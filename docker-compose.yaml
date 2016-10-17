@@ -1,0 +1,35 @@
+version: '2'
+services:
+
+  mysql:
+    image: mysql:5.7
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: 'password'
+      MYSQL_DATABASE: 'nudmore'
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: 'password'
+
+  nginx:
+    build: ./docker/nginx/
+    ports:
+      - "8080:80"
+    depends_on:
+      - php
+      - mysql
+    volumes_from:
+      - app
+
+  php:
+    build: ./docker/php/
+    expose:
+      - "9000"
+    volumes_from:
+      - app
+
+  app:
+    image: php:7.0-fpm
+    volumes:
+      - ./nudmore-main-site:/var/www/html
+    command: "true"
