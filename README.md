@@ -10,6 +10,8 @@
 docker-compose up --build
 ```
 
+After running `docker-compose`, web server will serve at port 8080 (you can access website at [http://localhost:8080](http://localhost:8080)) and MySQL will serve at port 3307.
+
 ### Server
 
 #### Setting up
