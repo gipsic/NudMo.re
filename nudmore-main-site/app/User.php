@@ -27,6 +27,78 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    /**
+     * Relationship assignment
+     */
+
+    public function patient()
+    {
+        return $this->hasOne('App\Patient');
+    }
+
+    public function doctor()
+    {
+        return $this->hasOne('App\Doctor');
+    }
+
+    public function staff()
+    {
+        return $this->hasOne('App\Staff');
+    }
+
+    public function nurse()
+    {
+        return $this->hasOne('App\Nurse');
+    }
+
+    public function pharmacist()
+    {
+        return $this->hasOne('App\Pharmacist');
+    }
+
+    public function administrator()
+    {
+        return $this->hasOne('App\Administrator');
+    }
+
+    /**
+     * Determine user role
+     */
+
+    public function isPatient()
+    {
+        return $this->patient !== null;
+    }
+
+    public function isDoctor()
+    {
+        return $this->doctor !== null;
+    }
+
+    public function isStaff()
+    {
+        return $this->staff !== null;
+    }
+
+    public function isNurse()
+    {
+        return $this->nurse !== null;
+    }
+
+    public function isPharmacist()
+    {
+        return $this->pharmacist !== null;
+    }
+
+    public function isAdministrator()
+    {
+        return $this->administrator !== null;
+    }
+
+    /**
+     * Mutators
+     */
+
     public function setPasswordAttribute($value)
     {
         $this->attributes['password'] = bcrypt($value);
