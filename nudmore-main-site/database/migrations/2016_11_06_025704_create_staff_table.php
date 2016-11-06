@@ -15,7 +15,7 @@ class CreateStaffTable extends Migration
     {
         Schema::create('staff', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->unique()->references('id')->on('users')->onDelete('cascade');
+            $table->integer('user_id')->unique();
             $table->timestamps();
         });
     }

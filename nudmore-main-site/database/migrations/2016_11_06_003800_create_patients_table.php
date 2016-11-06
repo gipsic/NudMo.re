@@ -15,7 +15,7 @@ class CreatePatientsTable extends Migration
     {
         Schema::create('patients', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->unique()->references('id')->on('users')->onDelete('cascade');
+            $table->integer('user_id')->unique();
             $table->string('patient_number')->unique();
             $table->enum('blood_type', ['A', 'B', 'O', 'AB']);
             $table->date('birthdate');

@@ -15,7 +15,7 @@ class CreateDoctorsTable extends Migration
     {
         Schema::create('doctors', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->unique()->references('id')->on('users')->onDelete('cascade');
+            $table->integer('user_id')->unique();
             $table->string('doctor_number')->unique();
             $table->timestamps();
         });
