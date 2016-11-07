@@ -130,6 +130,90 @@
                             </div>
                         </div>
 
+                        <div class="form-group{{ $errors->has('patient_number') ? ' has-error' : '' }}">
+                            {!! Form::label('patient_number', 'Patient Number', ['class' => 'col-md-4 control-label']) !!}
+
+                            <div class="col-md-6">
+                                {!! Form::text('patient_number', old('patient_number'), ['class' => 'form-control', 'required']) !!}
+
+                                @if ($errors->has('patient_number'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('patient_number') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('blood_type') ? ' has-error' : '' }}">
+                            {!! Form::label('blood_type', 'Blood Type', ['class' => 'col-md-4 control-label']) !!}
+
+                            <div class="col-md-6">
+                                {!! Form::text('blood_type', old('blood_type'), ['class' => 'form-control', 'required']) !!}
+
+                                @if ($errors->has('blood_type'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('blood_type') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('birthdate') ? ' has-error' : '' }}">
+                            {!! Form::label('birthdate', 'Birth Date', ['class' => 'col-md-4 control-label']) !!}
+
+                            <div class="col-md-6">
+                                {!! Form::date('birthdate', \Carbon\Carbon::now(), ['class' => 'form-control', 'required']) !!}
+                                
+                                @if ($errors->has('birthdate'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('birthdate') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('address') ? ' has-error' : '' }}">
+                            {!! Form::label('address', 'Address', ['class' => 'col-md-4 control-label']) !!}
+
+                            <div class="col-md-6">
+                                {!! Form::text('address', old('address'), ['class' => 'form-control', 'required']) !!}
+
+                                @if ($errors->has('address'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('address') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('phone_number') ? ' has-error' : '' }}">
+                            {!! Form::label('phone_number', 'Phone Number', ['class' => 'col-md-4 control-label']) !!}
+
+                            <div class="col-md-6">
+                                {!! Form::text('phone_number', old('phone_number'), ['class' => 'form-control', 'required']) !!}
+
+                                @if ($errors->has('phone_number'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('phone_number') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('drug_allergy') ? ' has-error' : '' }}">
+                            {!! Form::label('drug_allergy', 'Drug Allergy', ['class' => 'col-md-4 control-label']) !!}
+
+                            <div class="col-md-6">
+                                {!! Form::text('drug_allergy', old('drug_allergy'), ['class' => 'form-control']) !!}
+
+                                @if ($errors->has('drug_allergy'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('drug_allergy') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 {!! Form::submit('Register', ['class' => 'btn btn-primary']) !!}

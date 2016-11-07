@@ -55,7 +55,13 @@ class RegisterController extends Controller
             'name' => 'required|max:255',
             'surname' => 'required|max:255',
             'gender' => 'required',
-            'identity_number' => 'required|digits:13',
+            'identity_number' => 'required|digits:13|unique:users',
+            'patient_number' => 'required|max:255|unique:patients',
+            'blood_type' => 'required',
+            'birthdate' => 'date|max:255',
+            'address' => 'required|max:255',
+            'phone_number' => 'required|digits_between:9,10',
+            'drug_allergy' => 'max:255',
         ]);
     }
 
@@ -67,7 +73,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'username' => $data['username'],
             'password' => $data['password'],
             'email' => $data['email'],
@@ -77,5 +83,15 @@ class RegisterController extends Controller
             'gender' => $data['gender'],
             'identity_number' => $data['identity_number'],
         ]);
+        $user->patient()->create([
+            'patient_number' => $data['patient_number'],
+            'blood_type' => $data['blood_type'],
+            'birthdate' => $data['birthdate'],
+            'address' => $data['address'],
+            'phone_number' => $data['phone_number'],
+            'drug_allergy' => $data['drug_allergy'],
+        ])->user();
+
+        return $user;
     }
 }
