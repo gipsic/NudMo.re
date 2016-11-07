@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\View;
+
 
 class HomeController extends Controller
 {
@@ -23,6 +26,23 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $roles = array();
+       
+        $user = Auth::user();
+        if ($user->isPatient()) {
+            $roles[] = 'Patient';
+        } else if ($user->isDoctor()) {
+            $roles[] = 'Doctor';
+        } else if ($user->isStaff()) {
+            $roles[] = 'Staff';
+        } else if ($user->isNurse()) {
+            $roles[] = 'Nurse';
+        } else if ($user->isPharmacist()) {
+            $roles[] = 'Pharmacist';
+        } else if ($user->isAdministrator()) {
+            $roles[] = 'Administrator';
+        }
+
+        return view('home', ['roles' => $roles]);
     }
 }

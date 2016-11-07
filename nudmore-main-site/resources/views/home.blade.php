@@ -8,7 +8,12 @@
                 <div class="panel-heading">Dashboard</div>
 
                 <div class="panel-body">
-                    You are logged in!
+                    You are logged in!<br>
+                    Your role: 
+
+                    @foreach ($roles as $role)
+                        <p>{{ $role }}</p>
+                    @endforeach
                 </div>
             </div>
         </div>
