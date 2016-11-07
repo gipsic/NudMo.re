@@ -15,6 +15,11 @@ class Doctor extends Model
         'user_id', 'doctor_number',
     ];
 
+    public function schedule()
+    {
+        return $this->hasMany('App\Schedule');
+    }
+
     public function user()
     {
         return $this->belongsTo('App\User');
