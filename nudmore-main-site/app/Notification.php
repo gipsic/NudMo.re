@@ -14,4 +14,32 @@ class Notification extends Model
     protected $fillable = [
         'scheduled_timestamp',
     ];
+
+    /**
+     * Relationship assignment
+     */
+
+    public function email()
+    {
+        return $this->hasOne('App\EmailNotification');
+    }
+
+    public function sms()
+    {
+        return $this->hasOne('App\SmsNotification');
+    }
+
+    /**
+     * Determine notification type
+     */
+
+    public function isEmailNotification()
+    {
+        return $this->emailNotification !== null;
+    }
+
+    public function isSmsNotification()
+    {
+        return $this->smsNotification !== null;
+    }
 }
