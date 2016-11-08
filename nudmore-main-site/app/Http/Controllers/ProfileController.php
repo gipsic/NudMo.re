@@ -78,9 +78,10 @@ class ProfileController extends Controller
     			$doctor = DB::table('doctors')->select('id')->where('user_id',$id)->get()->first();
        			if ($doctor != null) {
        				$doctor_id = $doctor->id;
-       				$validator = Validator::make($request->all(), User::rules($id, ['doctor_number' => 'required|max:255|unique:doctors,doctor_number'.($id ? ",doctor_number,$doctor_id" : ''),]));
-       			}
-    			$validator = Validator::make($request->all(), User::rules($id, ['doctor_number' => 'required|max:255',]));
+       				$validator = Validator::make($request->all(), User::rules($id, ['doctor_number' => 'required|max:255|unique:doctors'.($id ? ",doctor_number,$doctor_id" : ''),]));
+       			} else {
+    				$validator = Validator::make($request->all(), User::rules($id, ['doctor_number' => 'required|max:255|unique:doctors',]));
+    			}
     		} else {
     			$validator = Validator::make($request->all(), User::rules($id));
     		}
@@ -89,9 +90,10 @@ class ProfileController extends Controller
        			$doctor = DB::table('doctors')->select('id')->where('user_id',$id)->get()->first();
        			if ($doctor != null) {
        				$doctor_id = $doctor->id;
-       				$validator = Validator::make($request->all(), User::rulesWithoutPassword($id, ['doctor_number' => 'required|max:255|unique:doctors,doctor_number'.($id ? ",doctor_number,$doctor_id" : ''),]));
-       			}
-    			$validator = Validator::make($request->all(), User::rulesWithoutPassword($id, ['doctor_number' => 'required|max:255']));
+       				$validator = Validator::make($request->all(), User::rulesWithoutPassword($id, ['doctor_number' => 'required|max:255|unique:doctors'.($id ? ",doctor_number,$doctor_id" : ''),]));
+       			} else {
+    				$validator = Validator::make($request->all(), User::rulesWithoutPassword($id, ['doctor_number' => 'required|max:255|unique:doctors']));
+    			}
     		} else {
     			$validator = Validator::make($request->all(), User::rulesWithoutPassword($id));
     		}
@@ -105,7 +107,7 @@ class ProfileController extends Controller
 
         $user = User::where('id', $id)->first();
 
-        $user->name = $request->name;
+        $user->username = $request->username;
         if ($request->password !== '') {
         	$user->password = $request->password;
         }
@@ -147,6 +149,10 @@ class ProfileController extends Controller
         	$doctor->delete();
         } else if (!$user->isDoctor() && $request->doctor === 'doctor') {
         	$user->doctor()->create(['doctor_number' => $request->doctor_number,]);
+        } else if ($user->isDoctor() && $request->doctor == 'doctor') {
+        	$doctor = Doctor::where('user_id', $id)->first();
+        	$doctor->doctor_number = $request->doctor_number;
+        	$doctor->save();
         }
 
         if ($user->isNurse() && $request->nurse !== 'nurse') {
@@ -164,5 +170,94 @@ class ProfileController extends Controller
         }
 
         return view('profile', ['user' => $user]);
+    }
+
+    /**
+     * Show create user page.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showCreateUser()
+    {
+        return view('create_user');
+    }
+
+    /**
+     * Create an user instance.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function createUser(Request $request)
+    {
+    	if ($request->doctor === 'doctor') {
+    		$validator = Validator::make($request->all(), User::rules(0, ['doctor_number' => 'required|max:255|unique',]));
+		} else {
+			$validator = Validator::make($request->all(), User::rules(0));
+		}
+
+		if ($validator->fails()) {
+            return redirect('create_user')
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+
+		$user = new User;
+        
+        $user->username = $request->username;
+        $user->password = $request->password;
+        $user->email = $request->email;
+        $user->title = $request->title;
+        $user->name = $request->name;
+        $user->surname = $request->surname;
+        $user->gender = $request->gender;
+        $user->identity_number = $request->identity_number;
+
+        $user->save();
+
+        $user->patient()->create([
+            'patient_number' => $request['patient_number'],
+            'blood_type' => $request['blood_type'],
+            'birthdate' => $request['birthdate'],
+            'address' => $request['address'],
+            'phone_number' => $request['phone_number'],
+            'drug_allergy' => $request['drug_allergy'],
+        ]);
+
+        if ($user->isAdministrator() && $request->administrator !== 'administrator') {
+        	$administrator = Administrator::where('user_id', $id)->first();
+        	$administrator->delete();
+        } else if (!$user->isAdministrator() && $request->administrator === 'administrator') {
+        	$user->administrator()->create([]);
+        }
+
+        if ($user->isStaff() && $request->staff !== 'staff') {
+        	$staff = Staff::where('user_id', $id)->first();
+        	$staff->delete();
+        } else if (!$user->isStaff() && $request->staff === 'staff') {
+        	$user->staff()->create([]);
+        }
+
+        if ($user->isDoctor() && $request->doctor !== 'doctor') {
+        	$doctor = Doctor::where('user_id', $id)->first();
+        	$doctor->delete();
+        } else if (!$user->isDoctor() && $request->doctor === 'doctor') {
+        	$user->doctor()->create(['doctor_number' => $request->doctor_number,]);
+        }
+
+        if ($user->isNurse() && $request->nurse !== 'nurse') {
+        	$nurse = Nurse::where('user_id', $id)->first();
+        	$nurse->delete();
+        } else if (!$user->isNurse() && $request->nurse === 'nurse') {
+        	$user->nurse()->create([]);
+        }
+
+        if ($user->isPharmacist() && $request->pharmacist !== 'pharmacist') {
+        	$pharmacist = Pharmacist::where('user_id', $id)->first();
+        	$pharmacist->delete();
+        } else if (!$user->isPharmacist() && $request->pharmacist === 'pharmacist') {
+        	$user->pharmacist()->create([]);
+        }
+
+        return redirect()->to('profile/'.$user->id);
     }
 }

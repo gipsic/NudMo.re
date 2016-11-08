@@ -26,3 +26,7 @@ Route::get('/profile/{id}', 'ProfileController@showUser')->middleware(['auth', /
 Route::get('/profile/{id}/edit', 'ProfileController@showEditUser')->middleware(['auth', /*'doctor', 'staff', 'nurse', 'pharmacist', 'administrator'*/]);
 
 Route::post('/profile/{id}/edit', 'ProfileController@editUser')->middleware(['auth', /*'doctor', 'staff', 'nurse', 'pharmacist', 'administrator'*/]);
+
+Route::get('/create_user', 'ProfileController@showCreateUser')->middleware(['auth', /*'doctor', 'staff', 'nurse', 'pharmacist', 'administrator'*/]);
+
+Route::post('create_user', 'ProfileController@createUser')->middleware(['auth', /*'doctor', 'staff', 'nurse', 'pharmacist', 'administrator'*/]);

@@ -47,7 +47,7 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, User::rules($id));
+        return Validator::make($data, User::rules(0));
     }
 
     /**
