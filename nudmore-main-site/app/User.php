@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\DB;
 
 class User extends Authenticatable
 {
@@ -102,5 +103,58 @@ class User extends Authenticatable
     public function setPasswordAttribute($value)
     {
         $this->attributes['password'] = bcrypt($value);
+    }
+
+    /**
+     * Rules
+     */
+    public static function rules ($id=0, $merge=[]) {
+        if ($id) {
+            $patient_id = DB::table('patients')->select('id')->where('user_id',$id)->get()->first()->id;
+        }
+        return array_merge(
+        [
+            'username' => 'required|max:255|unique:users'.($id ? ",username,$id" : ''),
+            'password' => 'required|min:8|confirmed',
+            'email' => 'required|email|max:255|unique:users'.($id ? ",email,$id" : ''),
+            'title' => 'required|max:255',
+            'name' => 'required|max:255',
+            'surname' => 'required|max:255',
+            'gender' => 'required',
+            'identity_number' => 'required|digits:13|unique:users'.($id ? ",identity_number,$id" : ''),
+            'patient_number' => 'required|max:255|unique:patients'.($id ? ",patient_number,$id" : ''),
+            'blood_type' => 'required',
+            'birthdate' => 'date|max:255',
+            'address' => 'required|max:255',
+            'phone_number' => 'required|digits_between:9,10',
+            'drug_allergy' => 'max:255',
+        ], 
+        $merge);
+    }
+
+    /**
+     * Rules withour password
+     */
+    public static function rulesWithoutPassword ($id=0, $merge=[]) {
+        if ($id) {
+            $patient_id = DB::table('patients')->select('id')->where('user_id',$id)->get()->first()->id;
+        }
+        return array_merge(
+        [
+            'username' => 'required|max:255|unique:users'.($id ? ",username,$id" : ''),
+            'email' => 'required|email|max:255|unique:users'.($id ? ",email,$id" : ''),
+            'title' => 'required|max:255',
+            'name' => 'required|max:255',
+            'surname' => 'required|max:255',
+            'gender' => 'required',
+            'identity_number' => 'required|digits:13|unique:users'.($id ? ",identity_number,$id" : ''),
+            'patient_number' => 'required|max:255|unique:patients'.($id ? ",patient_number,$patient_id" : ''),
+            'blood_type' => 'required',
+            'birthdate' => 'date|max:255',
+            'address' => 'required|max:255',
+            'phone_number' => 'required|digits_between:9,10',
+            'drug_allergy' => 'max:255',
+        ], 
+        $merge);
     }
 }

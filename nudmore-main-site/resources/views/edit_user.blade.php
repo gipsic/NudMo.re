@@ -7,14 +7,14 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Register</div>
                 <div class="panel-body">
-                    {!! Form::open(['url' => 'register', 'class' => 'form-horizontal']) !!}
+                    {!! Form::open(['url' => '/profile/'.$user->id.'/edit', 'class' => 'form-horizontal']) !!}
                         {!! Form::token() !!}
 
                         <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
                             {!! Form::label('username', 'Username', ['class' => 'col-md-4 control-label']) !!}
 
                             <div class="col-md-6">
-                                {!! Form::text('username', old('username'), ['class' => 'form-control', 'required', 'autofocus']) !!}
+                                {!! Form::text('username', $user->username, ['class' => 'form-control', 'required', 'autofocus']) !!}
 
                                 @if ($errors->has('username'))
                                     <span class="help-block">
@@ -28,7 +28,7 @@
                             {!! Form::label('password', 'Password', ['class' => 'col-md-4 control-label']) !!}
 
                             <div class="col-md-6">
-                                {!! Form::password('password', ['class' => 'form-control', 'required']) !!}
+                                {!! Form::password('password', ['class' => 'form-control']) !!}
 
                                 @if ($errors->has('password'))
                                     <span class="help-block">
@@ -42,7 +42,7 @@
                             {!! Form::label('password-confirm', 'Confirm Password', ['class' => 'col-md-4 control-label']) !!}
 
                             <div class="col-md-6">
-                                {!! Form::password('password_confirmation', ['class' => 'form-control', 'required']) !!}
+                                {!! Form::password('password_confirmation', ['class' => 'form-control']) !!}
                             </div>
                         </div>
 
@@ -50,7 +50,7 @@
                             {!! Form::label('email', 'E-Mail Address', ['class' => 'col-md-4 control-label']) !!}
 
                             <div class="col-md-6">
-                                {!! Form::text('email', old('email'), ['class' => 'form-control', 'required']) !!}
+                                {!! Form::text('email', $user->email, ['class' => 'form-control', 'required']) !!}
 
                                 @if ($errors->has('email'))
                                     <span class="help-block">
@@ -64,7 +64,7 @@
                             {!! Form::label('title', 'Title', ['class' => 'col-md-4 control-label']) !!}
 
                             <div class="col-md-6">
-                                {!! Form::text('title', old('title'), ['class' => 'form-control', 'required']) !!}
+                                {!! Form::text('title', $user->title, ['class' => 'form-control', 'required']) !!}
 
                                 @if ($errors->has('title'))
                                     <span class="help-block">
@@ -78,7 +78,7 @@
                             {!! Form::label('name', 'Name', ['class' => 'col-md-4 control-label']) !!}
 
                             <div class="col-md-6">
-                                {!! Form::text('name', old('name'), ['class' => 'form-control', 'required']) !!}
+                                {!! Form::text('name', $user->name, ['class' => 'form-control', 'required']) !!}
 
                                 @if ($errors->has('name'))
                                     <span class="help-block">
@@ -92,7 +92,7 @@
                             {!! Form::label('surname', 'Surname', ['class' => 'col-md-4 control-label']) !!}
 
                             <div class="col-md-6">
-                                {!! Form::text('surname', old('surname'), ['class' => 'form-control', 'required']) !!}
+                                {!! Form::text('surname', $user->surname, ['class' => 'form-control', 'required']) !!}
 
                                 @if ($errors->has('surname'))
                                     <span class="help-block">
@@ -106,7 +106,7 @@
                             {!! Form::label('gender', 'Gender', ['class' => 'col-md-4 control-label']) !!}
 
                             <div class="col-md-6">
-                                {!! Form::text('gender', old('gender'), ['class' => 'form-control', 'required']) !!}
+                                {!! Form::text('gender', $user->gender, ['class' => 'form-control', 'required']) !!}
 
                                 @if ($errors->has('gender'))
                                     <span class="help-block">
@@ -120,7 +120,7 @@
                             {!! Form::label('identity_number', 'Identity Number', ['class' => 'col-md-4 control-label']) !!}
 
                             <div class="col-md-6">
-                                {!! Form::text('identity_number', old('identity_number'), ['class' => 'form-control', 'required']) !!}
+                                {!! Form::text('identity_number', $user->identity_number, ['class' => 'form-control', 'required']) !!}
 
                                 @if ($errors->has('identity_number'))
                                     <span class="help-block">
@@ -134,7 +134,7 @@
                             {!! Form::label('patient_number', 'Patient Number', ['class' => 'col-md-4 control-label']) !!}
 
                             <div class="col-md-6">
-                                {!! Form::text('patient_number', old('patient_number'), ['class' => 'form-control', 'required']) !!}
+                                {!! Form::text('patient_number', $user->patient()->first()->patient_number, ['class' => 'form-control', 'required']) !!}
 
                                 @if ($errors->has('patient_number'))
                                     <span class="help-block">
@@ -148,7 +148,7 @@
                             {!! Form::label('blood_type', 'Blood Type', ['class' => 'col-md-4 control-label']) !!}
 
                             <div class="col-md-6">
-                                {!! Form::text('blood_type', old('blood_type'), ['class' => 'form-control', 'required']) !!}
+                                {!! Form::text('blood_type', $user->patient()->first()->blood_type, ['class' => 'form-control', 'required']) !!}
 
                                 @if ($errors->has('blood_type'))
                                     <span class="help-block">
@@ -162,7 +162,7 @@
                             {!! Form::label('birthdate', 'Birth Date', ['class' => 'col-md-4 control-label']) !!}
 
                             <div class="col-md-6">
-                                {!! Form::date('birthdate', \Carbon\Carbon::now(), ['class' => 'form-control', 'required']) !!}
+                                {!! Form::date('birthdate', $user->patient()->first()->birthdate, ['class' => 'form-control', 'required']) !!}
                                 
                                 @if ($errors->has('birthdate'))
                                     <span class="help-block">
@@ -176,7 +176,7 @@
                             {!! Form::label('address', 'Address', ['class' => 'col-md-4 control-label']) !!}
 
                             <div class="col-md-6">
-                                {!! Form::text('address', old('address'), ['class' => 'form-control', 'required']) !!}
+                                {!! Form::text('address', $user->patient()->first()->address, ['class' => 'form-control', 'required']) !!}
 
                                 @if ($errors->has('address'))
                                     <span class="help-block">
@@ -190,7 +190,7 @@
                             {!! Form::label('phone_number', 'Phone Number', ['class' => 'col-md-4 control-label']) !!}
 
                             <div class="col-md-6">
-                                {!! Form::text('phone_number', old('phone_number'), ['class' => 'form-control', 'required']) !!}
+                                {!! Form::text('phone_number', $user->patient()->first()->phone_number, ['class' => 'form-control', 'required']) !!}
 
                                 @if ($errors->has('phone_number'))
                                     <span class="help-block">
@@ -204,7 +204,7 @@
                             {!! Form::label('drug_allergy', 'Drug Allergy', ['class' => 'col-md-4 control-label']) !!}
 
                             <div class="col-md-6">
-                                {!! Form::text('drug_allergy', old('drug_allergy'), ['class' => 'form-control']) !!}
+                                {!! Form::text('drug_allergy', $user->patient()->first()->drug_allergy, ['class' => 'form-control']) !!}
 
                                 @if ($errors->has('drug_allergy'))
                                     <span class="help-block">
@@ -216,7 +216,71 @@
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
-                                {!! Form::submit('Register', ['class' => 'btn btn-primary']) !!}
+                                <div class="checkbox">
+                                    <label>
+                                        {!! Form::checkbox('administrator', 'administrator', $user->isAdministrator()) !!} Administrator
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-6 col-md-offset-4">
+                                <div class="checkbox">
+                                    <label>
+                                        {!! Form::checkbox('staff', 'staff', $user->isStaff()) !!} Staff
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-6 col-md-offset-4">
+                                <div class="checkbox">
+                                    <label>
+                                        {!! Form::checkbox('doctor', 'doctor', $user->isDoctor()) !!} Doctor
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('doctor_number') ? ' has-error' : '' }}">
+                            {!! Form::label('doctor_number', 'Doctor Number', ['class' => 'col-md-4 control-label']) !!}
+
+                            <div class="col-md-6">
+                                {!! Form::text('doctor_number', $user->isDoctor() ? $user->doctor()->first()->doctor_number : '', ['class' => 'form-control']) !!}
+
+                                @if ($errors->has('doctor_number'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('doctor_number') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-6 col-md-offset-4">
+                                <div class="checkbox">
+                                    <label>
+                                        {!! Form::checkbox('nurse', 'nurse', $user->isNurse()) !!} Nurse
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-6 col-md-offset-4">
+                                <div class="checkbox">
+                                    <label>
+                                        {!! Form::checkbox('pharmacist', 'pharmacist', $user->isPharmacist()) !!} Pharmacist
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-6 col-md-offset-4">
+                                {!! Form::submit('Update', ['class' => 'btn btn-primary']) !!}
                             </div>
                         </div>
 

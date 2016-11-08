@@ -47,22 +47,7 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, [
-            'username' => 'required|max:255|unique:users',
-            'password' => 'required|min:8|confirmed',
-            'email' => 'required|email|max:255|unique:users',
-            'title' => 'required|max:255',
-            'name' => 'required|max:255',
-            'surname' => 'required|max:255',
-            'gender' => 'required',
-            'identity_number' => 'required|digits:13|unique:users',
-            'patient_number' => 'required|max:255|unique:patients',
-            'blood_type' => 'required',
-            'birthdate' => 'date|max:255',
-            'address' => 'required|max:255',
-            'phone_number' => 'required|digits_between:9,10',
-            'drug_allergy' => 'max:255',
-        ]);
+        return Validator::make($data, User::rules($id));
     }
 
     /**
@@ -90,7 +75,7 @@ class RegisterController extends Controller
             'address' => $data['address'],
             'phone_number' => $data['phone_number'],
             'drug_allergy' => $data['drug_allergy'],
-        ])->user();
+        ]);
 
         return $user;
     }
