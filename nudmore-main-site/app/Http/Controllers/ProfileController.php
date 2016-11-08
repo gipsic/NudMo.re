@@ -173,6 +173,23 @@ class ProfileController extends Controller
     }
 
     /**
+     * Show patient's profile page.
+     *
+     * @param  UserID  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function deleteUser($id)
+    {
+    	$user = User::where('id', $id)->first();
+
+    	$user->delete();
+
+        $user = Auth::user();
+
+        return view('profile', ['user' => $user]);
+    }
+
+    /**
      * Show create user page.
      *
      * @return \Illuminate\Http\Response

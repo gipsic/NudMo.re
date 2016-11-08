@@ -27,6 +27,9 @@ Route::get('/profile/{id}/edit', 'ProfileController@showEditUser')->middleware([
 
 Route::post('/profile/{id}/edit', 'ProfileController@editUser')->middleware(['auth', /*'doctor', 'staff', 'nurse', 'pharmacist', 'administrator'*/]);
 
+Route::delete('/profile/{id}/delete', 'ProfileController@deleteUser')->middleware(['auth', /*'doctor', 'staff', 'nurse', 'pharmacist', 'administrator'*/]);
+
 Route::get('/create_user', 'ProfileController@showCreateUser')->middleware(['auth', /*'doctor', 'staff', 'nurse', 'pharmacist', 'administrator'*/]);
 
 Route::post('create_user', 'ProfileController@createUser')->middleware(['auth', /*'doctor', 'staff', 'nurse', 'pharmacist', 'administrator'*/]);
+
