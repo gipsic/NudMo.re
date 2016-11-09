@@ -19,4 +19,9 @@ class Patient extends Model
     {
         return $this->belongsTo('App\User');
     }
+
+    public function record()
+    {
+        return $this->hasMany('App\Record');
+    }
 }
