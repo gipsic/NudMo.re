@@ -17,15 +17,15 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 
-Route::get('/profiles', 'ProfileController@list')->middleware(['auth', /*'doctor', 'staff', 'nurse', 'pharmacist', 'administrator'*/]);
-Route::get('/profile/create', 'ProfileController@showCreateUser')->middleware(['auth', /*'doctor', 'staff', 'nurse', 'pharmacist', 'administrator'*/]);
-Route::post('/profile/create', 'ProfileController@createUser')->middleware(['auth', /*'doctor', 'staff', 'nurse', 'pharmacist', 'administrator'*/]);
-Route::get('/profile/edit', 'ProfileController@showEditUser')->middleware(['auth', /*'doctor', 'staff', 'nurse', 'pharmacist', 'administrator'*/]);
-Route::post('/profile/edit', 'ProfileController@editUser')->middleware(['auth', /*'doctor', 'staff', 'nurse', 'pharmacist', 'administrator'*/]);
-Route::get('/profile/{id}', 'ProfileController@showUser')->middleware(['auth', /*'doctor', 'staff', 'nurse', 'pharmacist', 'administrator'*/]);
-Route::get('/profile/{id}/edit', 'ProfileController@showEditUserStaff')->middleware(['auth', /*'doctor', 'staff', 'nurse', 'pharmacist', 'administrator'*/]);
-Route::post('/profile/{id}/edit', 'ProfileController@editUserStaff')->middleware(['auth', /*'doctor', 'staff', 'nurse', 'pharmacist', 'administrator'*/]);
-Route::delete('/profile/{id}/delete', 'ProfileController@deleteUser')->middleware(['auth', /*'doctor', 'staff', 'nurse', 'pharmacist', 'administrator'*/]);
+Route::get('/profiles', 'ProfileController@list')->middleware(['auth', 'doctor', 'staff', 'nurse', 'pharmacist', 'administrator']);
+Route::get('/profile/create', 'ProfileController@showCreateUser')->middleware(['auth', 'administrator']);
+Route::post('/profile/create', 'ProfileController@createUser')->middleware(['auth', 'administrator']);
+Route::get('/profile/edit', 'ProfileController@showEditUser')->middleware(['auth']);
+Route::post('/profile/edit', 'ProfileController@editUser')->middleware(['auth']);
+Route::get('/profile/{id}', 'ProfileController@showUser')->middleware(['auth', 'doctor', 'staff', 'nurse', 'pharmacist', 'administrator']);
+Route::get('/profile/{id}/edit', 'ProfileController@showEditUserStaff')->middleware(['auth', 'administrator']);
+Route::post('/profile/{id}/edit', 'ProfileController@editUserStaff')->middleware(['auth', 'administrator']);
+Route::delete('/profile/{id}/delete', 'ProfileController@deleteUser')->middleware(['auth', 'administrator']);
 Route::get('/profile', 'ProfileController@index')->middleware(['auth']);
 
 Route::get('/schedule/doctor', 'ScheduleController@listDoctor')->middleware(['auth', 'doctor']);

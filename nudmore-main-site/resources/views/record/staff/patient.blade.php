@@ -5,10 +5,9 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Dashboard</div>
+                <div class="panel-heading">Record History</div>
 
                 <div class="panel-body">
-                    <h1>Record History</h1>
                     @foreach ($patients as $patient)
                         <div class="row">
                             <div class="col-md-2">

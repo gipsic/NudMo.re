@@ -5,10 +5,9 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Dashboard</div>
+                <div class="panel-heading">Record History of {!! $patient->user()->first()->name !!} {!! $patient->user()->first()->surname !!}</div>
 
                 <div class="panel-body">
-                    <h1>Record History of {!! $patient->user()->first()->name !!} {!! $patient->user()->first()->surname !!}</h1>
                     <div class="row">
                         <a href="/record/staff/create/{!! $patient->patient_number !!}" class="btn btn-primary">Create Record</a>
                     </div>

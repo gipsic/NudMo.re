@@ -5,10 +5,9 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Dashboard</div>
-                <a href="/profile/create">Create User</a>
+                <div class="panel-heading">User List</div>
                 <div class="panel-body">
-                    <h1>User list</h1>
+                    <a href="/profile/create" class="btn btn-success">Create User</a>
                     @foreach ($users as $user)
                         <div class="row">
                             <div class="col-md-1">

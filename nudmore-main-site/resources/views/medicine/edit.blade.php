@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Add Medicine</div>
+                <div class="panel-heading">Edit Medicine</div>
                 <div class="panel-body">
                     {!! Form::open(['url' => 'medicine/'.$medicine->id.'/edit', 'class' => 'form-horizontal']) !!}
                         {!! Form::token() !!}
