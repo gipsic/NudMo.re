@@ -17,6 +17,6 @@ class Record extends Model
 
     public function patient()
     {
-        return $this->belongsTo('App\Patient', 'patient_number');
+        return $this->belongsTo('App\Patient', 'patient_number', 'patient_number');
     }
 }

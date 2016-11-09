@@ -17,11 +17,11 @@ class Prescription extends Model
 
     public function dispense()
     {
-        return $this->hasMany('App\Dispense');
+        return $this->hasMany('App\Dispense', 'diepense_id','id');
     }
 
     public function patient()
     {
-        return $this->belongsTo('App\Patient', 'patient_number');
+        return $this->belongsTo('App\Patient', 'patient_number', 'patient_number');
     }
 }

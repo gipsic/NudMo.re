@@ -17,6 +17,6 @@ class Medicine extends Model
 
     public function dispense()
     {
-        return $this->hasMany('App\Dispense');
+        return $this->hasMany('App\Dispense', 'medicine_id','id');
     }
 }

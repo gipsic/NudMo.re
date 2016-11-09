@@ -12,11 +12,11 @@ class Dispense extends Model
 
     public function prescription()
     {
-        return $this->belongsTo('App\Prescription', 'prescription_id');
+        return $this->belongsTo('App\Prescription', 'prescription_id', 'id');
     }
 
     public function medicine()
     {
-        return $this->belongsTo('App\Medicine', 'medicine_id');
+        return $this->belongsTo('App\Medicine', 'medicine_id', 'id');
     }
 }
