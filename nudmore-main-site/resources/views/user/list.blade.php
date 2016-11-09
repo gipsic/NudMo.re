@@ -6,7 +6,7 @@
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
                 <div class="panel-heading">Dashboard</div>
-
+                <a href="/profile/create">Create User</a>
                 <div class="panel-body">
                     <h1>User list</h1>
                     @foreach ($users as $user)

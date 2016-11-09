@@ -12,7 +12,7 @@ class Doctor extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id', 'doctor_number',
+        'user_id', 'doctor_number', 'department',
     ];
 
     public function schedule()

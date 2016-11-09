@@ -7,7 +7,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Register</div>
                 <div class="panel-body">
-                    {!! Form::open(['url' => '/profile/'.$user->id.'/edit', 'class' => 'form-horizontal']) !!}
+                    {!! Form::open(['url' => '/profile/edit', 'class' => 'form-horizontal']) !!}
                         {!! Form::token() !!}
 
                         <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
@@ -253,6 +253,20 @@
                                 @if ($errors->has('doctor_number'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('doctor_number') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('department') ? ' has-error' : '' }}">
+                            {!! Form::label('department', 'Department', ['class' => 'col-md-4 control-label']) !!}
+
+                            <div class="col-md-6">
+                                {!! Form::text('department', $user->doctor()->first()->department, ['class' => 'form-control']) !!}
+
+                                @if ($errors->has('department'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('department') }}</strong>
                                     </span>
                                 @endif
                             </div>
