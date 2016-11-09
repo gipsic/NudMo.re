@@ -29,8 +29,15 @@ Route::post('/profile/{id}/edit', 'ProfileController@editUser')->middleware(['au
 Route::delete('/profile/{id}/delete', 'ProfileController@deleteUser')->middleware(['auth', /*'doctor', 'staff', 'nurse', 'pharmacist', 'administrator'*/]);
 
 
-Route::get('/schedules', 'ScheduleController@list')->middleware(['auth', 'doctor']);
-Route::get('/schedule/create', 'ScheduleController@showCreateSchedule')->middleware(['auth', 'doctor']);
-Route::post('/schedule/create', 'ScheduleController@createSchedule')->middleware(['auth', 'doctor']);
-Route::delete('/schedule/{id}/delete', 'ScheduleController@deleteSchedule')->middleware(['auth', 'doctor']);
+Route::get('/schedule/doctor', 'ScheduleController@listDoctor')->middleware(['auth', 'doctor']);
+Route::get('/schedule/doctor/create', 'ScheduleController@showCreateScheduleDoctor')->middleware(['auth', 'doctor']);
+Route::post('/schedule/doctor/create', 'ScheduleController@createScheduleDoctor')->middleware(['auth', 'doctor']);
+Route::delete('/schedule/doctor/{id}/delete', 'ScheduleController@deleteScheduleDoctor')->middleware(['auth', 'doctor']);
+Route::get('/schedule/staff', 'ScheduleController@listStaff')->middleware(['auth', 'staff', 'administrator']);
+Route::get('/schedule/staff/create', 'ScheduleController@showCreateScheduleStaff')->middleware(['auth', 'staff', 'administrator']);
+Route::post('/schedule/staff/create', 'ScheduleController@createScheduleStaff')->middleware(['auth', 'staff', 'administrator']);
+Route::delete('/schedule/staff/{id}/delete', 'ScheduleController@deleteScheduleStaff')->middleware(['auth', 'staff', 'administrator']);
 
+Route::get('/appointment/patient', 'ScheduleController@list')->middleware(['auth', 'patient']);
+Route::get('/appointment/doctor', 'ScheduleController@list')->middleware(['auth', 'doctor']);
+Route::get('/appointment/create', 'ScheduleController@list')->middleware(['auth', 'doctor']);

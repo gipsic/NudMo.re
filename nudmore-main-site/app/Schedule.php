@@ -17,6 +17,6 @@ class Schedule extends Model
 
     public function doctor()
     {
-        return $this->belongsTo('App\Doctor', 'doctor_number');
+        return $this->belongsTo('App\Doctor', 'doctor_number', 'doctor_number');
     }
 }

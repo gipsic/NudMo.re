@@ -7,8 +7,22 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Create Schedule</div>
                 <div class="panel-body">
-                    {!! Form::open(['url' => 'schedule/create', 'class' => 'form-horizontal']) !!}
+                    {!! Form::open(['url' => 'schedule/staff/create', 'class' => 'form-horizontal']) !!}
                         {!! Form::token() !!}
+
+                        <div class="form-group{{ $errors->has('doctor_number') ? ' has-error' : '' }}">
+                            {!! Form::label('doctor_number', 'Doctor Number', ['class' => 'col-md-4 control-label']) !!}
+
+                            <div class="col-md-6">
+                                {!! Form::text('doctor_number', old('doctor_number'), ['class' => 'form-control', 'required', 'autofocus']) !!}
+
+                                @if ($errors->has('doctor_number'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('doctor_number') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
 
                         <div class="form-group{{ $errors->has('date_time') ? ' has-error' : '' }}">
                             {!! Form::label('date_time', 'Data and time', ['class' => 'col-md-4 control-label']) !!}

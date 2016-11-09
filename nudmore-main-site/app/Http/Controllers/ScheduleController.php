@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Schedule;
+use App\Doctor;
 use Validator;
 
 class ScheduleController extends Controller
@@ -19,25 +20,32 @@ class ScheduleController extends Controller
         //
     }
 
-    /**
-     * Show self schedule.
-     *
-     * @return \Illuminate\Http\Response  
-     */
-    public function list()
+    public function listDoctor()
     {	
     	$doctor_number = Auth::user()->doctor->doctor_number;
         $schedules = Schedule::where('doctor_number', 'LIKE', $doctor_number)->get();
 
-        return view('schedule_list', ['schedules' => $schedules]);
+        return view('schedule_list_doctor', ['schedules' => $schedules]);
     }
 
-    public function showCreateSchedule()
+    public function listStaff()
+    {   
+        $schedules = Schedule::all();
+
+        return view('schedule_list_staff', ['schedules' => $schedules]);
+    }
+
+    public function showCreateScheduleDoctor()
     {
-    	return View('create_schedule');
+    	return View('create_schedule_doctor');
     }
 
-    public function createSchedule(Request $request)
+    public function showCreateScheduleStaff()
+    {
+        return View('create_schedule_staff');
+    }
+
+    public function createScheduleDoctor(Request $request)
     {
     	/*
     	$validator = Validator::make($request->all(), [
@@ -53,20 +61,54 @@ class ScheduleController extends Controller
 
         $schedule = new Schedule;
 
-        $schedule->doctor_number = Auth::user()->doctor->doctor_number;
+        $schedule->doctor_number = $request->doctor_number;
         $schedule->date_time = $request->date_time;
 
         $schedule->save();
 
-        return redirect()->to('schedules');
+        return redirect()->to('schedule/doctor');
     }
 
-    public function deleteSchedule($id)
+    public function createScheduleStaff(Request $request)
+    {
+        /*
+        $validator = Validator::make($request->all(), [
+            'doctor_number' => 'required|max:255',
+            'date_time' => 'required|date_format:YYYY-MM-DD HH:MM:SS|unique:schedules,date_time,NULL,doctor_number,'.Auth::user()->doctor->doctor_number,
+            ]);
+
+        if ($validator->fails()) {
+            return redirect('schedule/create')
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+        */
+
+        $schedule = new Schedule;
+
+        $schedule->doctor_number = $request->doctor_number;
+        $schedule->date_time = $request->date_time;
+
+        $schedule->save();
+
+        return redirect()->to('schedule/staff');
+    }
+
+    public function deleteScheduleDoctor($id)
     {
     	$schedule = Schedule::where('id', $id)->first();
 
     	$schedule->delete();
 
-        return redirect()->to('schedules');
+        return redirect()->to('schedule/doctor');
+    }
+
+    public function deleteScheduleStaff($id)
+    {
+        $schedule = Schedule::where('id', $id)->first();
+
+        $schedule->delete();
+
+        return redirect()->to('schedule/staff');
     }
 }
