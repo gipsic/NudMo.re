@@ -5,19 +5,16 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Record History</div>
+                <div class="panel-heading">Prescription: {!! $prescription->id !!}</div>
 
                 <div class="panel-body">
-                    @foreach ($records as $record)
+                    @foreach ($dispenses as $dispense)
                         <div class="row">
-                            <div class="col-md-3">
-                                {!! $record->date_time !!}
-                            </div>
-                            <div class="col-md-7">
-                                {!! $record->topic !!}
+                            <div class="col-md-10">
+                                {!! $dispense->medicine()->first()->name !!}
                             </div>
                             <div class="col-md-2">
-                            <a href="/record/patient/{!! $record->id !!}" class="btn btn-primary">View</a>
+                                {!! $dispense->quantity !!}
                             </div>
                         </div>
                     @endforeach

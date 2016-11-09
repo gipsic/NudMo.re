@@ -79,7 +79,7 @@ class RecordController extends Controller
     	$record = Record::where('id', $id)->first();
 
     	if ($record->patient_number !== Auth::user()->patient()->first()->patient_number) {
-    		return redirect()->to('record/patient/');
+    		return redirect()->to('record/patient');
     	}
 
     	return view('record/patient/record', ['record' => $record]);
@@ -112,7 +112,7 @@ class RecordController extends Controller
                         ->withErrors($validator)
                         ->withInput();
         }
-        
+
         $record = Record::where('id', $id)->first();
 
         $record->date_time = $request->date_time;

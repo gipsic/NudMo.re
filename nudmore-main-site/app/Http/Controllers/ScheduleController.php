@@ -47,9 +47,8 @@ class ScheduleController extends Controller
 
     public function createScheduleDoctor(Request $request)
     {
-    	/*
     	$validator = Validator::make($request->all(), [
-    		'date_time' => 'required|date_format:YYYY-MM-DD HH:MM:SS|unique:schedules,date_time,NULL,doctor_number,'.Auth::user()->doctor->doctor_number,
+    		'date_time' => 'required|date|unique:schedules,date_time,NULL,doctor_number,'.Auth::user()->doctor->doctor_number,
     		]);
 
     	if ($validator->fails()) {
@@ -57,7 +56,6 @@ class ScheduleController extends Controller
                         ->withErrors($validator)
                         ->withInput();
         }
-        */
 
         $schedule = new Schedule;
 
@@ -71,10 +69,9 @@ class ScheduleController extends Controller
 
     public function createScheduleStaff(Request $request)
     {
-        /*
         $validator = Validator::make($request->all(), [
             'doctor_number' => 'required|max:255',
-            'date_time' => 'required|date_format:YYYY-MM-DD HH:MM:SS|unique:schedules,date_time,NULL,doctor_number,'.Auth::user()->doctor->doctor_number,
+            'date_time' => 'required|date|unique:schedules,date_time,NULL,doctor_number,'.Auth::user()->doctor->doctor_number,
             ]);
 
         if ($validator->fails()) {
@@ -82,7 +79,6 @@ class ScheduleController extends Controller
                         ->withErrors($validator)
                         ->withInput();
         }
-        */
 
         $schedule = new Schedule;
 
