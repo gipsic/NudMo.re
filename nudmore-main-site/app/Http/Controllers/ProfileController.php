@@ -35,7 +35,7 @@ class ProfileController extends Controller
     {
         $users = User::all();
 
-        return view('profile_list', ['users' => $users]);
+        return view('user/list', ['users' => $users]);
     }
 
     /**
@@ -47,7 +47,7 @@ class ProfileController extends Controller
     {
         $user = Auth::user();
 
-        return view('profile', ['user' => $user]);
+        return view('user/profile', ['user' => $user]);
     }
 
     /**
@@ -60,7 +60,7 @@ class ProfileController extends Controller
     {
         $user = User::where('id', $id)->first();
 
-        return view('profile', ['user' => $user]);
+        return view('user/profile', ['user' => $user]);
     }
 
     /**
@@ -73,7 +73,7 @@ class ProfileController extends Controller
     {
     	$user = User::where('id', $id)->first();
 
-        return view('edit_user', ['user' => $user]);
+        return view('user/edit', ['user' => $user]);
     }
 
     /**
@@ -181,7 +181,7 @@ class ProfileController extends Controller
         	$user->pharmacist()->create([]);
         }
 
-        return view('profile', ['user' => $user]);
+        return view('user/profile', ['user' => $user]);
     }
 
     /**

@@ -25,24 +25,24 @@ class ScheduleController extends Controller
     	$doctor_number = Auth::user()->doctor->doctor_number;
         $schedules = Schedule::where('doctor_number', 'LIKE', $doctor_number)->get();
 
-        return view('schedule_list_doctor', ['schedules' => $schedules]);
+        return view('schedule/doctor/list', ['schedules' => $schedules]);
     }
 
     public function listStaff()
     {   
         $schedules = Schedule::all();
 
-        return view('schedule_list_staff', ['schedules' => $schedules]);
+        return view('schedule/staff/list', ['schedules' => $schedules]);
     }
 
     public function showCreateScheduleDoctor()
     {
-    	return View('create_schedule_doctor');
+    	return View('schedule/doctor/create');
     }
 
     public function showCreateScheduleStaff()
     {
-        return View('create_schedule_staff');
+        return View('schedule/staff/create');
     }
 
     public function createScheduleDoctor(Request $request)

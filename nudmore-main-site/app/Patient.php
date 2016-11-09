@@ -22,7 +22,7 @@ class Patient extends Model
 
     public function appointment()
     {
-        return $this->belongsTo('App\Appointment');
+        return $this->belongsTo('App\Appointment', 'patient_number', 'patient_number');
     }
 
     public function prescription()
