@@ -22,6 +22,6 @@ class Appointment extends Model
 
     public function doctor()
     {
-        return $this->belongsTo('App\Doctor', 'appointments_doctor_number');
+        return $this->belongsTo('App\Doctor', 'doctor_number');
     }
 }

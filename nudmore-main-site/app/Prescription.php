@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Record extends Model
+class Prescription extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -12,8 +12,13 @@ class Record extends Model
      * @var array
      */
     protected $fillable = [
-        'patient_number', 'date', 'topic', 'detail',
+        'patient_number', 'date-time',
     ];
+
+    public function dispense()
+    {
+        return $this->hasMany('App\Dispense');
+    }
 
     public function patient()
     {

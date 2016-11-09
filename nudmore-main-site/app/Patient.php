@@ -24,6 +24,11 @@ class Patient extends Model
     {
         return $this->belongsTo('App\Appointment');
     }
+
+    public function prescription()
+    {
+        return $this->hasMany('App\Prescription');
+    }
     
     public function user()
     {

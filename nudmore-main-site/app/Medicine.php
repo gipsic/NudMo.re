@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Schedule extends Model
+class Medicine extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -12,11 +12,11 @@ class Schedule extends Model
      * @var array
      */
     protected $fillable = [
-        'doctor_number', 'date_time',
+        'name',
     ];
 
-    public function doctor()
+    public function dispense()
     {
-        return $this->belongsTo('App\Doctor', 'doctor_number');
+        return $this->hasMany('App\Dispense');
     }
 }
