@@ -36,6 +36,7 @@ Route::post('/schedule/staff/create', 'ScheduleController@createScheduleStaff')-
 Route::delete('/schedule/doctor/{id}/delete', 'ScheduleController@deleteScheduleDoctor')->middleware(['auth', 'doctor']);
 Route::delete('/schedule/staff/{id}/delete', 'ScheduleController@deleteScheduleStaff')->middleware(['auth', 'staff', 'administrator']);
 
+
 Route::get('/appointment/patient', 'AppointmentController@listPatient')->middleware(['auth', 'patient']);
 Route::get('/appointment/doctor', 'AppointmentController@listDoctor')->middleware(['auth', 'doctor']);
 Route::get('/appointment/staff', 'AppointmentController@listStaff')->middleware(['auth', 'staff', 'administrator']);
@@ -50,3 +51,15 @@ Route::post('/appointment/staff/create', 'AppointmentController@createAppointmen
 Route::delete('/appointment/patient/{id}/delete', 'AppointmentController@deleteAppointmentPatient')->middleware(['auth', 'patient']);
 Route::delete('/appointment/doctor/{id}/delete', 'AppointmentController@deleteAppointmentDoctor')->middleware(['auth', 'doctor']);
 Route::delete('/appointment/staff/{id}/delete', 'AppointmentController@deleteAppointmentStaff')->middleware(['auth', 'staff', 'administrator']);
+
+
+Route::get('/record/patient', 'RecordController@listPatient')->middleware(['auth', 'patient']);
+Route::get('/record/staff', 'RecordController@patientListStaff')->middleware(['auth', 'doctor', 'staff', 'nurse', 'pharmacist', 'administrator']);
+Route::post('/record/staff', 'RecordController@listStaff')->middleware(['auth', 'doctor', 'staff', 'nurse', 'pharmacist', 'administrator']);
+Route::get('/record/staff/create/{id}', 'RecordController@showCreateRecord')->middleware(['auth', 'doctor', 'staff', 'nurse', 'pharmacist', 'administrator']);
+Route::post('/record/staff/create', 'RecordController@createRecord')->middleware(['auth', 'doctor', 'staff', 'nurse', 'pharmacist', 'administrator']);
+Route::get('/record/patient/{id}', 'RecordController@showRecordPatient')->middleware(['auth', 'patient']);
+Route::get('/record/staff/{id}', 'RecordController@showRecordStaff')->middleware(['auth', 'doctor', 'staff', 'nurse', 'pharmacist', 'administrator']);
+Route::get('/record/staff/{id}/edit', 'RecordController@showEditRecord')->middleware(['auth', 'doctor', 'staff', 'nurse', 'pharmacist', 'administrator']);
+Route::post('/record/staff/{id}/edit', 'RecordController@editRecord')->middleware(['auth', 'doctor', 'staff', 'nurse', 'pharmacist', 'administrator']);
+

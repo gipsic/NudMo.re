@@ -25,7 +25,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('date_time') ? ' has-error' : '' }}">
-                            {!! Form::label('date_time', 'Data and time', ['class' => 'col-md-4 control-label']) !!}
+                            {!! Form::label('date_time', 'Date and time', ['class' => 'col-md-4 control-label']) !!}
 
                             <div class="col-md-6">
                                 {!! Form::text('date_time', old('date_time'), ['class' => 'form-control', 'required', 'autofocus']) !!}
