@@ -198,7 +198,7 @@ class ProfileController extends Controller
 
         $user = Auth::user();
 
-        return view('profile', ['user' => $user]);
+        return redirect()->to('profiles');
     }
 
     /**
@@ -225,7 +225,7 @@ class ProfileController extends Controller
 		}
 
 		if ($validator->fails()) {
-            return redirect('create_user')
+            return redirect('profile/create')
                         ->withErrors($validator)
                         ->withInput();
         }

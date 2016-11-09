@@ -7,7 +7,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Register</div>
                 <div class="panel-body">
-                    {!! Form::open(['url' => '/create_user', 'class' => 'form-horizontal']) !!}
+                    {!! Form::open(['url' => 'profile/create', 'class' => 'form-horizontal']) !!}
                         {!! Form::token() !!}
 
                         <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
