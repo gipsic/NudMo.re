@@ -28,3 +28,8 @@ Route::delete('/profile/{id}/delete', 'ProfileController@deleteUser')->middlewar
 Route::get('/create_user', 'ProfileController@showCreateUser')->middleware(['auth', /*'doctor', 'staff', 'nurse', 'pharmacist', 'administrator'*/]);
 Route::post('create_user', 'ProfileController@createUser')->middleware(['auth', /*'doctor', 'staff', 'nurse', 'pharmacist', 'administrator'*/]);
 
+Route::get('/schedules', 'ScheduleController@list')->middleware(['auth', 'doctor']);
+Route::get('/schedule/{id}', 'ScheduleController@schedule')->middleware(['auth', 'doctor']);
+Route::post('/schedules/create_schedule', 'ScheduleController@createSchedule')->middleware(['auth', 'doctor']);
+Route::delete('/schedule/{id}/delete', 'ScheduleController@deleteSchedule')->middleware(['auth', 'doctor']);
+
