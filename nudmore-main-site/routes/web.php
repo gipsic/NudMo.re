@@ -63,3 +63,15 @@ Route::get('/record/staff/{id}', 'RecordController@showRecordStaff')->middleware
 Route::get('/record/staff/{id}/edit', 'RecordController@showEditRecord')->middleware(['auth', 'doctor', 'staff', 'nurse', 'pharmacist', 'administrator']);
 Route::post('/record/staff/{id}/edit', 'RecordController@editRecord')->middleware(['auth', 'doctor', 'staff', 'nurse', 'pharmacist', 'administrator']);
 
+
+Route::get('/medicine', 'MedicineController@list')->middleware(['auth', 'pharmacist', 'administrator']);
+Route::get('/medicine/create', 'MedicineController@showCreateMedicine')->middleware(['auth', 'pharmacist', 'administrator']);
+Route::post('/medicine/create', 'MedicineController@createMedicine')->middleware(['auth', 'pharmacist', 'administrator']);
+Route::get('/medicine/{id}/edit', 'MedicineController@showEditMedicine')->middleware(['auth', 'pharmacist', 'administrator']);
+Route::post('/medicine/{id}/edit', 'MedicineController@editMedicine')->middleware(['auth', 'pharmacist', 'administrator']);
+Route::delete('/medicine/{id}/delete', 'MedicineController@deleteMedicine')->middleware(['auth', 'pharmacist', 'administrator']);
+
+
+Route::get('/prescription/patient', 'PrescriptionController@listPatient')->middleware(['auth', 'patient']);
+Route::get('/prescription/patient/{id}', 'PrescriptionController@listStaff')->middleware(['auth', 'staff', 'nurse', 'pharmacist']);
+Route::get('/prescription/{id}', 'PrescriptionController@listPatient')->middleware(['auth', 'patient', 'staff', 'nurse', 'pharmacist']);
