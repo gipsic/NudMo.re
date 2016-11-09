@@ -181,6 +181,9 @@ return [
         // Laravel Collective
         Collective\Html\HtmlServiceProvider::class,
 
+        // Current User
+        App\Providers\CurrentUserProvider::class,
+
     ],
 
     /*

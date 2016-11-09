@@ -27,7 +27,19 @@ class ProfileController extends Controller
     }
 
     /**
-     * Show self profile page.
+     * Show self profile.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function list()
+    {
+        $users = User::all();
+
+        return view('profile_list', ['users' => $users]);
+    }
+
+    /**
+     * Show user list.
      *
      * @return \Illuminate\Http\Response
      */
@@ -39,7 +51,7 @@ class ProfileController extends Controller
     }
 
     /**
-     * Show patient's profile page.
+     * Show patient's profile.
      *
      * @param  UserID  $id
      * @return \Illuminate\Http\Response
@@ -52,7 +64,7 @@ class ProfileController extends Controller
     }
 
     /**
-     * Show patient's profile page.
+     * Show edit user's profile page.
      *
      * @param  UserID  $id
      * @return \Illuminate\Http\Response
@@ -65,7 +77,7 @@ class ProfileController extends Controller
     }
 
     /**
-     * Show patient's profile page.
+     * Edit patient's profile.
      *
      * @param  Request  $request
      * @param  UserID  $id
@@ -173,7 +185,7 @@ class ProfileController extends Controller
     }
 
     /**
-     * Show patient's profile page.
+     * Show create patient page.
      *
      * @param  UserID  $id
      * @return \Illuminate\Http\Response
