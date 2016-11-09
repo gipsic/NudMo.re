@@ -130,20 +130,6 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('patient_number') ? ' has-error' : '' }}">
-                            {!! Form::label('patient_number', 'Patient Number', ['class' => 'col-md-4 control-label']) !!}
-
-                            <div class="col-md-6">
-                                {!! Form::text('patient_number', old('patient_number'), ['class' => 'form-control', 'required']) !!}
-
-                                @if ($errors->has('patient_number'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('patient_number') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
                         <div class="form-group{{ $errors->has('blood_type') ? ' has-error' : '' }}">
                             {!! Form::label('blood_type', 'Blood Type', ['class' => 'col-md-4 control-label']) !!}
 

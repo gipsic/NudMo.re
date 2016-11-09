@@ -363,8 +363,10 @@ class ProfileController extends Controller
 
         $user->save();
 
+        $patient_number = 'P'.str_pad($user->id, 4, '0', STR_PAD_LEFT);
+
         $user->patient()->create([
-            'patient_number' => $request['patient_number'],
+            'patient_number' => $patient_number,
             'blood_type' => $request['blood_type'],
             'birthdate' => $request['birthdate'],
             'address' => $request['address'],

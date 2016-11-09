@@ -130,19 +130,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('patient_number') ? ' has-error' : '' }}">
-                            {!! Form::label('patient_number', 'Patient Number', ['class' => 'col-md-4 control-label']) !!}
-
-                            <div class="col-md-6">
-                                {!! Form::text('patient_number', $user->patient()->first()->patient_number, ['class' => 'form-control', 'required']) !!}
-
-                                @if ($errors->has('patient_number'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('patient_number') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
+                        {!! Form::hidden('patient_number', $user->patient()->first()->patient_number) !!}
 
                         <div class="form-group{{ $errors->has('blood_type') ? ' has-error' : '' }}">
                             {!! Form::label('blood_type', 'Blood Type', ['class' => 'col-md-4 control-label']) !!}
@@ -214,83 +202,17 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <div class="checkbox">
-                                    <label>
-                                        {!! Form::checkbox('administrator', 'administrator', $user->isAdministrator()) !!} Administrator
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
+                        {!! Form::hidden('administrator', $user->isAdministrator()) !!}
 
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <div class="checkbox">
-                                    <label>
-                                        {!! Form::checkbox('staff', 'staff', $user->isStaff()) !!} Staff
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
+                        {!! Form::hidden('staff', $user->isStaff()) !!}
 
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <div class="checkbox">
-                                    <label>
-                                        {!! Form::checkbox('doctor', 'doctor', $user->isDoctor()) !!} Doctor
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
+                        {!! Form::hidden('doctor', $user->isDoctor()) !!}
+                        {!! Form::hidden('doctor_number', $user->isDoctor() ? $user->doctor()->first()->doctor_number : '') !!}
+                        {!! Form::hidden('department', $user->isDoctor() ? $user->doctor()->first()->department : '') !!}
+                     
+                        {!! Form::hidden('nurse', $user->isNurse()) !!}
 
-                        <div class="form-group{{ $errors->has('doctor_number') ? ' has-error' : '' }}">
-                            {!! Form::label('doctor_number', 'Doctor Number', ['class' => 'col-md-4 control-label']) !!}
-
-                            <div class="col-md-6">
-                                {!! Form::text('doctor_number', $user->isDoctor() ? $user->doctor()->first()->doctor_number : '', ['class' => 'form-control']) !!}
-
-                                @if ($errors->has('doctor_number'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('doctor_number') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('department') ? ' has-error' : '' }}">
-                            {!! Form::label('department', 'Department', ['class' => 'col-md-4 control-label']) !!}
-
-                            <div class="col-md-6">
-                                {!! Form::text('department', $user->doctor()->first()->department, ['class' => 'form-control']) !!}
-
-                                @if ($errors->has('department'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('department') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <div class="checkbox">
-                                    <label>
-                                        {!! Form::checkbox('nurse', 'nurse', $user->isNurse()) !!} Nurse
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <div class="checkbox">
-                                    <label>
-                                        {!! Form::checkbox('pharmacist', 'pharmacist', $user->isPharmacist()) !!} Pharmacist
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
+                        {!! Form::hidden('pharmacist', $user->isPharmacist()) !!}
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">

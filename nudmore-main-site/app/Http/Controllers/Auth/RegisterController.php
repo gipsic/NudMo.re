@@ -58,18 +58,21 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $user = User::create([
-            'username' => $data['username'],
-            'password' => $data['password'],
-            'email' => $data['email'],
-            'title' => $data['title'],
-            'name' => $data['name'],
-            'surname' => $data['surname'],
-            'gender' => $data['gender'],
-            'identity_number' => $data['identity_number'],
-        ]);
+        $user = new User;
+        $user->username = $data['username'];
+        $user->password = $data['password'];
+        $user->email = $data['email'];
+        $user->title = $data['title'];
+        $user->name = $data['name'];
+        $user->surname = $data['surname'];
+        $user->gender = $data['gender'];
+        $user->identity_number = $data['identity_number'];
+
+        $user->save();
+       
+        $patient_number = 'P'.str_pad($user->id, 4, '0', STR_PAD_LEFT);
         $user->patient()->create([
-            'patient_number' => $data['patient_number'],
+            'patient_number' => $patient_number, 
             'blood_type' => $data['blood_type'],
             'birthdate' => $data['birthdate'],
             'address' => $data['address'],
