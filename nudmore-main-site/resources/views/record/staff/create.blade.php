@@ -43,7 +43,7 @@
                             {!! Form::label('date_time', 'Date and time', ['class' => 'col-md-4 control-label']) !!}
 
                             <div class="col-md-6">
-                                {!! Form::text('date_time', \Carbon\Carbon::now(), ['class' => 'form-control', 'required', 'autofocus']) !!}
+                                {!! Form::date('date_time', \Carbon\Carbon::now(), ['class' => 'form-control', 'required', 'autofocus']) !!}
 
                                 @if ($errors->has('date_time'))
                                     <span class="help-block">

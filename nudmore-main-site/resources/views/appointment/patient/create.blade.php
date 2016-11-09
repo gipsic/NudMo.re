@@ -9,18 +9,28 @@
                 <div class="panel-body">
                 @foreach ($available_schedules as $schedule)
                     <div class="row">
-                        <div class="col-md-8">
+                        <div class="col-md-4">
                         {!! $schedule->date_time !!} to <?php $date_time = (new DateTime($schedule->date_time))->modify('+20 minutes'); echo $date_time->format('H:i:s'); ?>
                         </div>
-                        <div class="col-md-4">
-                            {!! Form::open(['url' => 'appointment/patient/create', 'class' => 'form-horizontal']) !!}
-                                {!! Form::token() !!}
-                                {!! Form::hidden('patient_number', $current_user->patient()->first()->patient_number) !!}
-                                {!! Form::hidden('doctor_number', $doctor_number) !!}
-                                {!! Form::hidden('date_time', $schedule->date_time) !!}
+                        {!! Form::open(['url' => 'appointment/patient/create', 'class' => 'form-horizontal']) !!}
+                            {!! Form::token() !!}
+                            {!! Form::hidden('patient_number', $current_user->patient()->first()->patient_number) !!}
+                            {!! Form::hidden('doctor_number', $doctor_number) !!}
+                            {!! Form::hidden('date_time', $schedule->date_time) !!}
+
+                            <div class="col-md-4">
+                                <div class="form-group' }}">
+                                    {!! Form::label('reason', 'Reason', ['class' => 'col-md-4 control-label']) !!}
+
+                                    <div class="col-md-6">
+                                        {!! Form::text('reason', old('reason'), ['class' => 'form-control', 'required', 'autofocus']) !!}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
                                 {!! Form::submit('Make Appointment >>', ['class' => 'btn btn-success']) !!}
-                            {!! Form::close() !!}
-                        </div>
+                            </div>
+                        {!! Form::close() !!}
                     </div>
                 @endforeach
                 </div>

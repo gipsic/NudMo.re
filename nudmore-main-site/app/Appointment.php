@@ -12,7 +12,7 @@ class Appointment extends Model
      * @var array
      */
     protected $fillable = [
-        'patient_number', 'doctor_number', 'date_time',
+        'patient_number', 'doctor_number', 'date_time', 'reason', 'notification_id',
     ];
 
     public function patient()

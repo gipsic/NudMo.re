@@ -9,6 +9,8 @@ use App\Schedule;
 use App\Appointment;
 use App\Doctor;
 use App\Patient;
+use App\Notification;
+use Carbon\Carbon;
 use Validator;
 
 class AppointmentController extends Controller
@@ -85,39 +87,114 @@ class AppointmentController extends Controller
 
     public function createAppointmentPatient(Request $request)
     {
+        $patient = Patient::where('patient_number', $request->patient_number)->first();
+        $doctor = Doctor::where('doctor_number', $request->doctor_number)->first();
+
     	$appointment = new Appointment;
 
     	$appointment->patient_number = $request->patient_number;
     	$appointment->doctor_number = $request->doctor_number;
     	$appointment->date_time = $request->date_time;
+        $appointment->reason = $request->reason;
+
+        $notification = new Notification;
+
+        $notification_date_time = Carbon::createFromFormat('Y-m-d H:i:s', $request->date_time)->subDay();
+        $notification->scheduled_timestamp = $notification_date_time->toDateTimeString();
+        
+        $notification->save();
+
+        $topic = 'Appointment Reminder!';
+        $detail = 'You have an appointment with '.$doctor->user()->first()->title.' '.$doctor->user()->first()->name.' '.$doctor->user()->first()->surname.' at '.$request->date_time.'.';
+        $notification->email()->create(['notification_id' => $notification->id,
+                                        'email_address' => $patient->user()->first()->email,
+                                        'topic' => $topic,
+                                        'detail' => $detail,]);
+        $notification->sms()->create(['notification_id' => $notification->id,
+                                        'phone_number' => $patient->phone_number,
+                                        'message' => $detail]);
+
+
+        $appointment->notification_id = $notification->id;
 
     	$appointment->save();
+        $notification->save();
 
     	return redirect()->to('appointment/patient');
     }
 
     public function createAppointmentDoctor(Request $request)
     {
-    	$appointment = new Appointment;
+    	$patient = Patient::where('patient_number', $request->patient_number)->first();
+        $doctor = Doctor::where('doctor_number', $request->doctor_number)->first();
 
-    	$appointment->patient_number = $request->patient_number;
-    	$appointment->doctor_number = $request->doctor_number;
-    	$appointment->date_time = $request->date_time;
+        $appointment = new Appointment;
 
-    	$appointment->save();
+        $appointment->patient_number = $request->patient_number;
+        $appointment->doctor_number = $request->doctor_number;
+        $appointment->date_time = $request->date_time;
+        $appointment->reason = $request->reason;
+
+        $notification = new Notification;
+
+        $notification_date_time = Carbon::createFromFormat('Y-m-d H:i:s', $request->date_time)->subDay();
+        $notification->scheduled_timestamp = $notification_date_time->toDateTimeString();
+        
+        $notification->save();
+
+        $topic = 'Appointment Reminder!';
+        $detail = 'You have an appointment with '.$doctor->user()->first()->title.' '.$doctor->user()->first()->name.' '.$doctor->user()->first()->surname.' at '.$request->date_time.'.';
+        $notification->email()->create(['notification_id' => $notification->id,
+                                        'email_address' => $patient->user()->first()->email,
+                                        'topic' => $topic,
+                                        'detail' => $detail,]);
+        $notification->sms()->create(['notification_id' => $notification->id,
+                                        'phone_number' => $patient->phone_number,
+                                        'message' => $detail]);
+
+
+        $appointment->notification_id = $notification->id;
+
+        $appointment->save();
+        $notification->save();
 
     	return redirect()->to('appointment/doctor');
     }
 
     public function createAppointmentStaff(Request $request)
     {
-    	$appointment = new Appointment;
+    	$patient = Patient::where('patient_number', $request->patient_number)->first();
+        $doctor = Doctor::where('doctor_number', $request->doctor_number)->first();
 
-    	$appointment->patient_number = $request->patient_number;
-    	$appointment->doctor_number = $request->doctor_number;
-    	$appointment->date_time = $request->date_time;
+        $appointment = new Appointment;
 
-    	$appointment->save();
+        $appointment->patient_number = $request->patient_number;
+        $appointment->doctor_number = $request->doctor_number;
+        $appointment->date_time = $request->date_time;
+        $appointment->reason = $request->reason;
+
+        $notification = new Notification;
+
+        $notification_date_time = Carbon::createFromFormat('Y-m-d H:i:s', $request->date_time)->subDay();
+        $notification->scheduled_timestamp = $notification_date_time->toDateTimeString();
+        
+        $notification->save();
+
+        $topic = 'Appointment Reminder!';
+        $detail = 'You have an appointment with '.$doctor->user()->first()->title.' '.$doctor->user()->first()->name.' '.$doctor->user()->first()->surname.' at '.$request->date_time.'.';
+        $notification->email()->create(['notification_id' => $notification->id,
+                                        'email_address' => $patient->user()->first()->email,
+                                        'topic' => $topic,
+                                        'detail' => $detail,]);
+        $notification->sms()->create(['notification_id' => $notification->id,
+                                        'phone_number' => $patient->phone_number,
+                                        'message' => $detail]);
+
+
+        $appointment->notification_id = $notification->id;
+
+        $appointment->save();
+        $notification->save();
 
     	return redirect()->to('appointment/staff');
     }
@@ -126,6 +203,10 @@ class AppointmentController extends Controller
     {
     	$appointment = Appointment::where('id', $id)->first();
 
+        $notification = Notification::where('id', $appointment->notification_id);
+
+        $notification->delete();
+        
     	$appointment->delete();
 
     	return redirect()->to('appointment/patient');
@@ -135,7 +216,11 @@ class AppointmentController extends Controller
     {
     	$appointment = Appointment::where('id', $id)->first();
 
-    	$appointment->delete();
+        $notification = Notification::where('id', $appointment->notification_id);
+
+        $notification->delete();
+        
+        $appointment->delete();
 
     	return redirect()->to('appointment/doctor');
     }
@@ -144,7 +229,11 @@ class AppointmentController extends Controller
     {
     	$appointment = Appointment::where('id', $id)->first();
 
-    	$appointment->delete();
+        $notification = Notification::where('id', $appointment->notification_id);
+
+        $notification->delete();
+        
+        $appointment->delete();
 
     	return redirect()->to('appointment/staff');
     }

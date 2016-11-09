@@ -55,6 +55,13 @@
                                     @endif
                                 </div>
                             </div>
+                            <div class="form-group' }}">
+                                {!! Form::label('reason', 'Reason', ['class' => 'col-md-4 control-label']) !!}
+
+                                <div class="col-md-6">
+                                    {!! Form::text('reason', old('reason'), ['class' => 'form-control', 'required', 'autofocus']) !!}
+                                </div>
+                            </div>
                             {!! Form::submit('Make Appointment >>', ['class' => 'btn btn-success']) !!}
                         {!! Form::close() !!}
                     </div>

@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Schedule;
 use App\Doctor;
+use App\Appointment;
+use App\Notification;
 use Validator;
 
 class ScheduleController extends Controller
@@ -94,6 +96,16 @@ class ScheduleController extends Controller
     {
     	$schedule = Schedule::where('id', $id)->first();
 
+        $appointments = Appointment::where('doctor_number', $schedule->doctor_number)->where('date_time', $schedule->date_time)->get();
+
+        foreach ($appointments as $appointment) {
+            $appointment->delete();
+
+            $notification = Notification::where('id', $appointment->notification_id);
+
+            $notification->delete();
+        }
+
     	$schedule->delete();
 
         return redirect()->to('schedule/doctor');
@@ -102,6 +114,16 @@ class ScheduleController extends Controller
     public function deleteScheduleStaff($id)
     {
         $schedule = Schedule::where('id', $id)->first();
+
+        $appointments = Appointment::where('doctor_number', $schedule->doctor_number)->where('date_time', $schedule->date_time)->get();
+
+        foreach ($appointments as $appointment) {
+            $appointment->delete();
+
+            $notification = Notification::where('id', $appointment->notification_id);
+
+            $notification->delete();
+        }
 
         $schedule->delete();
 
