@@ -20,6 +20,11 @@ class Doctor extends Model
         return $this->hasMany('App\Schedule');
     }
 
+    public function appointment()
+    {
+        return $this->belongsTo('App\Appointment');
+    }
+
     public function user()
     {
         return $this->belongsTo('App\User');
