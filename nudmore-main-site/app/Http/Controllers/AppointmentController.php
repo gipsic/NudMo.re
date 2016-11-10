@@ -104,8 +104,9 @@ class AppointmentController extends Controller
         
         $notification->save();
 
-        $topic = 'Appointment Reminder!';
-        $detail = 'You have an appointment with '.$doctor->user()->first()->title.' '.$doctor->user()->first()->name.' '.$doctor->user()->first()->surname.' at '.$request->date_time.'.';
+        $topic = 'แจ้งเตือนการนัดหมาย - Nudmo.re';
+        $detail = 'คุณ '.$patient->user()->first()->name.' '.$patient->user()->first()->surname.' มีการนัดหมายแพทย์ '.$doctor->user()->first()->title.' '.$doctor->user()->first()->name.' '.$doctor->user()->first()->surname.' แผนก '.$doctor->department.'เพื่อเข้ารับการตรวจในวันที่ '.$request->date_time.'.';
+        
         $notification->email()->create(['notification_id' => $notification->id,
                                         'email_address' => $patient->user()->first()->email,
                                         'topic' => $topic,
@@ -113,6 +114,8 @@ class AppointmentController extends Controller
         $notification->sms()->create(['notification_id' => $notification->id,
                                         'phone_number' => $patient->phone_number,
                                         'message' => $detail]);
+
+        app('App\Http\Controllers\SmsNotificationController')->sendSms($patient->phone_number, $detail);
 
 
         $appointment->notification_id = $notification->id;
@@ -142,8 +145,9 @@ class AppointmentController extends Controller
         
         $notification->save();
 
-        $topic = 'Appointment Reminder!';
-        $detail = 'You have an appointment with '.$doctor->user()->first()->title.' '.$doctor->user()->first()->name.' '.$doctor->user()->first()->surname.' at '.$request->date_time.'.';
+        $topic = 'แจ้งเตือนการนัดหมาย - Nudmo.re';
+        $detail = 'คุณ '.$patient->user()->first()->name.' '.$patient->user()->first()->surname.' มีการนัดหมายแพทย์ '.$doctor->user()->first()->title.' '.$doctor->user()->first()->name.' '.$doctor->user()->first()->surname.' แผนก '.$doctor->department.'เพื่อเข้ารับการตรวจในวันที่ '.$request->date_time.'.';
+
         $notification->email()->create(['notification_id' => $notification->id,
                                         'email_address' => $patient->user()->first()->email,
                                         'topic' => $topic,
@@ -152,6 +156,7 @@ class AppointmentController extends Controller
                                         'phone_number' => $patient->phone_number,
                                         'message' => $detail]);
 
+        app('App\Http\Controllers\SmsNotificationController')->sendSms($patient->phone_number, $detail);
 
         $appointment->notification_id = $notification->id;
 
@@ -180,8 +185,9 @@ class AppointmentController extends Controller
         
         $notification->save();
 
-        $topic = 'Appointment Reminder!';
-        $detail = 'You have an appointment with '.$doctor->user()->first()->title.' '.$doctor->user()->first()->name.' '.$doctor->user()->first()->surname.' at '.$request->date_time.'.';
+        $topic = 'แจ้งเตือนการนัดหมาย - Nudmo.re';
+        $detail = 'คุณ '.$patient->user()->first()->name.' '.$patient->user()->first()->surname.' มีการนัดหมายแพทย์ '.$doctor->user()->first()->title.' '.$doctor->user()->first()->name.' '.$doctor->user()->first()->surname.' แผนก '.$doctor->department.'เพื่อเข้ารับการตรวจในวันที่ '.$request->date_time.'.';
+
         $notification->email()->create(['notification_id' => $notification->id,
                                         'email_address' => $patient->user()->first()->email,
                                         'topic' => $topic,
@@ -190,6 +196,7 @@ class AppointmentController extends Controller
                                         'phone_number' => $patient->phone_number,
                                         'message' => $detail]);
 
+        app('App\Http\Controllers\SmsNotificationController')->sendSms($patient->phone_number, $detail);
 
         $appointment->notification_id = $notification->id;
 
