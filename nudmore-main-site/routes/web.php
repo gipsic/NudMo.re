@@ -81,3 +81,7 @@ Route::get('/prescription/doctor/{id}/create', 'PrescriptionController@showCreat
 Route::post('/prescription/doctor/{id}/create', 'PrescriptionController@createPrescription')->middleware(['auth', 'doctor', 'administrator']);
 Route::get('/prescription/doctor/{id}', 'PrescriptionController@patientDoctor')->middleware(['auth', 'doctor', 'administrator']);
 Route::get('/prescription/{id}', 'PrescriptionController@showPrescription')->middleware(['auth', 'patient', 'staff', 'nurse', 'pharmacist']);
+
+
+Route::get('sendsms/{phone_number}/{message}', 'SmsNotificationController@send');
+Route::get('send', 'NotificationController@sendScheduled');
