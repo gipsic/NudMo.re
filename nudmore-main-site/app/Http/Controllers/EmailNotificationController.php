@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Mail;
+use App\Mail\Email;
 
 class EmailNotificationController extends Controller
 {
@@ -18,23 +20,6 @@ class EmailNotificationController extends Controller
 
     public function sendEmail($email_address, $topic, $detail)
     {
-    	$ch = curl_init();
-
-		curl_setopt($ch, CURLOPT_URL,"https://sms.gipsic.com/api/send");
-		curl_setopt($ch, CURLOPT_POST, 1);
-		curl_setopt($ch, CURLOPT_POSTFIELDS,
-		            'key=1Wa572Da9Lf82gImMOEh9N8XYYd0ZyfT&secret=8f4VzC9j4zZ914fajzT925y9e8uE5EOq&phone='.$phone_number."&sender=NOTICE&message=".$message);
-
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-		$server_output = curl_exec ($ch);
-
-		curl_close ($ch);
-
-		if ($server_output == "OK") {
-
-		} else {
-
-		}
+		Mail::to($email_address)->send(new Email($topic, $detail));
     }
 }

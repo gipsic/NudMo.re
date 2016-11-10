@@ -83,5 +83,6 @@ Route::get('/prescription/doctor/{id}', 'PrescriptionController@patientDoctor')-
 Route::get('/prescription/{id}', 'PrescriptionController@showPrescription')->middleware(['auth', 'patient', 'staff', 'nurse', 'pharmacist']);
 
 
-Route::get('sendsms/{phone_number}/{message}', 'SmsNotificationController@send');
+Route::get('sendsms/{phone_number}/{message}', 'SmsNotificationController@sendSms')->middleware(['auth', 'administrator']);
+Route::get('sendemail/{email_address}/{topic}/{detail}', 'EmailNotificationController@sendEmail')->middleware(['auth', 'administrator']);
 Route::get('send', 'NotificationController@sendScheduled');

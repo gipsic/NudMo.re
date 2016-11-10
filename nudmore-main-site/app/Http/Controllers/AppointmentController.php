@@ -105,18 +105,20 @@ class AppointmentController extends Controller
         $notification->save();
 
         $topic = 'แจ้งเตือนการนัดหมาย - Nudmo.re';
-        $detail = 'คุณ '.$patient->user()->first()->name.' '.$patient->user()->first()->surname.' มีการนัดหมายแพทย์ '.$doctor->user()->first()->title.' '.$doctor->user()->first()->name.' '.$doctor->user()->first()->surname.' แผนก '.$doctor->department.'เพื่อเข้ารับการตรวจในวันที่ '.$request->date_time.'.';
-        
+        $message = $patient->user()->first()->title.' '.$patient->user()->first()->name.' '.$patient->user()->first()->surname.' มีการนัดหมายแพทย์ '.$doctor->user()->first()->name.' '.$doctor->user()->first()->surname.' แผนก '.$doctor->department.' เพื่อเข้ารับการตรวจในวันที่ '.$request->date_time.'.';
+
+        $detail = 'รหัสผู้ป่วย: '.$patient->patient_number.'<br>ชื่อ-นามสกุล ผู้ป่วย: '.$patient->user()->first()->title.' '.$patient->user()->first()->name.' '.$patient->user()->first()->surname.'<br>วันเวลานัด: '.$request->date_time.'<br>แพทย์ที่นัด :'.$doctor->user()->first()->name.' '.$doctor->user()->first()->surname.'<br>แผนก: '.$doctor->department.'<br>';
+
         $notification->email()->create(['notification_id' => $notification->id,
                                         'email_address' => $patient->user()->first()->email,
                                         'topic' => $topic,
                                         'detail' => $detail,]);
         $notification->sms()->create(['notification_id' => $notification->id,
                                         'phone_number' => $patient->phone_number,
-                                        'message' => $detail]);
+                                        'message' => $message]);
 
-        app('App\Http\Controllers\SmsNotificationController')->sendSms($patient->phone_number, $detail);
-
+        app('App\Http\Controllers\SmsNotificationController')->sendSms($patient->phone_number, $message);
+        app('App\Http\Controllers\EmailNotificationController')->sendEmail($patient->user()->first()->email, $topic, $detail);
 
         $appointment->notification_id = $notification->id;
 
@@ -146,7 +148,9 @@ class AppointmentController extends Controller
         $notification->save();
 
         $topic = 'แจ้งเตือนการนัดหมาย - Nudmo.re';
-        $detail = 'คุณ '.$patient->user()->first()->name.' '.$patient->user()->first()->surname.' มีการนัดหมายแพทย์ '.$doctor->user()->first()->title.' '.$doctor->user()->first()->name.' '.$doctor->user()->first()->surname.' แผนก '.$doctor->department.'เพื่อเข้ารับการตรวจในวันที่ '.$request->date_time.'.';
+        $message = $patient->user()->first()->title.' '.$patient->user()->first()->name.' '.$patient->user()->first()->surname.' มีการนัดหมายแพทย์ '.$doctor->user()->first()->name.' '.$doctor->user()->first()->surname.' แผนก '.$doctor->department.' เพื่อเข้ารับการตรวจในวันที่ '.$request->date_time.'.';
+
+        $detail = 'รหัสผู้ป่วย: '.$patient->patient_number.'<br>ชื่อ-นามสกุล ผู้ป่วย: '.$patient->user()->first()->title.' '.$patient->user()->first()->name.' '.$patient->user()->first()->surname.'<br>วันเวลานัด: '.$request->date_time.'<br>แพทย์ที่นัด :'.$doctor->user()->first()->name.' '.$doctor->user()->first()->surname.'<br>แผนก: '.$doctor->department.'<br>';
 
         $notification->email()->create(['notification_id' => $notification->id,
                                         'email_address' => $patient->user()->first()->email,
@@ -154,9 +158,10 @@ class AppointmentController extends Controller
                                         'detail' => $detail,]);
         $notification->sms()->create(['notification_id' => $notification->id,
                                         'phone_number' => $patient->phone_number,
-                                        'message' => $detail]);
+                                        'message' => $message]);
 
-        app('App\Http\Controllers\SmsNotificationController')->sendSms($patient->phone_number, $detail);
+        app('App\Http\Controllers\SmsNotificationController')->sendSms($patient->phone_number, $message);
+        app('App\Http\Controllers\EmailNotificationController')->sendEmail($patient->user()->first()->email, $topic, $detail);
 
         $appointment->notification_id = $notification->id;
 
@@ -186,7 +191,9 @@ class AppointmentController extends Controller
         $notification->save();
 
         $topic = 'แจ้งเตือนการนัดหมาย - Nudmo.re';
-        $detail = 'คุณ '.$patient->user()->first()->name.' '.$patient->user()->first()->surname.' มีการนัดหมายแพทย์ '.$doctor->user()->first()->title.' '.$doctor->user()->first()->name.' '.$doctor->user()->first()->surname.' แผนก '.$doctor->department.'เพื่อเข้ารับการตรวจในวันที่ '.$request->date_time.'.';
+        $message = $patient->user()->first()->title.' '.$patient->user()->first()->name.' '.$patient->user()->first()->surname.' มีการนัดหมายแพทย์ '.$doctor->user()->first()->name.' '.$doctor->user()->first()->surname.' แผนก '.$doctor->department.' เพื่อเข้ารับการตรวจในวันที่ '.$request->date_time.'.';
+
+        $detail = 'รหัสผู้ป่วย: '.$patient->patient_number.'<br>ชื่อ-นามสกุล ผู้ป่วย: '.$patient->user()->first()->title.' '.$patient->user()->first()->name.' '.$patient->user()->first()->surname.'<br>วันเวลานัด: '.$request->date_time.'<br>แพทย์ที่นัด :'.$doctor->user()->first()->name.' '.$doctor->user()->first()->surname.'<br>แผนก: '.$doctor->department.'<br>';
 
         $notification->email()->create(['notification_id' => $notification->id,
                                         'email_address' => $patient->user()->first()->email,
@@ -194,9 +201,10 @@ class AppointmentController extends Controller
                                         'detail' => $detail,]);
         $notification->sms()->create(['notification_id' => $notification->id,
                                         'phone_number' => $patient->phone_number,
-                                        'message' => $detail]);
+                                        'message' => $message]);
 
-        app('App\Http\Controllers\SmsNotificationController')->sendSms($patient->phone_number, $detail);
+        app('App\Http\Controllers\SmsNotificationController')->sendSms($patient->phone_number, $message);
+        app('App\Http\Controllers\EmailNotificationController')->sendEmail($patient->user()->first()->email, $topic, $detail);
 
         $appointment->notification_id = $notification->id;
 
