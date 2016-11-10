@@ -25,23 +25,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $roles = array();
-       
-        $user = Auth::user();
-        if ($user->isPatient()) {
-            $roles[] = 'Patient';
-        } else if ($user->isDoctor()) {
-            $roles[] = 'Doctor';
-        } else if ($user->isStaff()) {
-            $roles[] = 'Staff';
-        } else if ($user->isNurse()) {
-            $roles[] = 'Nurse';
-        } else if ($user->isPharmacist()) {
-            $roles[] = 'Pharmacist';
-        } else if ($user->isAdministrator()) {
-            $roles[] = 'Administrator';
-        }
-
-        return view('home', ['roles' => $roles]);
+        return view('home');
     }
 }
