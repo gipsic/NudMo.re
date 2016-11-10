@@ -105,9 +105,9 @@ class AppointmentController extends Controller
         $notification->save();
 
         $topic = 'แจ้งเตือนการนัดหมาย - Nudmo.re';
-        $message = $patient->user()->first()->title.' '.$patient->user()->first()->name.' '.$patient->user()->first()->surname.' มีการนัดหมายแพทย์ '.$doctor->user()->first()->name.' '.$doctor->user()->first()->surname.' แผนก '.$doctor->department.' เพื่อเข้ารับการตรวจในวันที่ '.$request->date_time.'.';
+        $message = $patient->user()->first()->title.' '.$patient->user()->first()->name.' '.$patient->user()->first()->surname.' มีการนัดหมายแพทย์ '.$doctor->user()->first()->name.' '.$doctor->user()->first()->surname.' แผนก '.$doctor->department.' เพื่อเข้ารับการตรวจในวันที่ '.$request->date_time;
 
-        $detail = 'รหัสผู้ป่วย: '.$patient->patient_number.'<br>ชื่อ-นามสกุล ผู้ป่วย: '.$patient->user()->first()->title.' '.$patient->user()->first()->name.' '.$patient->user()->first()->surname.'<br>วันเวลานัด: '.$request->date_time.'<br>แพทย์ที่นัด :'.$doctor->user()->first()->name.' '.$doctor->user()->first()->surname.'<br>แผนก: '.$doctor->department.'<br>';
+        $detail = 'รหัสผู้ป่วย: '.$patient->patient_number.'<br>ชื่อ-นามสกุล ผู้ป่วย: '.$patient->user()->first()->title.' '.$patient->user()->first()->name.' '.$patient->user()->first()->surname.'<br>วันเวลานัด: '.$request->date_time.'<br>แพทย์ที่นัด: '.$doctor->user()->first()->name.' '.$doctor->user()->first()->surname.'<br>แผนก: '.$doctor->department.'<br>';
 
         $notification->email()->create(['notification_id' => $notification->id,
                                         'email_address' => $patient->user()->first()->email,
@@ -148,9 +148,9 @@ class AppointmentController extends Controller
         $notification->save();
 
         $topic = 'แจ้งเตือนการนัดหมาย - Nudmo.re';
-        $message = $patient->user()->first()->title.' '.$patient->user()->first()->name.' '.$patient->user()->first()->surname.' มีการนัดหมายแพทย์ '.$doctor->user()->first()->name.' '.$doctor->user()->first()->surname.' แผนก '.$doctor->department.' เพื่อเข้ารับการตรวจในวันที่ '.$request->date_time.'.';
+        $message = $patient->user()->first()->title.' '.$patient->user()->first()->name.' '.$patient->user()->first()->surname.' มีการนัดหมายแพทย์ '.$doctor->user()->first()->name.' '.$doctor->user()->first()->surname.' แผนก '.$doctor->department.' เพื่อเข้ารับการตรวจในวันที่ '.$request->date_time;
 
-        $detail = 'รหัสผู้ป่วย: '.$patient->patient_number.'<br>ชื่อ-นามสกุล ผู้ป่วย: '.$patient->user()->first()->title.' '.$patient->user()->first()->name.' '.$patient->user()->first()->surname.'<br>วันเวลานัด: '.$request->date_time.'<br>แพทย์ที่นัด :'.$doctor->user()->first()->name.' '.$doctor->user()->first()->surname.'<br>แผนก: '.$doctor->department.'<br>';
+        $detail = 'รหัสผู้ป่วย: '.$patient->patient_number.'<br>ชื่อ-นามสกุล ผู้ป่วย: '.$patient->user()->first()->title.' '.$patient->user()->first()->name.' '.$patient->user()->first()->surname.'<br>วันเวลานัด: '.$request->date_time.'<br>แพทย์ที่นัด: '.$doctor->user()->first()->name.' '.$doctor->user()->first()->surname.'<br>แผนก: '.$doctor->department.'<br>';
 
         $notification->email()->create(['notification_id' => $notification->id,
                                         'email_address' => $patient->user()->first()->email,
@@ -191,9 +191,9 @@ class AppointmentController extends Controller
         $notification->save();
 
         $topic = 'แจ้งเตือนการนัดหมาย - Nudmo.re';
-        $message = $patient->user()->first()->title.' '.$patient->user()->first()->name.' '.$patient->user()->first()->surname.' มีการนัดหมายแพทย์ '.$doctor->user()->first()->name.' '.$doctor->user()->first()->surname.' แผนก '.$doctor->department.' เพื่อเข้ารับการตรวจในวันที่ '.$request->date_time.'.';
+        $message = $patient->user()->first()->title.' '.$patient->user()->first()->name.' '.$patient->user()->first()->surname.' มีการนัดหมายแพทย์ '.$doctor->user()->first()->name.' '.$doctor->user()->first()->surname.' แผนก '.$doctor->department.' เพื่อเข้ารับการตรวจในวันที่ '.$request->date_time;
 
-        $detail = 'รหัสผู้ป่วย: '.$patient->patient_number.'<br>ชื่อ-นามสกุล ผู้ป่วย: '.$patient->user()->first()->title.' '.$patient->user()->first()->name.' '.$patient->user()->first()->surname.'<br>วันเวลานัด: '.$request->date_time.'<br>แพทย์ที่นัด :'.$doctor->user()->first()->name.' '.$doctor->user()->first()->surname.'<br>แผนก: '.$doctor->department.'<br>';
+        $detail = 'รหัสผู้ป่วย: '.$patient->patient_number.'<br>ชื่อ-นามสกุล ผู้ป่วย: '.$patient->user()->first()->title.' '.$patient->user()->first()->name.' '.$patient->user()->first()->surname.'<br>วันเวลานัด: '.$request->date_time.'<br>แพทย์ที่นัด: '.$doctor->user()->first()->name.' '.$doctor->user()->first()->surname.'<br>แผนก: '.$doctor->department.'<br>';
 
         $notification->email()->create(['notification_id' => $notification->id,
                                         'email_address' => $patient->user()->first()->email,

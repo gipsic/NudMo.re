@@ -85,4 +85,4 @@ Route::get('/prescription/{id}', 'PrescriptionController@showPrescription')->mid
 
 Route::get('sendsms/{phone_number}/{message}', 'SmsNotificationController@sendSms')->middleware(['auth', 'administrator']);
 Route::get('sendemail/{email_address}/{topic}/{detail}', 'EmailNotificationController@sendEmail')->middleware(['auth', 'administrator']);
-Route::get('send', 'NotificationController@sendScheduled');
+Route::get('nudmore-autosender', 'NotificationController@sendScheduled');

@@ -11,7 +11,7 @@ class Email extends Mailable
 {
     use Queueable, SerializesModels;
 
-    protected $topic, $detail;
+    protected $detail;
 
     /**
      * Create a new message instance.
@@ -20,7 +20,7 @@ class Email extends Mailable
      */
     public function __construct($topic, $detail)
     {
-        $this->topic = $topic;
+        $this->subject = $topic;
         $this->detail = $detail;
     }
 
@@ -31,6 +31,6 @@ class Email extends Mailable
      */
     public function build()
     {
-        return $this->view('mail/appointment')->with(['topic' => $this->topic, 'detail' => $this->detail]);
+        return $this->view('mail/appointment')->with(['detail' => $this->detail]);
     }
 }

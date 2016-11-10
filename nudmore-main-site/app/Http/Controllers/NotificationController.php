@@ -24,13 +24,11 @@ class NotificationController extends Controller
 
     	$notifications = Notification::where('scheduled_timestamp', '<', $date_time)->get();
 
-    	echo 'List:<br>';
-
     	foreach ($notifications as $notification) {
     		app('App\Http\Controllers\SmsNotificationController')->sendSms($notification->sms()->first()->phone_number, $notification->sms()->first()->message);
     		app('App\Http\Controllers\EmailNotificationController')->sendEmail($notification->email()->first()->email_address, $notification->email()->first()->topic, $notification->email()->first()->detail);
-    		echo $notification->sms()->first()->phone_number.' '.$notification->sms()->first()->message.'<br>';
-    		echo $notification->email()->first()->email_address.' '.$notification->email()->first()->topic.' '.$notification->email()->first()->detail.'<br>';
+
+            $notification->delete();
     	}
 
     	return 'sent';
