@@ -17,7 +17,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 
-Route::get('/profiles', 'ProfileController@list')->middleware(['auth', 'doctor', 'staff', 'nurse', 'pharmacist', 'administrator']);
+Route::get('/profile/list', 'ProfileController@list')->middleware(['auth', 'doctor', 'staff', 'nurse', 'pharmacist', 'administrator']);
 Route::get('/profile/create', 'ProfileController@showCreateUser')->middleware(['auth', 'administrator']);
 Route::post('/profile/create', 'ProfileController@createUser')->middleware(['auth', 'administrator']);
 Route::get('/profile/edit', 'ProfileController@showEditUser')->middleware(['auth']);

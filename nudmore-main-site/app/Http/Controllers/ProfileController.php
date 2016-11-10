@@ -91,6 +91,7 @@ class ProfileController extends Controller
 
 
     	if ($request->password !== '') {
+            /*
     		if ($request->doctor === 'doctor') {
     			$doctor = DB::table('doctors')->select('id')->where('user_id',$id)->get()->first();
        			if ($doctor != null) {
@@ -102,7 +103,11 @@ class ProfileController extends Controller
     		} else {
     			$validator = Validator::make($request->all(), User::rules($id));
     		}
+            */
+
+            $validator = Validator::make($request->all(), User::rules($id));
        	} else {
+            /*
        		if ($request->doctor === 'doctor') {
        			$doctor = DB::table('doctors')->select('id')->where('user_id',$id)->get()->first();
        			if ($doctor != null) {
@@ -114,6 +119,9 @@ class ProfileController extends Controller
     		} else {
     			$validator = Validator::make($request->all(), User::rulesWithoutPassword($id));
     		}
+            */
+
+            $validator = Validator::make($request->all(), User::rulesWithoutPassword($id));
        	}
 
         if ($validator->fails()) {
@@ -135,7 +143,7 @@ class ProfileController extends Controller
 
         $patient = Patient::where('user_id', $id)->first();
 
-        $patient->patient_number = $request->patient_number;
+        /* $patient->patient_number = $request->patient_number; */
         $patient->blood_type = $request->blood_type;
         $patient->birthdate = $request->birthdate;
         $patient->address = $request->address;
@@ -145,7 +153,7 @@ class ProfileController extends Controller
         $user->save();
         $patient->save();
 
-        if ($user->isAdministrator() && $request->administrator !== 'administrator') {
+        /* if ($user->isAdministrator() && $request->administrator !== 'administrator') {
         	$administrator = Administrator::where('user_id', $id)->first();
         	$administrator->delete();
         } else if (!$user->isAdministrator() && $request->administrator === 'administrator') {
@@ -183,9 +191,9 @@ class ProfileController extends Controller
         	$pharmacist->delete();
         } else if (!$user->isPharmacist() && $request->pharmacist === 'pharmacist') {
         	$user->pharmacist()->create([]);
-        }
+        } */
 
-        return view('user/profile', ['user' => $user]);
+        return redirect()->to('profile');
     }
 
     public function showEditUserStaff($id)
@@ -301,7 +309,7 @@ class ProfileController extends Controller
             $user->pharmacist()->create([]);
         }
 
-        return view('user/profile', ['user' => $user]);
+        return redirect()->to('profile/list');
     }
 
     /**
@@ -318,7 +326,7 @@ class ProfileController extends Controller
 
         $user = Auth::user();
 
-        return redirect()->to('profiles');
+        return redirect()->to('profile/list');
     }
 
     /**

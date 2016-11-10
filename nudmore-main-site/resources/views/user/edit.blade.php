@@ -130,7 +130,7 @@
                             </div>
                         </div>
 
-                        {!! Form::hidden('patient_number', $user->patient()->first()->patient_number) !!}
+                        {{-- {!! Form::hidden('patient_number', $user->patient()->first()->patient_number) !!} --}}
 
                         <div class="form-group{{ $errors->has('blood_type') ? ' has-error' : '' }}">
                             {!! Form::label('blood_type', 'Blood Type', ['class' => 'col-md-4 control-label']) !!}
@@ -202,17 +202,17 @@
                             </div>
                         </div>
 
-                        {!! Form::hidden('administrator', $user->isAdministrator()) !!}
+                        {{-- {!! Form::hidden('administrator', $user->isAdministrator()) !!} --}}
 
-                        {!! Form::hidden('staff', $user->isStaff()) !!}
+                        {{-- {!! Form::hidden('staff', $user->isStaff()) !!} --}}
 
-                        {!! Form::hidden('doctor', $user->isDoctor()) !!}
-                        {!! Form::hidden('doctor_number', $user->isDoctor() ? $user->doctor()->first()->doctor_number : '') !!}
-                        {!! Form::hidden('department', $user->isDoctor() ? $user->doctor()->first()->department : '') !!}
+                        {{-- {!! Form::hidden('doctor', $user->isDoctor()) !!} --}}
+                        {{-- {!! Form::hidden('doctor_number', $user->isDoctor() ? $user->doctor()->first()->doctor_number : '') !!} --}}
+                        {{-- {!! Form::hidden('department', $user->isDoctor() ? $user->doctor()->first()->department : '') !!} --}}
                      
-                        {!! Form::hidden('nurse', $user->isNurse()) !!}
+                        {{-- {!! Form::hidden('nurse', $user->isNurse()) !!} --}}
 
-                        {!! Form::hidden('pharmacist', $user->isPharmacist()) !!}
+                        {{-- {!! Form::hidden('pharmacist', $user->isPharmacist()) !!} --}}
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
