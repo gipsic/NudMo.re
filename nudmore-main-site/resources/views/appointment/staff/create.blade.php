@@ -10,7 +10,7 @@
                 @foreach ($available_schedules as $schedule)
                     <div class="row">
                         <div class="col-md-4">
-                        {!! $schedule->date_time !!} to <?php $date_time = (new DateTime($schedule->date_time))->modify('+20 minutes'); echo $date_time->format('H:i:s'); ?>
+                        {!! $schedule->date_time !!} to <?php $date_time = (new DateTime($schedule->date_time))->modify('+30 minutes')->modify('+2 hours'); echo $date_time->format('H:i:s'); ?>
                         </div>
 
                         {!! Form::open(['url' => 'appointment/staff/create', 'class' => 'form-horizontal']) !!}

@@ -14,7 +14,7 @@
                     @foreach ($schedules as $schedule)
                         <div class="row">
                             <div class="col-md-3">
-                                {!! $schedule->date_time !!}
+                                {!! $schedule->date_time !!} to <?php $date_time = (new DateTime($schedule->date_time))->modify('+30 minutes')->modify('+2 hours'); echo $date_time->format('H:i:s'); ?>
                             </div>
                             <div class="col-md-2">
                                 {!! $schedule->doctor_number !!}
