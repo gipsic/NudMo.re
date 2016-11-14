@@ -11,12 +11,12 @@
 |
 */
 
+// System Route
 Route::get('/', 'HomeController@index');
-
 Auth::routes();
-
 Route::get('/home', 'HomeController@index');
 
+// Profile Route
 Route::get('/profile/list', 'ProfileController@list')->middleware(['auth', 'doctor', 'staff', 'nurse', 'pharmacist', 'administrator']);
 Route::get('/profile/create', 'ProfileController@showCreateUser')->middleware(['auth', 'administrator']);
 Route::post('/profile/create', 'ProfileController@createUser')->middleware(['auth', 'administrator']);
@@ -28,6 +28,7 @@ Route::post('/profile/{id}/edit', 'ProfileController@editUserStaff')->middleware
 Route::delete('/profile/{id}/delete', 'ProfileController@deleteUser')->middleware(['auth', 'administrator']);
 Route::get('/profile', 'ProfileController@index')->middleware(['auth']);
 
+// Schedule Route
 Route::get('/schedule/doctor', 'ScheduleController@listDoctor')->middleware(['auth', 'doctor']);
 Route::get('/schedule/staff', 'ScheduleController@listStaff')->middleware(['auth', 'staff', 'administrator']);
 Route::get('/schedule/doctor/create', 'ScheduleController@showCreateScheduleDoctor')->middleware(['auth', 'doctor']);
@@ -37,7 +38,7 @@ Route::post('/schedule/staff/create', 'ScheduleController@createScheduleStaff')-
 Route::delete('/schedule/doctor/{id}/delete', 'ScheduleController@deleteScheduleDoctor')->middleware(['auth', 'doctor']);
 Route::delete('/schedule/staff/{id}/delete', 'ScheduleController@deleteScheduleStaff')->middleware(['auth', 'staff', 'administrator']);
 
-
+// Appointment Route
 Route::get('/appointment/patient', 'AppointmentController@listPatient')->middleware(['auth', 'patient']);
 Route::get('/appointment/doctor', 'AppointmentController@listDoctor')->middleware(['auth', 'doctor']);
 Route::get('/appointment/staff', 'AppointmentController@listStaff')->middleware(['auth', 'staff', 'administrator']);
@@ -53,7 +54,7 @@ Route::delete('/appointment/patient/{id}/delete', 'AppointmentController@deleteA
 Route::delete('/appointment/doctor/{id}/delete', 'AppointmentController@deleteAppointmentDoctor')->middleware(['auth', 'doctor']);
 Route::delete('/appointment/staff/{id}/delete', 'AppointmentController@deleteAppointmentStaff')->middleware(['auth', 'staff', 'administrator']);
 
-
+// Record Route
 Route::get('/record/patient', 'RecordController@listPatient')->middleware(['auth', 'patient']);
 Route::get('/record/staff', 'RecordController@patientListStaff')->middleware(['auth', 'doctor', 'staff', 'nurse', 'pharmacist', 'administrator']);
 Route::post('/record/staff', 'RecordController@listStaff')->middleware(['auth', 'doctor', 'staff', 'nurse', 'pharmacist', 'administrator']);
@@ -64,7 +65,7 @@ Route::get('/record/staff/{id}', 'RecordController@showRecordStaff')->middleware
 Route::get('/record/staff/{id}/edit', 'RecordController@showEditRecord')->middleware(['auth', 'doctor', 'staff', 'nurse', 'pharmacist', 'administrator']);
 Route::post('/record/staff/{id}/edit', 'RecordController@editRecord')->middleware(['auth', 'doctor', 'staff', 'nurse', 'pharmacist', 'administrator']);
 
-
+// Medicine Route
 Route::get('/medicine', 'MedicineController@list')->middleware(['auth', 'pharmacist', 'administrator']);
 Route::get('/medicine/create', 'MedicineController@showCreateMedicine')->middleware(['auth', 'pharmacist', 'administrator']);
 Route::post('/medicine/create', 'MedicineController@createMedicine')->middleware(['auth', 'pharmacist', 'administrator']);
@@ -72,7 +73,7 @@ Route::get('/medicine/{id}/edit', 'MedicineController@showEditMedicine')->middle
 Route::post('/medicine/{id}/edit', 'MedicineController@editMedicine')->middleware(['auth', 'pharmacist', 'administrator']);
 Route::delete('/medicine/{id}/delete', 'MedicineController@deleteMedicine')->middleware(['auth', 'pharmacist', 'administrator']);
 
-
+// Prescription Route
 Route::get('/prescription', 'PrescriptionController@patientListStaff')->middleware(['auth', 'staff', 'nurse', 'pharmacist']);
 Route::get('/prescription/patient', 'PrescriptionController@listPatient')->middleware(['auth', 'patient']);
 Route::get('/prescription/patient/{id}', 'PrescriptionController@listStaff')->middleware(['auth', 'staff', 'nurse', 'pharmacist']);
@@ -82,7 +83,7 @@ Route::post('/prescription/doctor/{id}/create', 'PrescriptionController@createPr
 Route::get('/prescription/doctor/{id}', 'PrescriptionController@patientDoctor')->middleware(['auth', 'doctor', 'administrator']);
 Route::get('/prescription/{id}', 'PrescriptionController@showPrescription')->middleware(['auth', 'patient', 'staff', 'nurse', 'pharmacist']);
 
-
+// Notification Route
 Route::get('sendsms/{phone_number}/{message}', 'SmsNotificationController@sendSms')->middleware(['auth', 'administrator']);
 Route::get('sendemail/{email_address}/{topic}/{detail}', 'EmailNotificationController@sendEmail')->middleware(['auth', 'administrator']);
 Route::get('nudmore-autosender', 'NotificationController@sendScheduled');

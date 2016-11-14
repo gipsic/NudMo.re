@@ -50,7 +50,7 @@ class ScheduleController extends Controller
     public function createScheduleDoctor(Request $request)
     {
     	$validator = Validator::make($request->all(), [
-    		'date_time' => 'required|date|unique:schedules,date_time,NULL,doctor_number,'.Auth::user()->doctor->doctor_number,
+    		'date_time' => 'required|date',
     		]);
 
     	if ($validator->fails()) {
@@ -73,7 +73,7 @@ class ScheduleController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'doctor_number' => 'required|max:255',
-            'date_time' => 'required|date|unique:schedules,date_time,NULL,doctor_number,'.Auth::user()->doctor->doctor_number,
+            'date_time' => 'required|date',
             ]);
 
         if ($validator->fails()) {
@@ -128,5 +128,36 @@ class ScheduleController extends Controller
         $schedule->delete();
 
         return redirect()->to('schedule/staff');
+    }
+
+    public function importSchedule(Request $request)
+    {
+        $username = $request->input('user.username');
+        $password = $request->input('user.password');
+
+        if (!Auth::attempt(['username' => $username, 'password' => $password])) {
+            return 'Authentication Error';
+        }
+
+        $user = Auth::user();
+
+        if (!$user->isDoctor() && !$user->isStaff() && !$user->isAdministrator()) {
+            return 'Permission Denied';
+        }
+
+        $validator = Validator::make($request->all(), [
+            'doctor_number' => 'required|max:255',
+            'date_time' => 'required|date|unique:schedules,date_time,NULL,doctor_number,'.$request->input('schedule.doctor_number'),
+            ]);
+
+
+        $schedule = new Schedule;
+
+        $schedule->doctor_number = $request->input('schedule.doctor_number');
+        $schedule->date_time = $request->input('schedule.date_time');
+
+        $schedule->save();
+
+        return 'Success';
     }
 }
