@@ -118,7 +118,7 @@ class AppointmentController extends Controller
                                         'message' => $message]);
 
         app('App\Http\Controllers\SmsNotificationController')->sendSms($patient->phone_number, $message);
-        app('App\Http\Controllers\EmailNotificationController')->sendEmail($patient->user()->first()->email, $topic, $detail);
+        app('App\Http\Controllers\EmailNotificationController')->sendEmail($patient->user()->first()->email, $topic, $detail, true);
 
         $appointment->notification_id = $notification->id;
 
@@ -161,7 +161,7 @@ class AppointmentController extends Controller
                                         'message' => $message]);
 
         app('App\Http\Controllers\SmsNotificationController')->sendSms($patient->phone_number, $message);
-        app('App\Http\Controllers\EmailNotificationController')->sendEmail($patient->user()->first()->email, $topic, $detail);
+        app('App\Http\Controllers\EmailNotificationController')->sendEmail($patient->user()->first()->email, $topic, $detail, true);
 
         $appointment->notification_id = $notification->id;
 
@@ -204,7 +204,7 @@ class AppointmentController extends Controller
                                         'message' => $message]);
 
         app('App\Http\Controllers\SmsNotificationController')->sendSms($patient->phone_number, $message);
-        app('App\Http\Controllers\EmailNotificationController')->sendEmail($patient->user()->first()->email, $topic, $detail);
+        app('App\Http\Controllers\EmailNotificationController')->sendEmail($patient->user()->first()->email, $topic, $detail, true);
 
         $appointment->notification_id = $notification->id;
 

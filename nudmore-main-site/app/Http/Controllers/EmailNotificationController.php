@@ -18,8 +18,8 @@ class EmailNotificationController extends Controller
 
     }
 
-    public function sendEmail($email_address, $topic, $detail)
+    public function sendEmail($email_address, $topic, $detail, $isAppointment)
     {
-		Mail::to($email_address)->send(new Email($topic, $detail));
+		Mail::to($email_address)->send(new Email($topic, $detail, $isAppointment));
     }
 }

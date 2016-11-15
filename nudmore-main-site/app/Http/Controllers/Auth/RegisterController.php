@@ -59,6 +59,8 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         $user = new User;
+        $email_verification_token = str_random(128);
+
         $user->username = $data['username'];
         $user->password = $data['password'];
         $user->email = $data['email'];
@@ -67,8 +69,14 @@ class RegisterController extends Controller
         $user->surname = $data['surname'];
         $user->gender = $data['gender'];
         $user->identity_number = $data['identity_number'];
+        $user->email_verification_token = $email_verification_token;
 
         $user->save();
+
+        $email_topic = 'ยืนยันการเปิดใช้งานบัญชี - Nudmo.re';
+        $email_detail = 'เรียน '.$user->title.' '.$user->name.' '.$user->surname.'<br>ขอบคุณที่สมัครสมาชิก Nudmore ระบบนัดหมายสำหรับโรงพยาบาล<br>ชื่อผู้ใช้งานของคุณคือ '.$user->username.'<br>กรุณาคลิกที่ลิ้งก์ด้านล่างเพื่อยืนยันการเปิดใช้งานบัญชี และรหัสผ่านของท่าน<br><a href="nudmo.re/verify/'.$email_verification_token.'">ยืนยันการเปิดใช้งานบัญชี</a><br>';
+
+        app('App\Http\Controllers\EmailNotificationController')->sendEmail($user->email, $email_topic, $email_detail, false);
        
         $patient_number = 'P'.str_pad($user->id, 4, '0', STR_PAD_LEFT);
         $user->patient()->create([

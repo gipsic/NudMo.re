@@ -26,7 +26,7 @@ class NotificationController extends Controller
 
     	foreach ($notifications as $notification) {
     		app('App\Http\Controllers\SmsNotificationController')->sendSms($notification->sms()->first()->phone_number, $notification->sms()->first()->message);
-    		app('App\Http\Controllers\EmailNotificationController')->sendEmail($notification->email()->first()->email_address, $notification->email()->first()->topic, $notification->email()->first()->detail);
+    		app('App\Http\Controllers\EmailNotificationController')->sendEmail($notification->email()->first()->email_address, $notification->email()->first()->topic, $notification->email()->first()->detail, false);
 
             $notification->delete();
     	}

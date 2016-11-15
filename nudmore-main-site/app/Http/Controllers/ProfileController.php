@@ -368,6 +368,7 @@ class ProfileController extends Controller
         $user->surname = $request->surname;
         $user->gender = $request->gender;
         $user->identity_number = $request->identity_number;
+        $user->email_verification_token = '';
 
         $user->save();
 
@@ -418,5 +419,16 @@ class ProfileController extends Controller
         }
 
         return redirect()->to('profile/'.$user->id);
+    }
+
+    function verifyUser($token)
+    {
+        $user = User::where('email_verification_token', 'LIKE', $token)->first();
+        if (is_null($user)) return view('user/activated', ['isSuccess' => false]);
+
+        $user->email_verification_token = '';
+        $user->save();
+
+        return view('user/activated', ['isSuccess' => true]);
     }
 }

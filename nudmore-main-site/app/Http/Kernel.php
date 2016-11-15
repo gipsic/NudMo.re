@@ -64,5 +64,6 @@ class Kernel extends HttpKernel
         'pharmacistnursestaff' => \App\Http\Middleware\CheckIfUserIsPharmacistOrNurseOrStaff::class,
         'patientpharmacistnursestaff' => \App\Http\Middleware\CheckIfUserIsPatientOrPharmacistOrNurseOrStaff::class,
         'doctoradministrator' => \App\Http\Middleware\CheckIfUserIsDoctorOrAdministrator::class,
+        'activated' => \App\Http\Middleware\CheckIfUserActivated::class,
     ];
 }
