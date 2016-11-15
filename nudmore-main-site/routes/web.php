@@ -20,13 +20,13 @@ Route::get('/home', 'HomeController@index');
 Route::get('/profile/list', 'ProfileController@list')->middleware(['auth', 'activated', 'staffteam']);
 Route::get('/profile/create', 'ProfileController@showCreateUser')->middleware(['auth', 'activated', 'administrator']);
 Route::post('/profile/create', 'ProfileController@createUser')->middleware(['auth', 'activated', 'administrator']);
-Route::get('/profile/edit', 'ProfileController@showEditUser')->middleware(['auth']);
-Route::post('/profile/edit', 'ProfileController@editUser')->middleware(['auth']);
+Route::get('/profile/edit', 'ProfileController@showEditUser')->middleware(['auth', 'activated']);
+Route::post('/profile/edit', 'ProfileController@editUser')->middleware(['auth', 'activated']);
 Route::get('/profile/{id}', 'ProfileController@showUser')->middleware(['auth', 'activated', 'staffteam']);
 Route::get('/profile/{id}/edit', 'ProfileController@showEditUserStaff')->middleware(['auth', 'activated', 'administrator']);
 Route::post('/profile/{id}/edit', 'ProfileController@editUserStaff')->middleware(['auth', 'activated', 'administrator']);
 Route::delete('/profile/{id}/delete', 'ProfileController@deleteUser')->middleware(['auth', 'activated', 'administrator']);
-Route::get('/profile', 'ProfileController@index')->middleware(['auth']);
+Route::get('/profile', 'ProfileController@index')->middleware(['auth', 'activated']);
 Route::get('/verify/{token}', 'ProfileController@verifyUser');
 
 // Schedule Route
