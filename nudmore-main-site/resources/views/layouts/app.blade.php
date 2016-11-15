@@ -115,119 +115,73 @@
                             <!-- START sidebar nav-->
                             <ul class="nav">
                                 <!-- Iterates over all sidebar items-->
-                                <li class="nav-heading ">
-                                    <span>รายการ</span>
+                                <li class="nav-heading "><span>รายการ</span></li>
+                                @if (Auth::guest())
+                                <li><a href="{{ url('/login') }}">Login</a></li>
+                                <li><a href="{{ url('/register') }}">Register</a></li>
+                                @elseif (Auth::guest())
+
+                                <li class="">
+                                    <a href="/profile" title="ข้อมูลส่วนตัว"><em class="icon-user"></em><span>ข้อมูลส่วนตัว</span></a>
                                 </li>
 
                                 <li class=" ">
-                                    <a href="profile.html" title="ข้อมูลส่วนตัว">
-
-                                        <em class="icon-user"></em>
-                                        <span>ข้อมูลส่วนตัว</span>
-                                    </a>
-                                </li>
-
-                                <li class=" ">
-                                    <a href="#appointment" title="การนัดหมาย" data-toggle="collapse">
-
-                                        <em class="icon-book-open"></em>
-                                        <span>การนัดหมาย</span>
-                                    </a>
+                                    <a href="#appointment" title="การนัดหมาย" data-toggle="collapse"><em class="icon-book-open"></em><span>การนัดหมาย</span></a>
                                     <ul id="appointment" class="nav sidebar-subnav collapse">
                                         <li class="sidebar-subnav-header">การนัดหมาย</li>
                                         <li class=" ">
-                                            <a href="appointment.html" title="ดูรายการนัดหมาย">
-                                                <span>ดูรายการนัดหมาย</span>
-                                            </a>
+                                            <a href="appointment.html" title="ดูรายการนัดหมาย"><span>ดูรายการนัดหมาย</span></a>
                                         </li>
                                         <li class=" ">
-                                            <a href="createAppointment.html" title="สร้างการนัดหมาย">
-                                                <span>สร้างการนัดหมาย</span>
-                                            </a>
+                                            <a href="createAppointment.html" title="สร้างการนัดหมาย"><span>สร้างการนัดหมาย</span></a>
                                         </li>
                                     </ul>
                                 </li>
 
                                 <li class=" ">
-                                    <a href="userManage.html" title="จัดการบุคคล">
-
-                                        <em class="icon-people"></em>
-                                        <span>จัดการบุคคล</span>
-                                    </a>
+                                    <a href="userManage.html" title="จัดการบุคคล"><em class="icon-people"></em><span>จัดการบุคคล</span></a>
                                 </li>
 
                                 <li class=" ">
-                                    <a href="permission.html" title="กำหนดสิทธิ">
-
-                                        <em class="icon-check"></em>
-                                        <span>กำหนดสิทธิ</span>
-                                    </a>
+                                    <a href="permission.html" title="กำหนดสิทธิ"><em class="icon-check"></em><span>กำหนดสิทธิ</span></a>
                                 </li>
 
                                 <li class=" ">
-                                    <a href="#schedule" title="ตารางออกตรวจ" data-toggle="collapse">
-
-                                        <em class="icon-clock"></em>
-                                        <span>ตารางออกตรวจ</span>
-                                    </a>
+                                    <a href="#schedule" title="ตารางออกตรวจ" data-toggle="collapse"><em class="icon-clock"></em><span>ตารางออกตรวจ</span></a>
                                     <ul id="schedule" class="nav sidebar-subnav collapse">
                                         <li class="sidebar-subnav-header">ตารางออกตรวจ</li>
                                         <li class=" ">
-                                            <a href="schedule.html" title="ดูรายการนัดหมาย">
-                                                <span>ดูตารางออกตรวจ</span>
-                                            </a>
+                                            <a href="schedule.html" title="ดูรายการนัดหมาย"><span>ดูตารางออกตรวจ</span></a>
                                         </li>
                                         <li class=" ">
-                                            <a href="importSchedule.html" title="นำเข้าตารางออกตรวจ">
-                                                <span>นำเข้าตารางออกตรวจ</span>
-                                            </a>
+                                            <a href="importSchedule.html" title="นำเข้าตารางออกตรวจ"><span>นำเข้าตารางออกตรวจ</span></a>
                                         </li>
                                     </ul>
                                 </li>
 
                                 <li class=" ">
-                                    <a href="prescribe.html" title="สั่งยา">
-
-                                        <em class="icon-pencil"></em>
-                                        <span>สั่งยา</span>
-                                    </a>
+                                    <a href="prescribe.html" title="สั่งยา"><em class="icon-pencil"></em><span>สั่งยา</span></a>
                                 </li>
 
                                 <li class=" ">
-                                    <a href="confirmPrescribe.html" title="รายการสั่งยา">
-
-                                        <em class="icon-list"></em>
-                                        <span>รายการสั่งยา</span>
-                                    </a>
+                                    <a href="confirmPrescribe.html" title="รายการสั่งยา"><em class="icon-list"></em><span>รายการสั่งยา</span></a>
                                 </li>
 
                                 <li class=" ">
-                                    <a href="#medHistory" title="ประวัติผู้ป่งย" data-toggle="collapse">
-
-                                        <em class="icon-user-follow"></em>
-                                        <span>ประวัติผู้ป่วย</span>
-                                    </a>
+                                    <a href="#medHistory" title="ประวัติผู้ป่งย" data-toggle="collapse"><em class="icon-user-follow"></em><span>ประวัติผู้ป่วย</span></a>
                                     <ul id="medHistory" class="nav sidebar-subnav collapse">
                                         <li class="sidebar-subnav-header">ประวัติผู้ป่งย</li>
                                         <li class=" ">
-                                            <a href="medHistory.html" title="ดูรายการนัดหมาย">
-                                                <span>ดูประวัติการรักษา</span>
-                                            </a>
+                                            <a href="medHistory.html" title="ดูรายการนัดหมาย"><span>ดูประวัติการรักษา</span></a>
                                         </li>
                                         <li class=" ">
-                                            <a href="addMedHistory.html" title="นำเข้าตารางออกตรวจ">
-                                                <span>เพิ่มประวัติการรักษา</span>
-                                            </a>
+                                            <a href="addMedHistory.html" title="นำเข้าตารางออกตรวจ"><span>เพิ่มประวัติการรักษา</span></a>
                                         </li>
                                     </ul>
                                 </li>
 
                                 <li class=" ">
-                                    <a href="checkup.html" title="บันทึกข้อมูลการตรวจ">
-
-                                        <em class="icon-plus"></em>
-                                        <span>บันทึกข้อมูลการตรวจ</span>
-                                    </a>
+                                    <a href="checkup.html" title="บันทึกข้อมูลการตรวจ"><em class="icon-plus"></em><span>บันทึกข้อมูลการตรวจ</span></a>
                                 </li>
 
                             </ul>
