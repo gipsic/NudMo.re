@@ -58,5 +58,11 @@ class Kernel extends HttpKernel
         'nurse' => \App\Http\Middleware\CheckIfUserIsNurse::class,
         'pharmacist' => \App\Http\Middleware\CheckIfUserIsPharmacist::class,
         'administrator' => \App\Http\Middleware\CheckIfUserIsAdministrator::class,
+        'staffteam' => \App\Http\Middleware\CheckIfUserIsInStaffList,
+        'staffadmin' => \App\Http\Middleware\CheckIfUserIsStaffOrAdministrator,
+        'pharmacistadmin' => \App\Http\Middleware\CheckIfUserIsPharmacistOrAdmin,
+        'pharmacistnursestaff' => \App\Http\Middleware\CheckIfUserIsPharmacistOrNurseOrStaff,
+        'patientpharmacistnursestaff' => \App\Http\Middleware\CheckIfUserIsPatientOrPharmacistOrNurseOrStaff,
+        'doctoradministrator' => \App\Http\Middleware\CheckIfUserIsDoctorOrAdministrator,
     ];
 }
