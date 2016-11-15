@@ -13,3 +13,5 @@ bootstrap/cache/
 
 # Rocketeer PHP task runner and deployment package. https://github.com/rocketeers/rocketeer
 .rocketeer/
+nudmore-main-site/public/design/
+nudmore-main-site/public/laravel/js/app.js
