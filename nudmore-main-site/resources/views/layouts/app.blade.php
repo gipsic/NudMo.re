@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <meta name="description" content="Bootstrap Admin App + jQuery">
         <meta name="keywords" content="app, responsive, jquery, bootstrap, dashboard, admin">
-        <title>ระบบนัดหมายแพทย์ NudMore</title>
+        <title>{{ config('app.name', 'Laravel') }}</title>
         <!-- =============== VENDOR STYLES ===============-->
         <!-- FONT AWESOME-->
         <link rel="stylesheet" href="/vendor/fontawesome/css/font-awesome.min.css">
@@ -32,7 +32,6 @@
         <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
 
         <!-- Scripts -->
         <script>
