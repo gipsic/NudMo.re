@@ -183,7 +183,7 @@
                                 <li class=" ">
                                     <a href="checkup.html" title="บันทึกข้อมูลการตรวจ"><em class="icon-plus"></em><span>บันทึกข้อมูลการตรวจ</span></a>
                                 </li>
-
+                                @endif
                             </ul>
                             <!-- END sidebar nav-->
                         </nav>
