@@ -10,9 +10,9 @@
  * License: https://wrapbootstrap.com/help/licenses
  *
  */
-@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:300, 400, 600, 400italic);
+/*@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:300, 400, 600, 400italic);*/
     
-@import url('https://fonts.googleapis.com/css?family=Athiti');
+/*@import url('https://fonts.googleapis.com/css?family=Athiti');*/
     
 .glyphicon {
     display: inline-block;
@@ -396,10 +396,13 @@ body, html {
     -webkit-transform: translateZ(0);
     transform: translateZ(0);
 }
-}@media only screen and (max-width:767px) {
+}
+    .aside-collapsed  .wrapper>.aside .aside-inner { width: 68px; }
+@media only screen and (max-width:767px) {
     .aside-collapsed .wrapper>.aside {
     margin-left: -70px;
 }
+
 .aside-collapsed.aside-toggled .wrapper>footer, .aside-collapsed.aside-toggled .wrapper>section {
     margin-left: 70px;
 }

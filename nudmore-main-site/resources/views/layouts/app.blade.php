@@ -53,10 +53,10 @@
                         <div class="navbar-header">
                             <a href="#" class="navbar-brand">
                                 <div class="brand-logo">
-                                    <img src="img/logo.png" alt="App Logo" class="img-responsive">
+                                    <img src="/img/logo.png" alt="{{ config('app.name', 'Laravel') }}" style="height:32px;" class="img-responsive">
                                 </div>
                                 <div class="brand-logo-collapsed">
-                                    <img src="img/logo-single.png" alt="App Logo" class="img-responsive">
+                                    <img src="/img/logo-single.png" alt="{{ config('app.name', 'Laravel') }}" class="img-responsive">
                                 </div>
                             </a>
                         </div>
@@ -77,15 +77,12 @@
                             <ul class="nav navbar-nav navbar-right">
                                 <!-- Fullscreen (only desktops)-->
                                 <li class="visible-lg">
-                                    <a href="#" data-toggle-fullscreen="">
-                                        <em class="fa fa-expand"></em>
-                                    </a>
+                                    <a href="#" data-toggle-fullscreen=""><em class="fa fa-expand"></em></a>
                                 </li>
+                                @if (!Auth::guest())
                                 <!-- START Alert menu-->
                                 <li>
-                                    <a href="/profile">
-                                        <em class="icon-user"></em>
-                                    </a>
+                                    <a href="/profile"><em class="icon-user"></em></a>
                                 </li>
                                 <!-- END Alert menu-->
                                 <!-- START Offsidebar button-->
@@ -93,6 +90,7 @@
                                     <a href="{{ url('/logout') }}"onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><em class="icon-logout"></em></a>
                                     <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form>
                                 </li>
+                                @endif
                                 <!-- END Offsidebar menu-->
                             </ul>
                             <!-- END Right Navbar-->
@@ -114,74 +112,72 @@
                             <!-- START sidebar nav-->
                             <ul class="nav">
                                 <!-- Iterates over all sidebar items-->
-                                <li class="nav-heading "><span>รายการ</span></li>
                                 @if (Auth::guest())
-                                <li><a href="{{ url('/login') }}">Login</a></li>
-                                <li><a href="{{ url('/register') }}">Register</a></li>
-                                @elseif (Auth::guest())
+                                <li class="nav-heading "><span>ยินดีต้อนรับ</span></li>
+                                <li><a href="{{ url('/login') }}">เข้าสู่ระบบ</a></li>
+                                <li><a href="{{ url('/register') }}">ลงทะเบียน</a></li>
+                                @else
 
+                                <li class="nav-heading "><span>เมนูสำหรับผู้ป่วย</span></li>
                                 <li class="">
                                     <a href="/profile" title="ข้อมูลส่วนตัว"><em class="icon-user"></em><span>ข้อมูลส่วนตัว</span></a>
                                 </li>
 
-                                <li class=" ">
-                                    <a href="#appointment" title="การนัดหมาย" data-toggle="collapse"><em class="icon-book-open"></em><span>การนัดหมาย</span></a>
-                                    <ul id="appointment" class="nav sidebar-subnav collapse">
-                                        <li class="sidebar-subnav-header">การนัดหมาย</li>
-                                        <li class=" ">
-                                            <a href="appointment.html" title="ดูรายการนัดหมาย"><span>ดูรายการนัดหมาย</span></a>
-                                        </li>
-                                        <li class=" ">
-                                            <a href="createAppointment.html" title="สร้างการนัดหมาย"><span>สร้างการนัดหมาย</span></a>
-                                        </li>
-                                    </ul>
-                                </li>
+                                @if ($current_user->isPatient())
+                                <li class="nav-heading "><span>เมนูสำหรับผู้ป่วย</span></li>
+                                <li class=" "><a href="/appointment/patient" title="จัดการ ตารางนัดหมาย"><em class="fa fa-calendar"></em><span>จัดการ ตารางนัดหมาย</span></a></li>
+                                <li class=" "><a href="/record/patient" title="จัดการ ประวัติการรักษา"><em class="icon-people"></em><span>จัดการ ประวัติการรักษา</span></a></li>
+                                <li class=" "><a href="/prescription/patient" title="จัดการ ประวัติการสั่งยา"><em class="icon-pencil"></em><span>จัดการ ประวัติการสั่งยา</span></a></li>
+                                @endif
+                                @if ($current_user->isAdministrator())
+                                <li class="nav-heading "><span>เมนูสำหรับผู้ดูแลระบบ</span></li>
+                                <li class=" "><a href="/profile/list" title="จัดการบุคคล"><em class="icon-people"></em><span>จัดการบุคคล</span></a></li>
+                                <li class=" "><a href="/schedule/staff" title="จัดการ ตารางออกตรวจ"><em class="icon-people"></em><span>จัดการ ตารางออกตรวจ</span></a></li>
+                                <li class=" "><a href="/appointment/staff" title="จัดการ ตารางนัดหมาย"><em class="fa fa-calendar"></em><span>จัดการ ตารางนัดหมาย</span></a></li>
+                                <li class=" "><a href="/record/staff" title="จัดการ ประวัติการรักษา"><em class="icon-people"></em><span>จัดการ ประวัติการรักษา</span></a></li>
+                                <li class=" "><a href="/medicine" title="จัดการ รายการยา"><em class="icon-people"></em><span>จัดการ รายการยา</span></a></li>
+                                <li class=" "><a href="/prescription" title="จัดการ ประวัติการสั่งยา"><em class="icon-people"></em><span>จัดการ ประวัติการสั่งยา</span></a></li>
 
-                                <li class=" ">
-                                    <a href="userManage.html" title="จัดการบุคคล"><em class="icon-people"></em><span>จัดการบุคคล</span></a>
-                                </li>
+                                @endif
+                                @if ($current_user->isStaff())
 
-                                <li class=" ">
-                                    <a href="permission.html" title="กำหนดสิทธิ"><em class="icon-check"></em><span>กำหนดสิทธิ</span></a>
-                                </li>
+                                <li class="nav-heading "><span>Staff menu</span></li>
+                                <li class=" "><a href="/profile/list" title="จัดการบุคคล"><em class="icon-people"></em><span>จัดการบุคคล</span></a></li>
+                                <li class=" "><a href="/schedule/staff" title="จัดการ ตารางออกตรวจ"><em class="icon-people"></em><span>จัดการ ตารางออกตรวจ</span></a></li>
+                                <li class=" "><a href="/appointment/staff" title="จัดการ ตารางนัดหมาย"><em class="fa fa-calendar"></em><span>จัดการ ตารางนัดหมาย</span></a></li>
+                                <li class=" "><a href="/record/staff" title="จัดการ ประวัติการรักษา"><em class="icon-people"></em><span>จัดการ ประวัติการรักษา</span></a></li>
+                                <li class=" "><a href="/prescription" title="จัดการ ประวัติการสั่งยา"><em class="icon-people"></em><span>จัดการ ประวัติการสั่งยา</span></a></li>
 
-                                <li class=" ">
-                                    <a href="#schedule" title="ตารางออกตรวจ" data-toggle="collapse"><em class="icon-clock"></em><span>ตารางออกตรวจ</span></a>
-                                    <ul id="schedule" class="nav sidebar-subnav collapse">
-                                        <li class="sidebar-subnav-header">ตารางออกตรวจ</li>
-                                        <li class=" ">
-                                            <a href="schedule.html" title="ดูรายการนัดหมาย"><span>ดูตารางออกตรวจ</span></a>
-                                        </li>
-                                        <li class=" ">
-                                            <a href="importSchedule.html" title="นำเข้าตารางออกตรวจ"><span>นำเข้าตารางออกตรวจ</span></a>
-                                        </li>
-                                    </ul>
-                                </li>
+                                @endif
+                                @if ($current_user->isDoctor())
 
-                                <li class=" ">
-                                    <a href="prescribe.html" title="สั่งยา"><em class="icon-pencil"></em><span>สั่งยา</span></a>
-                                </li>
+                                <li class="nav-heading "><span>Doctor menu</span></li>
+                                <li class=" "><a href="/profile/list" title="จัดการบุคคล"><em class="icon-people"></em><span>จัดการบุคคล</span></a></li>
+                                <li class=" "><a href="/schedule/doctor" title="จัดการ ตารางออกตรวจ"><em class="icon-people"></em><span>จัดการ ตารางออกตรวจ</span></a></li>
+                                <li class=" "><a href="/appointment/doctor" title="จัดการ ตารางนัดหมาย"><em class="fa fa-calendar"></em><span>จัดการ ตารางนัดหมาย</span></a></li>
+                                <li class=" "><a href="/record/staff" title="จัดการ ประวัติการรักษา"><em class="icon-people"></em><span>จัดการ ประวัติการรักษา</span></a></li>
+                                <li class=" "><a href="/prescription/doctor" title="จัดการ ประวัติการสั่งยา"><em class="icon-people"></em><span>จัดการ ประวัติการสั่งยา</span></a></li>
 
-                                <li class=" ">
-                                    <a href="confirmPrescribe.html" title="รายการสั่งยา"><em class="icon-list"></em><span>รายการสั่งยา</span></a>
-                                </li>
+                                @endif
+                                @if ($current_user->isNurse())
 
-                                <li class=" ">
-                                    <a href="#medHistory" title="ประวัติผู้ป่งย" data-toggle="collapse"><em class="icon-user-follow"></em><span>ประวัติผู้ป่วย</span></a>
-                                    <ul id="medHistory" class="nav sidebar-subnav collapse">
-                                        <li class="sidebar-subnav-header">ประวัติผู้ป่งย</li>
-                                        <li class=" ">
-                                            <a href="medHistory.html" title="ดูรายการนัดหมาย"><span>ดูประวัติการรักษา</span></a>
-                                        </li>
-                                        <li class=" ">
-                                            <a href="addMedHistory.html" title="นำเข้าตารางออกตรวจ"><span>เพิ่มประวัติการรักษา</span></a>
-                                        </li>
-                                    </ul>
-                                </li>
+                                <li class="nav-heading "><span>Nurse menu</span></li>
+                                <li class=" "><a href="/profile/list" title="จัดการบุคคล"><em class="icon-people"></em><span>จัดการบุคคล</span></a></li>
+                                <li class=" "><a href="/record/staff" title="จัดการ ประวัติการรักษา"><em class="icon-people"></em><span>จัดการ ประวัติการรักษา</span></a></li>
+                                <li class=" "><a href="/prescription" title="จัดการ ประวัติการสั่งยา"><em class="icon-people"></em><span>จัดการ ประวัติการสั่งยา</span></a></li>
 
-                                <li class=" ">
-                                    <a href="checkup.html" title="บันทึกข้อมูลการตรวจ"><em class="icon-plus"></em><span>บันทึกข้อมูลการตรวจ</span></a>
-                                </li>
+                                @endif
+                                @if ($current_user->isPharmacist())
+
+                                <li class="nav-heading "><span>Pharmacist menu</span></li>
+                                <li class=" "><a href="/profile/list" title="จัดการบุคคล"><em class="icon-people"></em><span>จัดการบุคคล</span></a></li>
+                                <li class=" "><a href="/record/staff" title="จัดการ ประวัติการรักษา"><em class="icon-people"></em><span>จัดการ ประวัติการรักษา</span></a></li>
+                                <li class=" "><a href="/medicine" title="จัดการ รายการยา"><em class="icon-people"></em><span>จัดการ รายการยา</span></a></li>
+                                <li class=" "><a href="/prescription" title="จัดการ ประวัติการสั่งยา"><em class="icon-people"></em><span>จัดการ ประวัติการสั่งยา</span></a></li>
+
+                                @endif
+
+
                                 @endif
                             </ul>
                             <!-- END sidebar nav-->
@@ -206,29 +202,29 @@
         </div>
         <!-- =============== VENDOR SCRIPTS ===============-->
         <!-- MODERNIZR-->
-        <script src="vendor/modernizr/modernizr.custom.js"></script>
+        <script src="/vendor/modernizr/modernizr.custom.js"></script>
         <!-- MATCHMEDIA POLYFILL-->
-        <script src="vendor/matchMedia/matchMedia.js"></script>
+        <script src="/vendor/matchMedia/matchMedia.js"></script>
         <!-- JQUERY-->
-        <script src="vendor/jquery/dist/jquery.js"></script>
+        <script src="/vendor/jquery/dist/jquery.js"></script>
         <!-- BOOTSTRAP-->
-        <script src="vendor/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="/vendor/bootstrap/dist/js/bootstrap.js"></script>
         <!-- STORAGE API-->
-        <script src="vendor/jQuery-Storage-API/jquery.storageapi.js"></script>
+        <script src="/vendor/jQuery-Storage-API/jquery.storageapi.js"></script>
         <!-- JQUERY EASING-->
-        <script src="vendor/jquery.easing/js/jquery.easing.js"></script>
+        <script src="/vendor/jquery.easing/js/jquery.easing.js"></script>
         <!-- ANIMO-->
-        <script src="vendor/animo.js/animo.js"></script>
+        <script src="/vendor/animo.js/animo.js"></script>
         <!-- SLIMSCROLL-->
-        <script src="vendor/slimScroll/jquery.slimscroll.min.js"></script>
+        <script src="/vendor/slimScroll/jquery.slimscroll.min.js"></script>
         <!-- SCREENFULL-->
-        <script src="vendor/screenfull/dist/screenfull.js"></script>
+        <script src="/vendor/screenfull/dist/screenfull.js"></script>
         <!-- =============== PAGE VENDOR SCRIPTS ===============-->
         <!-- JQCLOUD-->
-        <script src="vendor/jqcloud2/dist/jqcloud.js"></script>
+        <script src="/vendor/jqcloud2/dist/jqcloud.js"></script>
         <!-- Demo-->
-        <script src="js/demo/demo-jqcloud.js"></script>
+        <script src="/js/demo/demo-jqcloud.js"></script>
         <!-- =============== APP SCRIPTS ===============-->
-        <script src="js/app.js"></script>
+        <script src="/js/app.js"></script>
     </body>
 </html>
