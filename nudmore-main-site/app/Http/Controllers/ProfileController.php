@@ -60,6 +60,10 @@ class ProfileController extends Controller
     {
         $user = User::where('id', $id)->first();
 
+        if (!Auth::user()->isAdministrator() && !$user->isPatient()) {
+            abort(403);
+        }
+
         return view('user/profile', ['user' => $user]);
     }
 
