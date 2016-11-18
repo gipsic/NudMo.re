@@ -347,7 +347,7 @@ class ProfileController extends Controller
     public function createUser(Request $request)
     {
     	if ($request->doctor === 'doctor') {
-    		$validator = Validator::make($request->all(), User::rules(0, ['doctor_number' => 'required|max:255|unique', 'department' => 'required|max:255',]));
+    		$validator = Validator::make($request->all(), User::rules(0, ['doctor_number' => 'required|max:255|unique:doctors', 'department' => 'required|max:255',]));
 		} else {
 			$validator = Validator::make($request->all(), User::rules(0));
 		}
