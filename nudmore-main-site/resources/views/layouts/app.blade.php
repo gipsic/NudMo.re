@@ -75,16 +75,21 @@
                             <!-- END Left navbar-->
                             <!-- START Right Navbar-->
                             <ul class="nav navbar-nav navbar-right">
-                                <!-- Fullscreen (only desktops)-->
-                                <li class="visible-lg">
-                                    <a href="#" data-toggle-fullscreen=""><em class="fa fa-expand"></em></a>
-                                </li>
                                 @if (!Auth::guest())
+								<li>
+									<a>สวัสดี {{$current_user->name}} {{$current_user->surname}}</a>
+								</li>
                                 <!-- START Alert menu-->
                                 <li>
                                     <a href="/profile"><em class="icon-user"></em></a>
                                 </li>
                                 <!-- END Alert menu-->
+                                @endif
+                                <!-- Fullscreen (only desktops)-->
+                                <li class="visible-lg">
+                                    <a href="#" data-toggle-fullscreen=""><em class="fa fa-expand"></em></a>
+                                </li>
+                                @if (!Auth::guest())
                                 <!-- START Offsidebar button-->
                                 <li>
                                     <a href="{{ url('/logout') }}"onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><em class="icon-logout"></em></a>
@@ -114,67 +119,55 @@
                                 <!-- Iterates over all sidebar items-->
                                 @if (Auth::guest())
                                 <li class="nav-heading "><span>ยินดีต้อนรับ</span></li>
-                                <li><a href="{{ url('/login') }}">เข้าสู่ระบบ</a></li>
-                                <li><a href="{{ url('/register') }}">ลงทะเบียน</a></li>
+								<li><a href="{{ url('/login') }}"><em class="fa fa-sign-in"></em><span>เข้าสู่ระบบ</span></a></li>
+								<li><a href="{{ url('/register') }}"><em class="fa fa-users"></em><span>ลงทะเบียน</span></a></li>
                                 @else
-
-                                <li class="nav-heading "><span>เมนูสำหรับผู้ป่วย</span></li>
-                                <li class="">
-                                    <a href="/profile" title="ข้อมูลส่วนตัว"><em class="icon-user"></em><span>ข้อมูลส่วนตัว</span></a>
-                                </li>
-
+								
                                 @if ($current_user->isPatient())
-                                <li class="nav-heading "><span>เมนูสำหรับผู้ป่วย</span></li>
-                                <li class=" "><a href="/appointment/patient" title="จัดการ ตารางนัดหมาย"><em class="fa fa-calendar"></em><span>จัดการ ตารางนัดหมาย</span></a></li>
-                                <li class=" "><a href="/record/patient" title="จัดการ ประวัติการรักษา"><em class="icon-people"></em><span>จัดการ ประวัติการรักษา</span></a></li>
-                                <li class=" "><a href="/prescription/patient" title="จัดการ ประวัติการสั่งยา"><em class="icon-pencil"></em><span>จัดการ ประวัติการสั่งยา</span></a></li>
+                                <li class="nav-heading "><span>เมนูสำหรับผู้ใช้งาน</span></li>
+                                <li class=" "><a href="/profile" title="แก้ไขข้อมูลส่วนตัว"><em class="icon-user"></em><span>แก้ไขข้อมูลส่วนตัว</span></a></li>
+                                <li class=" "><a href="/appointment/patient" title=" จัดการตารางนัดหมาย "><em class="fa fa-calendar"></em><span> จัดการการนัดหมาย </span></a></li>
+                                <li class=" "><a href="/record/patient" title=" ดูประวัติการรักษา "><em class="fa fa-stethoscope"></em><span>ดูประวัติการรักษา</span></a></li>
+                                <li class=" "><a href="/prescription/patient" title=" ดูประวัติการรับยา "><em class="fa fa-list"></em><span> ดูประวัติการรับยา </span></a></li>
                                 @endif
+								
                                 @if ($current_user->isAdministrator())
                                 <li class="nav-heading "><span>เมนูสำหรับผู้ดูแลระบบ</span></li>
-                                <li class=" "><a href="/profile/list" title="จัดการบุคคล"><em class="icon-people"></em><span>จัดการบุคคล</span></a></li>
-                                <li class=" "><a href="/schedule/staff" title="จัดการ ตารางออกตรวจ"><em class="icon-people"></em><span>จัดการ ตารางออกตรวจ</span></a></li>
-                                <li class=" "><a href="/appointment/staff" title="จัดการ ตารางนัดหมาย"><em class="fa fa-calendar"></em><span>จัดการ ตารางนัดหมาย</span></a></li>
-                                <li class=" "><a href="/record/staff" title="จัดการ ประวัติการรักษา"><em class="icon-people"></em><span>จัดการ ประวัติการรักษา</span></a></li>
-                                <li class=" "><a href="/medicine" title="จัดการ รายการยา"><em class="icon-people"></em><span>จัดการ รายการยา</span></a></li>
-                                <li class=" "><a href="/prescription" title="จัดการ ประวัติการสั่งยา"><em class="icon-people"></em><span>จัดการ ประวัติการสั่งยา</span></a></li>
-
-                                @endif
-                                @if ($current_user->isStaff())
-
-                                <li class="nav-heading "><span>Staff menu</span></li>
-                                <li class=" "><a href="/profile/list" title="จัดการบุคคล"><em class="icon-people"></em><span>จัดการบุคคล</span></a></li>
-                                <li class=" "><a href="/schedule/staff" title="จัดการ ตารางออกตรวจ"><em class="icon-people"></em><span>จัดการ ตารางออกตรวจ</span></a></li>
-                                <li class=" "><a href="/appointment/staff" title="จัดการ ตารางนัดหมาย"><em class="fa fa-calendar"></em><span>จัดการ ตารางนัดหมาย</span></a></li>
-                                <li class=" "><a href="/record/staff" title="จัดการ ประวัติการรักษา"><em class="icon-people"></em><span>จัดการ ประวัติการรักษา</span></a></li>
-                                <li class=" "><a href="/prescription" title="จัดการ ประวัติการสั่งยา"><em class="icon-people"></em><span>จัดการ ประวัติการสั่งยา</span></a></li>
-
-                                @endif
-                                @if ($current_user->isDoctor())
-
-                                <li class="nav-heading "><span>Doctor menu</span></li>
-                                <li class=" "><a href="/profile/list" title="จัดการบุคคล"><em class="icon-people"></em><span>จัดการบุคคล</span></a></li>
-                                <li class=" "><a href="/schedule/doctor" title="จัดการ ตารางออกตรวจ"><em class="icon-people"></em><span>จัดการ ตารางออกตรวจ</span></a></li>
-                                <li class=" "><a href="/appointment/doctor" title="จัดการ ตารางนัดหมาย"><em class="fa fa-calendar"></em><span>จัดการ ตารางนัดหมาย</span></a></li>
-                                <li class=" "><a href="/record/staff" title="จัดการ ประวัติการรักษา"><em class="icon-people"></em><span>จัดการ ประวัติการรักษา</span></a></li>
-                                <li class=" "><a href="/prescription/doctor" title="จัดการ ประวัติการสั่งยา"><em class="icon-people"></em><span>จัดการ ประวัติการสั่งยา</span></a></li>
-
-                                @endif
-                                @if ($current_user->isNurse())
-
-                                <li class="nav-heading "><span>Nurse menu</span></li>
-                                <li class=" "><a href="/profile/list" title="จัดการบุคคล"><em class="icon-people"></em><span>จัดการบุคคล</span></a></li>
-                                <li class=" "><a href="/record/staff" title="จัดการ ประวัติการรักษา"><em class="icon-people"></em><span>จัดการ ประวัติการรักษา</span></a></li>
-                                <li class=" "><a href="/prescription" title="จัดการ ประวัติการสั่งยา"><em class="icon-people"></em><span>จัดการ ประวัติการสั่งยา</span></a></li>
-
-                                @endif
-                                @if ($current_user->isPharmacist())
-
-                                <li class="nav-heading "><span>Pharmacist menu</span></li>
-                                <li class=" "><a href="/profile/list" title="จัดการบุคคล"><em class="icon-people"></em><span>จัดการบุคคล</span></a></li>
-                                <li class=" "><a href="/record/staff" title="จัดการ ประวัติการรักษา"><em class="icon-people"></em><span>จัดการ ประวัติการรักษา</span></a></li>
-                                <li class=" "><a href="/medicine" title="จัดการ รายการยา"><em class="icon-people"></em><span>จัดการ รายการยา</span></a></li>
-                                <li class=" "><a href="/prescription" title="จัดการ ประวัติการสั่งยา"><em class="icon-people"></em><span>จัดการ ประวัติการสั่งยา</span></a></li>
-
+                                <li class=" "><a href="/profile/list" title="จัดการผู้ใช้งานระบบ"><em class="icon-people"></em><span>จัดการผู้ใช้งานระบบ</span></a></li>
+                                <li class=" "><a href="/schedule/staff" title="จัดการตารางออกตรวจ"><em class="fa fa-table"></em><span>จัดการตารางออกตรวจ</span></a></li>
+                                <li class=" "><a href="/appointment/staff" title="จัดการตารางนัดหมาย"><em class="fa fa-calendar"></em><span>จัดการตารางนัดหมาย</span></a></li>
+                                <li class=" "><a href="/record/staff" title="จัดการประวัติการรักษา"><em class="fa fa-file-text-o"></em><span>จัดการประวัติการรักษา</span></a></li>
+                                <li class=" "><a href="/medicine" title="จัดการรายการยา"><em class="fa fa-medkit"></em><span>จัดการรายการยา</span></a></li>
+                                <li class=" "><a href="/prescription" title="จัดการประวัติการสั่งยา"><em class="fa fa-list-alt"></em><span>จัดการประวัติการสั่งยา</span></a></li>
+								
+                                @elseif ($current_user->isStaff())
+                                <li class="nav-heading "><span>เมนูสำหรับเจ้าหน้าที่</span></li>
+                                <li class=" "><a href="/profile/list" title="จัดการผู้ใช้งานระบบ"><em class="icon-people"></em><span>จัดการผู้ใช้งานระบบ</span></a></li>
+                                <li class=" "><a href="/schedule/staff" title="จัดการตารางออกตรวจ"><em class="fa fa-table"></em><span>จัดการตารางออกตรวจ</span></a></li>
+                                <li class=" "><a href="/appointment/staff" title="จัดการตารางนัดหมาย"><em class="fa fa-calendar"></em><span>จัดการตารางนัดหมาย</span></a></li>
+                                <li class=" "><a href="/record/staff" title="จัดการประวัติการรักษา"><em class="fa fa-file-text-o"></em><span>จัดการประวัติการรักษา</span></a></li>
+                                <li class=" "><a href="/prescription" title="จัดการประวัติการสั่งยา"><em class="fa fa-list-alt"></em><span>จัดการประวัติการสั่งยา</span></a></li>
+                                
+								@elseif ($current_user->isDoctor())
+                                <li class="nav-heading "><span>เมนูสำหรับแพทย์</span></li>
+                                <li class=" "><a href="/profile/list" title="จัดการผู้ใช้งานระบบ"><em class="icon-people"></em><span>จัดการผู้ใช้งานระบบ</span></a></li>
+                                <li class=" "><a href="/schedule/doctor" title="จัดการตารางออกตรวจ"><em class="fa fa-table"></em><span>จัดการตารางออกตรวจ</span></a></li>
+                                <li class=" "><a href="/appointment/doctor" title="จัดการตารางนัดหมาย"><em class="fa fa-calendar"></em><span>จัดการตารางนัดหมาย</span></a></li>
+                                <li class=" "><a href="/record/staff" title="จัดการประวัติการรักษา"><em class="fa fa-file-text-o"></em><span>จัดการประวัติการรักษา</span></a></li>
+                                <li class=" "><a href="/prescription/doctor" title="จัดการประวัติการสั่งยา"><em class="fa fa-list-alt"></em><span>จัดการประวัติการสั่งยา</span></a></li>
+                               
+								@elseif ($current_user->isNurse())
+                                <li class="nav-heading "><span>เมนูสำหรับพยาบาล</span></li>
+                                <li class=" "><a href="/profile/list" title="จัดการผู้ใช้งานระบบ"><em class="icon-people"></em><span>จัดการผู้ใช้งานระบบ</span></a></li>
+                                <li class=" "><a href="/record/staff" title="จัดการ ประวัติการรักษา"><em class="fa fa-file-text-o"></em><span>จัดการประวัติการรักษา</span></a></li>
+                                <li class=" "><a href="/prescription" title="จัดการ ประวัติการสั่งยา"><em class="fa fa-list-alt"></em><span>จัดการประวัติการสั่งยา</span></a></li>
+                                
+								@elseif ($current_user->isPharmacist())
+                                <li class="nav-heading "><span>เมนูสำหรับเภสัชกร</span></li>
+                                <li class=" "><a href="/profile/list" title="จัดการผู้ใช้งานระบบ"><em class="icon-people"></em><span>จัดการผู้ใช้งานระบบ</span></a></li>
+                                <li class=" "><a href="/record/staff" title="จัดการ ประวัติการรักษา"><em class="fa fa-file-text-o"></em><span>จัดการประวัติการรักษา</span></a></li>
+                                <li class=" "><a href="/medicine" title="จัดการ รายการยา"><em class="fa fa-medkit"></em><span>จัดการรายการยา</span></a></li>
+                                <li class=" "><a href="/prescription" title="จัดการ ประวัติการสั่งยา"><em class="fa fa-list-alt"></em><span>จัดการประวัติการสั่งยา</span></a></li>
                                 @endif
 
 
