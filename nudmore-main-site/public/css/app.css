@@ -242,6 +242,7 @@ body, html {
     height: auto;
     min-height: 100%;
     overflow-x: hidden;
+	z-index: 0;
 }
 .wrapper.ng-leave {
     display: none;

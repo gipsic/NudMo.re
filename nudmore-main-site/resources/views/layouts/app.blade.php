@@ -16,6 +16,8 @@
         <link rel="stylesheet" href="{{ url('/vendor/animate.css/animate.min.css') }}">
         <!-- WHIRL (spinners)-->
         <link rel="stylesheet" href="{{ url('/vendor/whirl/dist/whirl.css') }}">
+        <!-- SWEETALERT-->
+		<link rel="stylesheet" href="{{ url('/vendor/sweetalert/dist/sweetalert.css') }}">
         <!-- =============== PAGE VENDOR STYLES ===============-->
         <!-- JQCLOUD-->
         <link rel="stylesheet" href="{{ url('/vendor/jqcloud2/dist/jqcloud.css') }}">
@@ -206,6 +208,8 @@
         <script src="{{ url('/vendor/animo.js/animo.js') }}"></script>
         <!-- SLIMSCROLL-->
         <script src="{{ url('/vendor/slimScroll/jquery.slimscroll.min.js') }}"></script>
+        <!-- SWEETALERT-->
+        <script src="{{ url('/vendor/sweetalert/dist/sweetalert.min.js') }}"></script>
         <!-- SCREENFULL-->
         <script src="{{ url('/vendor/screenfull/dist/screenfull.js') }}"></script>
         <!-- =============== PAGE VENDOR SCRIPTS ===============-->
@@ -215,5 +219,8 @@
         <script src="{{ url('/js/demo/demo-jqcloud.js') }}"></script>
         <!-- =============== APP SCRIPTS ===============-->
         <script src="{{ url('/js/app.js') }}"></script>
+		
+		@yield('footer_script')
+		
     </body>
 </html>

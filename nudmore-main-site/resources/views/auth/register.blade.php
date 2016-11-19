@@ -18,7 +18,7 @@
 					<div class="row">
 						<div class="mb col-md-6 {{ $errors->has('username') ? 'has-error' : '' }}">
 							{!! Form::label('username', 'ชื่อผู้ใช้งาน', ['class' => 'control-label']) !!}
-							{!! Form::text('username', old('username'), ['class' => 'form-control', 'pattern' => '[0-9]{13}', 'required', 'autofocus']) !!}
+							{!! Form::text('username', old('username'), ['class' => 'form-control', 'required', 'autofocus']) !!}
 							@if ($errors->has('username'))<span class="help-block"><strong>{{ $errors->first('username') }}</strong></span>@endif
 						</div>
 
@@ -70,13 +70,13 @@
 
 						<div class="mb col-md-4 {{ $errors->has('identity_number') ? ' has-error' : '' }}">
 							{!! Form::label('identity_number', 'หมายเลขบัตรประจำตัวประชาชน', ['class' => 'control-label']) !!}
-							{!! Form::text('identity_number', old('identity_number'), ['class' => 'form-control', 'required']) !!}
+							{!! Form::text('identity_number', old('identity_number'), ['pattern' => '[0-9]{13}','class' => 'form-control', 'required']) !!}
 							@if ($errors->has('identity_number'))<span class="help-block"><strong>{{ $errors->first('identity_number') }}</strong></span>@endif
 						</div>
 
 						<div class="mb col-md-2 {{ $errors->has('blood_type') ? ' has-error' : '' }}">
 							{!! Form::label('blood_type', 'หมู่เลือด', ['class' => 'control-label']) !!}
-							{!! Form::select('blood_type', ['A', 'B', 'O', 'AB'], old('blood_type'), ['class' => 'form-control', 'required']) !!}
+							{!! Form::select('blood_type', ['A'=>'A', 'B'=>'B', 'O'=>'O', 'AB'=>'AB'], old('blood_type'), ['class' => 'form-control', 'required']) !!}
 
 							@if ($errors->has('blood_type'))<span class="help-block"><strong>{{ $errors->first('blood_type') }}</strong></span>@endif
 						</div>
