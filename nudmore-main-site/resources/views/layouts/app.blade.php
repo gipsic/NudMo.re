@@ -47,7 +47,7 @@
                     <nav role="navigation" class="navbar topnavbar">
                         <!-- START navbar header-->
                         <div class="navbar-header">
-                            <a href="#" class="navbar-brand">
+                            <a href="{{ url('/') }}" class="navbar-brand">
                                 <div class="brand-logo">
                                     <img src="/img/logo.png" alt="{{ config('app.name', 'Laravel') }}" style="height:32px;" class="img-responsive">
                                 </div>

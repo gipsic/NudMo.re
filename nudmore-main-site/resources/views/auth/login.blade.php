@@ -6,7 +6,7 @@
 	<!-- START panel-->
 	<div class="panel panel-flat">
 		<div class="panel-heading text-center color-light-sky-blue">
-			<a href="login.html#">
+			<a href="{{ url('/') }}">
 				<img src="img/logo.png" alt="Image" class="block-center img-rounded">
 			</a>
 		</div>
