@@ -38,13 +38,14 @@ class ScheduleController extends Controller
     }
 
     public function showCreateScheduleDoctor()
-    {
+	{
     	return View('schedule/doctor/create');
     }
 
     public function showCreateScheduleStaff()
     {
-        return View('schedule/staff/create');
+		$doctors = Doctor::all();
+        return View('schedule/staff/create', ['doctors' => $doctors]);
     }
 
     public function createScheduleDoctor(Request $request)
