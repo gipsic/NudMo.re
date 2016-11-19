@@ -2,10 +2,10 @@
 
 @section('content')
 <div class="container content-wrapper">
-	<h3> โปรไฟล์ข้อมูลส่วนตัวของคุณ </h3>
+	<h3> @if ($current_user->id === $user->id) โปรไฟล์ข้อมูลส่วนตัวของคุณ @else โปรไฟล์ข้อมูลส่วนตัวของผู้ใช้งาน ID {{ $user->id }} @endif </h3>
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2">
-		<div class="panel panel-default mt-xl">
+			<div class="panel panel-default mt-xl">
 				<div class="panel-body">
 					<div class="row">
 						<div class="mb col-md-6 {{ $errors->has('username') ? 'has-error' : '' }}">
@@ -82,17 +82,16 @@
 						<div class="col-md-4 col-md-offset-4 mt-xl">
 							<a href="{{ url('/profile/edit') }}" class="btn btn-success btn-block">แก้ไข้ข้อมูลส่วนตัว</a>
 						</div>
-						@if ($user->id != $user->id)
+						@elseif ($current_user->isAdministrator())
 						<div class="col-md-4 col-md-offset-2 mt-xl"><a href="{{ url('/profile/'.$user->id.'/edit') }}" class="btn btn-success btn-block">แก้ไข้ข้อมูลผู้ใช้</a></div>
 						<div class="col-md-4 mt-xl">
 							{!! Form::open(['url' => '/profile/'.$user->id.'/delete', 'method' => 'delete']) !!}
 							{!! Form::token() !!}
-							{!! Form::button('ลบผู้ใช้รายนี้', ['id' => 'deleteU','class' => 'btn btn-danger']) !!}
+							{!! Form::button('ลบผู้ใช้รายนี้', ['id' => 'deleteU','class' => 'btn btn-danger btn-block']) !!}
 							{!! Form::close() !!}
 						</div>
 						@endif
 					</div>
-					@endif
 				</div>
 			</div>
 		</div>
@@ -116,7 +115,7 @@
 			closeOnConfirm: false,
 			closeOnCancel: false
 		},
-		function(isConfirm){
+			 function(isConfirm){
 			if (isConfirm) {
 				swal("ลบแล้ว!", "", "success");
 				t.submit();
