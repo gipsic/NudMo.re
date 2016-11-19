@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 use App\Schedule;
 use App\Doctor;
 use App\Appointment;
@@ -24,15 +25,16 @@ class ScheduleController extends Controller
 
     public function listDoctor()
     {	
+        $date_time = Carbon::now()->toDateTimeString();
     	$doctor_number = Auth::user()->doctor->doctor_number;
-        $schedules = Schedule::where('doctor_number', 'LIKE', $doctor_number)->get();
+        $schedules = Schedule::where('doctor_number', 'LIKE', $doctor_number)->where('date_time', '>', $date_time)->get();
 
         return view('schedule/doctor/list', ['schedules' => $schedules]);
     }
 
     public function listStaff()
     {   
-        $schedules = Schedule::all();
+        $schedules = Schedule::where('date_time', '>', $date_time)->get();
 
         return view('schedule/staff/list', ['schedules' => $schedules]);
     }
