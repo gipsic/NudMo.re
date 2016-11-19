@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="content-wrapper container">
-	<h3> @if ($current_user->isAdministrator()) จัดการผู้ใช้งานระบบ @else จัดการรายชื่อผู้ป่วย @endif <a href="{{ url('/profile/create') }}" class="btn btn-success pull-right"><i class="fa fa-plus"></i> สร้างบัญชีผู้ใช้งานใหม่</a></h3>
+	<h3> @if ($current_user->isAdministrator()) จัดการผู้ใช้งานระบบ <a href="{{ url('/profile/create') }}" class="btn btn-success pull-right"><i class="fa fa-plus"></i> สร้างบัญชีผู้ใช้งานใหม่</a> @else จัดการรายชื่อผู้ป่วย @endif </h3>
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2">
 			<div class="panel panel-default">
