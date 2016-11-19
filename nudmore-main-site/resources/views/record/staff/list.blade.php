@@ -4,7 +4,7 @@
 <div class="content-wrapper container">
 	<h3>
 		ประวัติการรักษาของ {!! $patient->user()->first()->title !!} {!! $patient->user()->first()->name !!} {!! $patient->user()->first()->surname !!}
-		<a href="{{ url('/record/staff/create/'.$patient->patient_number.'') }}" class="btn btn-success pull-right">เพิ่มประวัติการรักษาใหม่</a>
+		@if ($current_user->isDoctor() || $current_user->isNurse()) <a href="{{ url('/record/staff/create/'.$patient->patient_number.'') }}" class="btn btn-success pull-right">เพิ่มประวัติการรักษาใหม่</a> @endif
 	</h3>
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2">

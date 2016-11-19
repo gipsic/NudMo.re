@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="content-wrapper container">
-	<h3> @if ($current_user->isAdministrator()) จัดการผู้ใช้งานระบบ @else จัดการรายชื่อผู้ป่วย @endif <a href="{{ url('/profile/create') }}" class="btn btn-success pull-right"><i class="fa fa-plus"></i> สร้างบัญชีผู้ใช้งานใหม่</a></h3>
+	<h3> @if ($current_user->isAdministrator()) จัดการผู้ใช้งานระบบ <a href="{{ url('/profile/create') }}" class="btn btn-success pull-right"><i class="fa fa-plus"></i> สร้างบัญชีผู้ใช้งานใหม่</a> @else จัดการรายชื่อผู้ป่วย @endif </h3>
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2">
 			<div class="panel panel-default">
@@ -20,7 +20,6 @@
 							</thead>
 							<tbody>
 								@foreach ($users as $user)
-								@if ($current_user->isAdministrator() || (!$user->isAdministrator() && !$user->isStaff() && !$user->isDoctor() && !$user->isNurse() && !$user->isPharmacist()))
 								<tr>
 									<td>{!! $user->id !!} - {!! $user->patient()->first()->patient_number !!}</td>
 									<td>{!! $user->title !!} {!! $user->name !!} {!! $user->surname !!}</td>
@@ -38,7 +37,7 @@
 										{!! Form::open(['url' => '/profile/'.$user->id.'/delete', 'method' => 'delete']) !!}
 										{!! Form::token() !!}
 										<a href="{{ url('/profile/'.$user->id.'') }}" class="btn btn-labeled btn-info"> <span class="btn-label"><i class="fa fa-info-circle"></i> </span> ดู </a>
-										@if($user->isAdministrator())
+										@if($current_user->isAdministrator())
 										<a href="{{ url('/profile/'.$user->id.'/edit') }}" class="btn btn-labeled btn-warning"> <span class="btn-label"><i class="fa fa-pencil-square-o"></i> </span> แก้ไข </a>
 										<a class="btn btn-labeled btn-danger deleteU"> <span class="btn-label"><i class="fa fa-times"></i> </span> ลบ </a>
 										@endif
@@ -46,7 +45,6 @@
 
 									</td>
 								</tr>
-								@endif
 								@endforeach
 							</tbody>
 
