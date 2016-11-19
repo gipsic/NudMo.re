@@ -27,6 +27,7 @@
 										{!! Form::hidden('patient_number', $patient->patient_number) !!}
 										<button type="submit" class="btn btn-labeled btn-info"> <span class="btn-label"><i class="fa fa-info-circle"></i> </span> แสดง </a>
 										{!! Form::close() !!}
+										@if ($current_user->isDoctor() || $current_user->isNurse()) </td><td><a href="{{ url('/record/staff/'.$patient->patient_number.'/create') }}" class="btn btn-labeled btn-success"> <span class="btn-label"><i class="fa fa-plus"></i> </span> เพิ่มประวัติการรักษา </a> @endif
 									</td>
 								</tr>
 								@endforeach

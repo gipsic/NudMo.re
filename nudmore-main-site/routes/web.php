@@ -59,7 +59,7 @@ Route::delete('/appointment/staff/{id}/delete', 'AppointmentController@deleteApp
 Route::get('/record/patient', 'RecordController@listPatient')->middleware(['auth', 'activated', 'patient']);
 Route::get('/record/staff', 'RecordController@patientListStaff')->middleware(['auth', 'activated', 'staffteam']);
 Route::post('/record/staff', 'RecordController@listStaff')->middleware(['auth', 'activated', 'staffteam']);
-Route::get('/record/staff/create/{id}', 'RecordController@showCreateRecord')->middleware(['auth', 'activated', 'doctornurse']);
+Route::get('/record/staff/{id}/create', 'RecordController@showCreateRecord')->middleware(['auth', 'activated', 'doctornurse']);
 Route::post('/record/staff/create', 'RecordController@createRecord')->middleware(['auth', 'activated', 'doctornurse']);
 Route::get('/record/patient/{id}', 'RecordController@showRecordPatient')->middleware(['auth', 'activated', 'patient']);
 Route::get('/record/staff/{id}', 'RecordController@showRecordStaff')->middleware(['auth', 'activated', 'staffteam']);
