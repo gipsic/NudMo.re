@@ -12,13 +12,13 @@
 		<title>{{ config('app.name', 'Laravel') }}</title>
 		<!-- =============== VENDOR STYLES ===============-->
 		<!-- FONT AWESOME-->
-		<link rel="stylesheet" href="/vendor/fontawesome/css/font-awesome.min.css">
+		<link rel="stylesheet" href="{{ url('/vendor/fontawesome/css/font-awesome.min.css') }}">
 		<!-- SIMPLE LINE ICONS-->
-		<link rel="stylesheet" href="/vendor/simple-line-icons/css/simple-line-icons.css">
+		<link rel="stylesheet" href="{{ url('/vendor/simple-line-icons/css/simple-line-icons.css') }}">
 		<!-- =============== BOOTSTRAP STYLES ===============-->
-		<link rel="stylesheet" href="/css/bootstrap.css" id="bscss">
+		<link rel="stylesheet" href="{{ url('/css/bootstrap.css') }}" id="bscss">
 		<!-- =============== APP STYLES ===============-->
-		<link rel="stylesheet" href="/css/app.css" id="maincss">
+		<link rel="stylesheet" href="{{ url('/css/app.css') }}" id="maincss">
 
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -26,13 +26,9 @@
 
 		<!-- CSRF Token -->
 		<meta name="csrf-token" content="{{ csrf_token() }}">
-
-
 		<!-- Scripts -->
 		<script>
-			window.Laravel = <?php echo json_encode([
-	'csrfToken' => csrf_token(),
-]); ?>
+			window.Laravel = <?php echo json_encode([ 'csrfToken' => csrf_token(), ]); ?>
 		</script>
 
 	</head>
@@ -46,17 +42,17 @@
 		</div>
 		<!-- =============== VENDOR SCRIPTS ===============-->
 		<!-- MODERNIZR-->
-		<script src="vendor/modernizr/modernizr.custom.js"></script>
+		<script src="{{ url('/vendor/modernizr/modernizr.custom.js') }}"></script>
 		<!-- JQUERY-->
-		<script src="vendor/jquery/dist/jquery.js"></script>
+		<script src="{{ url('/vendor/jquery/dist/jquery.js') }}"></script>
 		<!-- BOOTSTRAP-->
-		<script src="vendor/bootstrap/dist/js/bootstrap.js"></script>
+		<script src="{{ url('/vendor/bootstrap/dist/js/bootstrap.js') }}"></script>
 		<!-- STORAGE API-->
-		<script src="vendor/jQuery-Storage-API/jquery.storageapi.js"></script>
+		<script src="{{ url('/vendor/jQuery-Storage-API/jquery.storageapi.js') }}"></script>
 		<!-- PARSLEY-->
-		<script src="vendor/parsleyjs/dist/parsley.min.js"></script>
+		<script src="{{ url('/vendor/parsleyjs/dist/parsley.min.js') }}"></script>
 		<!-- =============== APP SCRIPTS ===============-->
-		<script src="js/app.js"></script>
+		<script src="{{ url('/js/app.js') }}"></script>
 	</body>
 
 </html>
