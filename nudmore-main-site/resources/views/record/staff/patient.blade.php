@@ -14,6 +14,7 @@
 									<th>รหัสผู้ป่วย</th>
 									<th>ชื่อผู้ป่วย</th>
 									<th> การจัดการ </th>
+									@if ($current_user->isDoctor() || $current_user->isNurse())<th></th>@endif
 								</tr>
 							</thead>
 							<tbody>
@@ -25,10 +26,12 @@
 										{!! Form::open(['url' => '/record/staff']) !!}
 										{!! Form::token() !!}
 										{!! Form::hidden('patient_number', $patient->patient_number) !!}
-										<button type="submit" class="btn btn-labeled btn-info"> <span class="btn-label"><i class="fa fa-info-circle"></i> </span> แสดง </a>
+										<button type="submit" class="btn btn-labeled btn-info"> <span class="btn-label"><i class="fa fa-info-circle"></i> </span> แสดง </a></button>
 										{!! Form::close() !!}
-										@if ($current_user->isDoctor() || $current_user->isNurse()) </td><td><a href="{{ url('/record/staff/'.$patient->patient_number.'/create') }}" class="btn btn-labeled btn-success"> <span class="btn-label"><i class="fa fa-plus"></i> </span> เพิ่มประวัติการรักษา </a> @endif
 									</td>
+									@if ($current_user->isDoctor() || $current_user->isNurse()) 
+										<td><a href="{{ url('/record/staff/'.$patient->patient_number.'/create') }}" class="btn btn-labeled btn-success"> <span class="btn-label"><i class="fa fa-plus"></i> </span> เพิ่มประวัติการรักษา </a>	</td>
+									@endif
 								</tr>
 								@endforeach
 							</tbody>
