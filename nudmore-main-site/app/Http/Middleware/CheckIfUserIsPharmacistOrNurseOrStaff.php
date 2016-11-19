@@ -16,7 +16,7 @@ class CheckIfUserIsPharmacistOrNurseOrStaff
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::user()->isStaff() === false && Auth::user()->isPharmacist() === false && Auth::user()->isNurse() === false) {
+        if (Auth::user()->isStaff() === false && Auth::user()->isPharmacist() === false && Auth::user()->isNurse() === false && Auth::user()->isAdministrator() === false) {
             abort(403);
         }
         return $next($request);

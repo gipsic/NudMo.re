@@ -121,10 +121,10 @@
 								
                                 @if ($current_user->isPatient())
                                 <li class="nav-heading "><span>เมนูสำหรับผู้ใช้งาน</span></li>
-                                <li class=" "><a href="{{ url('/profile') }}" title="แก้ไขข้อมูลส่วนตัว"><em class="icon-user"></em><span>แก้ไขข้อมูลส่วนตัว</span></a></li>
-                                <li class=" "><a href="{{ url('/appointment/patient') }}" title=" จัดการตารางนัดหมาย "><em class="fa fa-calendar"></em><span> จัดการการนัดหมาย </span></a></li>
+                                <li class=" "><a href="{{ url('/profile') }}" title="ดูข้อมูลส่วนตัว"><em class="icon-user"></em><span>ดูข้อมูลส่วนตัว</span></a></li>
+                                <li class=" "><a href="{{ url('/appointment/patient') }}" title=" จัดการตารางนัดหมาย "><em class="fa fa-calendar"></em><span>จัดการการนัดหมาย </span></a></li>
                                 <li class=" "><a href="{{ url('/record/patient') }}" title=" ดูประวัติการรักษา "><em class="fa fa-stethoscope"></em><span>ดูประวัติการรักษา</span></a></li>
-                                <li class=" "><a href="{{ url('/prescription/patient') }}" title=" ดูประวัติการรับยา "><em class="fa fa-list"></em><span> ดูประวัติการรับยา </span></a></li>
+                                <li class=" "><a href="{{ url('/prescription/patient') }}" title=" ดูประวัติการรับยา "><em class="fa fa-list"></em><span>ดูประวัติการรับยา </span></a></li>
                                 @endif
 								
                                 @if ($current_user->isAdministrator())
