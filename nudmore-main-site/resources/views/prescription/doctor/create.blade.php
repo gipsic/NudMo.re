@@ -1,51 +1,54 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Create Prescription</div>
-                <div class="panel-body">
-                    {!! Form::open(['url' => 'prescription/doctor/'.$patient->id.'/create', 'class' => 'form-horizontal']) !!}
-                        {!! Form::token() !!}
 
-                        <div class="form-group{{ $errors->has('date_time') ? ' has-error' : '' }}">
-                            {!! Form::label('date_time', 'Date and time', ['class' => 'col-md-4 control-label']) !!}
+<div class="content-wrapper container">
+	<h3> ออกใบสั่งยาใหม่ </h3>
+	<div class="row">
+		<div class="col-md-6 col-md-offset-3">
+			<div class="panel panel-info">
 
-                            <div class="col-md-6">
-                                {!! Form::text('date_time', \Carbon\Carbon::now(), ['class' => 'form-control', 'required', 'autofocus']) !!}
+				<div class="panel-heading white-text">
+					<div class="row">
+						<div class="col-md-4">ใบสั่งยาใหม่</div>
+						<div class="col-md-8 text-right">วันที่ออกใบสั่งยา: {{ \Carbon\Carbon::now() }}</div>
+					</div>
+				</div>
 
-                                @if ($errors->has('date_time'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('date_time') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
+				<div class="panel-body">
 
-                        <div class = "form-group">
-                            @foreach ($medicines as $medicine)
-                            <div class="form-group">
-                                {!! Form::label('medicine', $medicine->name, ['class' => 'col-md-4 control-label']) !!}
+					<div class="row mt-sm form-group">
+						<div class="col-md-5 text-right"><h4>ชื่อยา</h4></div>
+						<div class="col-md-3 col-md-offset-1"><h4>ปริมาณที่ใช้</h4></div>
+					</div>
+					<hr />
+					{!! Form::open(['url' => 'prescription/doctor/'.$patient->id.'/create', 'class' => 'form-horizontal']) !!}
+					{!! Form::token() !!}
 
-                                <div class="col-md-6">
-                                    {!! Form::number('medicine[]', 0, ['class' => 'form-control', 'required', 'autofocus']) !!}
-                                </div>
-                            </div>
-                            @endforeach
-                        </div>
+					{!! Form::hidden('date_time', \Carbon\Carbon::now() ) !!}
+					@foreach ($medicines as $medicine)
+					<div class="row mt-sm form-group">
+						{!! Form::label('medicine', $medicine->name, ['class' => 'col-md-5 control-label']) !!}
 
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                {!! Form::submit('Create Prescription', ['class' => 'btn btn-primary']) !!}
-                            </div>
-                        </div>
+						<div class="col-md-3 col-md-offset-1">
+							{!! Form::number('medicine[]', 0, ['class' => 'form-control', 'required', 'autofocus']) !!}
+						</div>
 
-                    {!! Form::close() !!}
-                </div>
-            </div>
-        </div>
-    </div>
+					</div>
+					@endforeach
+					<hr />
+					<div class="form-group">
+						<div class="col-md-4 col-md-offset-4">
+							{!! Form::submit('บันทึกข้อมูลใบสั่งยา', ['class' => 'btn btn-success btn-block']) !!}
+						</div>
+					</div>
+
+					{!! Form::close() !!}
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 @endsection
+
+
