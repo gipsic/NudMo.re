@@ -20,7 +20,6 @@
 							</thead>
 							<tbody>
 								@foreach ($users as $user)
-								@if ($current_user->isAdministrator() || (!$user->isAdministrator() && !$user->isStaff() && !$user->isDoctor() && !$user->isNurse() && !$user->isPharmacist()))
 								<tr>
 									<td>{!! $user->id !!} - {!! $user->patient()->first()->patient_number !!}</td>
 									<td>{!! $user->title !!} {!! $user->name !!} {!! $user->surname !!}</td>
@@ -38,7 +37,7 @@
 										{!! Form::open(['url' => '/profile/'.$user->id.'/delete', 'method' => 'delete']) !!}
 										{!! Form::token() !!}
 										<a href="{{ url('/profile/'.$user->id.'') }}" class="btn btn-labeled btn-info"> <span class="btn-label"><i class="fa fa-info-circle"></i> </span> ดู </a>
-										@if($user->isAdministrator())
+										@if($current_user->isAdministrator())
 										<a href="{{ url('/profile/'.$user->id.'/edit') }}" class="btn btn-labeled btn-warning"> <span class="btn-label"><i class="fa fa-pencil-square-o"></i> </span> แก้ไข </a>
 										<a class="btn btn-labeled btn-danger deleteU"> <span class="btn-label"><i class="fa fa-times"></i> </span> ลบ </a>
 										@endif
@@ -46,7 +45,6 @@
 
 									</td>
 								</tr>
-								@endif
 								@endforeach
 							</tbody>
 
