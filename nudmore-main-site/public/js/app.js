@@ -178,19 +178,6 @@ function(e, t, o, n) {
         }
     }
 }(window, document, window.jQuery),
-function(e, t, o, n) {
-    o(function() {
-        o("[data-now]").each(function() {
-            function e() {
-                var e = moment(new Date).format(n);
-                t.text(e)
-            }
-            var t = o(this),
-                n = t.data("format");
-            e(), setInterval(e, 1e3)
-        })
-    })
-}(window, document, window.jQuery),
 function(e, t, o) {
     "use strict";
     var n = '[data-tool="panel-dismiss"]',
