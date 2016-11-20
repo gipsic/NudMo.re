@@ -26,61 +26,6 @@ function(e, t, o, n) {
         })
     })
 }(window, document, window.jQuery),
-
-function(e, t, o, n) {
-    o(function() {
-        if (o.fn.easyPieChart) {
-            var e = {
-                animate: {
-                    duration: 800,
-                    enabled: !0
-                },
-                barColor: APP_COLORS.success,
-                trackColor: !1,
-                scaleColor: !1,
-                lineWidth: 10,
-                lineCap: "circle"
-            };
-            o("#easypie1").easyPieChart(e);
-            var t = {
-                animate: {
-                    duration: 800,
-                    enabled: !0
-                },
-                barColor: APP_COLORS.warning,
-                trackColor: !1,
-                scaleColor: !1,
-                lineWidth: 4,
-                lineCap: "circle"
-            };
-            o("#easypie2").easyPieChart(t);
-            var n = {
-                animate: {
-                    duration: 800,
-                    enabled: !0
-                },
-                barColor: APP_COLORS.danger,
-                trackColor: !1,
-                scaleColor: APP_COLORS.gray,
-                lineWidth: 15,
-                lineCap: "circle"
-            };
-            o("#easypie3").easyPieChart(n);
-            var a = {
-                animate: {
-                    duration: 800,
-                    enabled: !0
-                },
-                barColor: APP_COLORS.danger,
-                trackColor: APP_COLORS.yellow,
-                scaleColor: APP_COLORS["gray-dark"],
-                lineWidth: 15,
-                lineCap: "circle"
-            };
-            o("#easypie4").easyPieChart(a)
-        }
-    })
-}(window, document, window.jQuery),
 function(e, t, o, n) {
     o(function() {
         if (o.fn.knob) {
