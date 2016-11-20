@@ -150,7 +150,7 @@ class ScheduleController extends Controller
 
         $validator = Validator::make($request->all(), [
             'doctor_number' => 'required|max:255',
-            'date_time' => 'required|date|unique:schedules,date_time,NULL,doctor_number,'.$request->input('schedule.doctor_number'),
+            'date_time' => 'required|date,'.$request->input('schedule.doctor_number'),
             ]);
 
 
