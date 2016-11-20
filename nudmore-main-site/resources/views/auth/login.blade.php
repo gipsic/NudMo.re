@@ -11,7 +11,7 @@
 			</a>
 		</div>
 		<div class="panel-body">
-			<p class="text-center pv">ลงชื่อเข้าใช้เพื่อดำเนินการต่อ</p>
+			<p class="text-center pv">เข้าสู่ระบบเพื่อดำเนินการต่อ</p>
 			{!! Form::open(['url' => 'login', 'class' => ' mb-lg']) !!}
                 {!! Form::token() !!}
 				<div class="form-group has-feedback {{ $errors->has('username') ? ' has-error' : '' }}">
