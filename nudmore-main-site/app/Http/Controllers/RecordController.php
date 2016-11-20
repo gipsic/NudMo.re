@@ -55,10 +55,17 @@ class RecordController extends Controller
     		'date_time' => 'required|date',
     		'topic' => 'string|max:255',
     		'detail' => 'string|max:65535',
+            'weight' => 'required|numeric',
+            'height' => 'required|numeric',
+            'temperature' => 'required|numeric',
+            'heart_rate' => 'required|integer',
+            'systolic_blood_pressure' => 'required|integer',
+            'diastolic_blood_pressure' => 'required|integer',
+            'icd10' => 'string|max:255',
     		]);
 
     	if ($validator->fails()) {
-            return redirect('record/staff/create/'.$request->patient_number)
+            return redirect('record/staff/'.$request->patient_number.'/create')
                         ->withErrors($validator)
                         ->withInput();
         }
@@ -68,6 +75,13 @@ class RecordController extends Controller
         $record->date_time = $request->date_time;
         $record->topic = $request->topic;
         $record->detail = $request->detail;
+        $record->weight = $request->weight;        
+        $record->height = $request->height;
+        $record->temperature = $request->temperature;
+        $record->heart_rate = $request->heart_rate;
+        $record->systolic_blood_pressure = $request->systolic_blood_pressure;
+        $record->diastolic_blood_pressure = $request->diastolic_blood_pressure;
+        $record->icd10 = $request->icd10;
 
         $record->save();
 
@@ -102,13 +116,20 @@ class RecordController extends Controller
     public function editRecord(Request $request, $id)
     {
     	$validator = Validator::make($request->all(), [
-    		'date_time' => 'required|date',
-    		'topic' => 'string|max:255',
-    		'detail' => 'string|max:65535',
-    		]);
+            'date_time' => 'required|date',
+            'topic' => 'string|max:255',
+            'detail' => 'string|max:65535',
+            'weight' => 'required|numeric',
+            'height' => 'required|numeric',
+            'temperature' => 'required|numeric',
+            'heart_rate' => 'required|integer',
+            'systolic_blood_pressure' => 'required|integer',
+            'diastolic_blood_pressure' => 'required|integer',
+            'icd10' => 'string|max:255',
+            ]);
 
     	if ($validator->fails()) {
-            return redirect('record/staff/create/'.$request->patient_number)
+            return redirect('record/staff/'.$id.'/edit')
                         ->withErrors($validator)
                         ->withInput();
         }
@@ -118,6 +139,13 @@ class RecordController extends Controller
         $record->date_time = $request->date_time;
         $record->topic = $request->topic;
         $record->detail = $request->detail;
+        $record->weight = $request->weight;        
+        $record->height = $request->height;
+        $record->temperature = $request->temperature;
+        $record->heart_rate = $request->heart_rate;
+        $record->systolic_blood_pressure = $request->systolic_blood_pressure;
+        $record->diastolic_blood_pressure = $request->diastolic_blood_pressure;
+        $record->icd10 = $request->icd10;
 
         $record->save();
 

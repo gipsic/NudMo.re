@@ -12,7 +12,7 @@ class Record extends Model
      * @var array
      */
     protected $fillable = [
-        'patient_number', 'date_time', 'topic', 'detail',
+        'patient_number', 'date_time', 'topic', 'detail', 'weight', 'height', 'temperature', 'heart_rate', 'systolic_blood_pressure', 'diastolic_blood_pressure', 'icd10',
     ];
 
     public function patient()
