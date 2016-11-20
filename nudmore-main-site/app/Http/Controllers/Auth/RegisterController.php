@@ -88,6 +88,10 @@ class RegisterController extends Controller
             'drug_allergy' => $data['drug_allergy'],
         ]);
 
+        if (User::all()->count() === 1) {
+            $user->administrator()->create([]);
+        }
+
         return $user;
     }
 }

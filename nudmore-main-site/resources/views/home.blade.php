@@ -3,6 +3,9 @@
 @section('content')
 <div class="container content-wrapper">
 	<h3>ยินดีต้อนรับเข้าสู่ Nudmore</h3>
+	@if ($current_user->email_verification_token !== '')
+	<div role="alert" class="alert alert-danger"><strong>คุณยังไม่ได้ยืนยันการเปิดใช้งานบัญชีผู้ใช้</strong> กรุณาตรวจสอบกล่องขาเข้าของอีเมลของคุณ หากไม่พบ กรุณาลองตรวจสอบในกล่องอีเมลขยะ หรือติดต่อผู้ดูแลระบบได้ที่ info@nudmo.re</div>
+	@endif
 	<div class="row">
 		<div class="col-md-6">
 			<div class="panel-body">
