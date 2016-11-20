@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="content-wrapper container">
-	<h3>รายการนัดหมายของท่าน <a href="{{ url('/appointment/patient/create/'.'') }}" class="btn btn-success pull-right"><i class="fa-plus fa"></i> เพิ่มรายการนัดหมายใหม่</a></h3>
+	<h3>รายการนัดหมายของคุณ <a href="{{ url('/appointment/patient/create/'.'') }}" class="btn btn-success pull-right"><i class="fa-plus fa"></i> เพิ่มรายการนัดหมายใหม่</a></h3>
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2">
 			<div class="panel panel-info">
