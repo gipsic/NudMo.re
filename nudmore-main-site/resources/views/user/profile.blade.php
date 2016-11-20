@@ -5,13 +5,10 @@
 	<h3> 
 		@if ($current_user->id === $user->id) 
 		โปรไฟล์ข้อมูลส่วนตัวของคุณ 
+		<a href="{{ url('/profile/edit') }}" class="btn btn-success pull-right">แก้ไข้ข้อมูลส่วนตัว</a>
 		@else 
 		โปรไฟล์ข้อมูลส่วนตัวของผู้ใช้งาน ID {{ $user->id }}
-		@if ($current_user->id === $user->id)
-
-		<a href="{{ url('/profile/edit') }}" class="btn btn-success pull-right">แก้ไข้ข้อมูลส่วนตัว</a>
-
-		@elseif ($current_user->isAdministrator())
+		@if ($current_user->isAdministrator())
 		<div class="pull-right">
 			{!! Form::open(['url' => '/profile/'.$user->id.'/delete', 'method' => 'delete']) !!}
 			{!! Form::token() !!}
