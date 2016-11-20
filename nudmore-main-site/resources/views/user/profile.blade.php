@@ -108,7 +108,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="row">
+	<div class="row hidden-lg">
 		<div class="col-lg-8 col-lg-offset-2">
 			<div class="form-group row">
 				@if ($current_user->id === $user->id)
