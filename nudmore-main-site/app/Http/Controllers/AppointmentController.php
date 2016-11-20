@@ -75,7 +75,7 @@ class AppointmentController extends Controller
     public function createAppointmentPatientSelected(Request $request)
     {
         $date_time = Carbon::now()->toDateTimeString();
-    	$available_schedules = DB::select(DB::raw("SELECT date_time FROM (SELECT s.date_time as date_time, COUNT(a.id) as count FROM schedules s LEFT JOIN (SELECT * FROM appointments WHERE doctor_number LIKE '".$request->doctor_number."') a ON s.date_time = a.date_time GROUP BY s.date_time) available_schedules WHERE count < 15 AND date_time > ".$date_time."'"));
+    	$available_schedules = DB::select(DB::raw("SELECT date_time FROM (SELECT s.date_time as date_time, COUNT(a.id) as count FROM schedules s LEFT JOIN (SELECT * FROM appointments WHERE doctor_number LIKE '".$request->doctor_number."') a ON s.date_time = a.date_time GROUP BY s.date_time) available_schedules WHERE count < 15 AND date_time > '".$date_time."'"));
 
     	return view('appointment/patient/create', ['available_schedules' => $available_schedules, 'doctor_number' => $request->doctor_number]);
     }
@@ -83,7 +83,7 @@ class AppointmentController extends Controller
     public function createAppointmentStaffSelected(Request $request)
     {
         $date_time = Carbon::now()->toDateTimeString();
-    	$available_schedules = DB::select(DB::raw("SELECT date_time FROM (SELECT s.date_time as date_time, COUNT(a.id) as count FROM schedules s LEFT JOIN (SELECT * FROM appointments WHERE doctor_number LIKE '".$request->doctor_number."') a ON s.date_time = a.date_time GROUP BY s.date_time) available_schedules WHERE count < 15 AND date_time > ".$date_time."'"));
+    	$available_schedules = DB::select(DB::raw("SELECT date_time FROM (SELECT s.date_time as date_time, COUNT(a.id) as count FROM schedules s LEFT JOIN (SELECT * FROM appointments WHERE doctor_number LIKE '".$request->doctor_number."') a ON s.date_time = a.date_time GROUP BY s.date_time) available_schedules WHERE count < 15 AND date_time > '".$date_time."'"));
 
     	return view('appointment/staff/create', ['available_schedules' => $available_schedules, 'patient_number' => $request->patient_number, 'doctor_number' => $request->doctor_number]);
     }
