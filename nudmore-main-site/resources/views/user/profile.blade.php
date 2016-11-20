@@ -56,7 +56,7 @@
 						<div class="col-md-7">{!! Form::text('username', $user->patient()->first()->patient_number, ['class' => 'form-control', 'readonly', 'autofocus']) !!}</div>
 					</div>
 
-					<div class="form-group row {{ $errors->has('username') ? 'has-error' : '' }}">
+					<div class="form-group row">
 						{!! Form::label('username', 'ประวัติการแพ้ยา', ['class' => 'col-md-5 control-label']) !!}
 						<div class="col-md-7">{!! Form::textarea('username', $user->patient()->first()->drug_allergy, ['class' => 'form-control', 'readonly', 'autofocus']) !!}</div>
 					</div>
