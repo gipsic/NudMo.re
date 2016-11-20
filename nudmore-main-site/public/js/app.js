@@ -615,5 +615,10 @@ function(e, t, o) {
     }), n.addClass(e.support.touch ? "touch" : "no-touch")
 }(jQuery, window, document),
 function(e, t, o, n) {
-    o(function() {})
+    o(function() {
+		
+		var current = e.location.href.replace(/#/g);
+		console.log(current);
+		
+	})
 }(window, document, window.jQuery);
