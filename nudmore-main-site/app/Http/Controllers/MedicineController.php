@@ -33,7 +33,8 @@ class MedicineController extends Controller
     public function createMedicine(Request $request)
     {
     	$validator = Validator::make($request->all(), [
-    		'name' => 'string|max:255',
+    		'name' => 'required|string|max:255',
+            'how_to_use' => 'required|string|max:255',
     		]);
 
     	if ($validator->fails()) {
@@ -45,6 +46,7 @@ class MedicineController extends Controller
     	$medicine = new Medicine;
 
     	$medicine->name = $request->name;
+        $medicine->how_to_use = $request->how_to_use;
 
     	$medicine->save();
 
@@ -61,8 +63,9 @@ class MedicineController extends Controller
     public function editMedicine(Request $request, $id)
     {
     	$validator = Validator::make($request->all(), [
-    		'name' => 'string|max:255',
-    		]);
+            'name' => 'required|string|max:255',
+            'how_to_use' => 'required|string|max:255',
+            ]);
 
     	if ($validator->fails()) {
             return redirect('medicine/create')
@@ -73,6 +76,7 @@ class MedicineController extends Controller
     	$medicine = Medicine::where('id', $id)->first();
 
     	$medicine->name = $request->name;
+        $medicine->how_to_use = $request->how_to_use;
 
     	$medicine->save();
 

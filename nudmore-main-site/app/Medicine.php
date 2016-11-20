@@ -12,7 +12,7 @@ class Medicine extends Model
      * @var array
      */
     protected $fillable = [
-        'name',
+        'name', 'how_to_use',
     ];
 
     public function dispense()

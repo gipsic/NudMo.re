@@ -82,7 +82,7 @@ Route::get('/prescription/doctor', 'PrescriptionController@patientListDoctor')->
 Route::get('/prescription/doctor/{id}/create', 'PrescriptionController@showCreatePrescription')->middleware(['auth', 'activated', 'doctoradministrator']);
 Route::post('/prescription/doctor/{id}/create', 'PrescriptionController@createPrescription')->middleware(['auth', 'activated', 'doctoradministrator']);
 Route::get('/prescription/doctor/{id}', 'PrescriptionController@patientDoctor')->middleware(['auth', 'activated', 'doctoradministrator']);
-Route::get('/prescription/{id}', 'PrescriptionController@showPrescription')->middleware(['auth', 'activated', 'patientpharmacistnursestaff']);
+Route::get('/prescription/{id}', 'PrescriptionController@showPrescription')->middleware(['auth', 'activated']);
 
 // Notification Route
 Route::get('sendsms/{phone_number}/{message}', 'SmsNotificationController@sendSms')->middleware(['auth', 'activated', 'administrator']);

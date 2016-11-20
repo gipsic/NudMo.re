@@ -17,13 +17,17 @@
 
 				<div class="panel-body">
 					<div class="row mt">
-						<div class="col-md-9"><strong>ชื่อยา</strong></div>
+						<div class="col-md-3"><strong>ชื่อยา</strong></div>
+						<div class="col-md-6"><strong>วิธีใช้</strong></div>
 						<div class="col-md-3 text-center"><strong>ปริมาณที่ใช้</strong></div>
 					</div>
 					@foreach ($dispenses as $dispense)
 					<div class="row mt-sm">
-						<div class="col-md-9">
+						<div class="col-md-3">
 							{!! $dispense->medicine()->first()->name !!}
+						</div>
+						<div class="col-md-6">
+							{!! $dispense->medicine()->first()->how_to_use !!}
 						</div>
 						<div class="col-md-3 text-center">
 							{!! $dispense->quantity !!}

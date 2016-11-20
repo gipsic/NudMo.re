@@ -13,6 +13,7 @@
 								<tr>
 									<th>ลำดับที่</th>
 									<th>ชื่อยา</th>
+									<th>วิธีใช้ยา</th>
 									<th> การจัดการ </th>
 								</tr>
 							</thead>
@@ -21,6 +22,7 @@
 								<tr>
 									<td>{!! $medicine->id !!}</td>
 									<td>{!! $medicine->name !!}</td>
+									<td>{!! $medicine->how_to_use !!}</td>
 									<td>
 										{!! Form::open(['url' => '/medicine/'.$medicine->id.'/delete', 'method' => 'delete']) !!}
 										{!! Form::token() !!}

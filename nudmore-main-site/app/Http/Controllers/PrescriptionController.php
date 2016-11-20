@@ -54,7 +54,7 @@ class PrescriptionController extends Controller
     	$prescription = Prescription::where('id', $id)->first();
     	$dispenses = Dispense::where('prescription_id', $id)->get();
 
-    	if (!$user->isStaff() && !$user->isNurse() && !$user->isPharmacist()) {
+    	if (!$user->isStaff() && !$user->isNurse() && !$user->isPharmacist() && !$user->isDoctor() && !$user->isAdministrator()) {
     		if ($user->patient()->first()->patient_number !== $prescription->patient_number) {
     			return redirect()->to('prescription/patient');
     		}
