@@ -476,43 +476,6 @@ function(e, t, o, n) {
 }(window, document, window.jQuery),
 function(e, t, o, n) {
     o(function() {
-        o("#swal-demo1").on("click", function(e) {
-            e.preventDefault(), swal("Here's a message!")
-        }), o("#swal-demo2").on("click", function(e) {
-            e.preventDefault(), swal("Here's a message!", "It's pretty, isn't it?")
-        }), o("#swal-demo3").on("click", function(e) {
-            e.preventDefault(), swal("Good job!", "You clicked the button!", "success")
-        }), o("#swal-demo4").on("click", function(e) {
-            e.preventDefault(), swal({
-                title: "Are you sure?",
-                text: "You will not be able to recover this imaginary file!",
-                type: "warning",
-                showCancelButton: !0,
-                confirmButtonColor: "#DD6B55",
-                confirmButtonText: "Yes, delete it!",
-                closeOnConfirm: !1
-            }, function() {
-                swal("Deleted!", "Your imaginary file has been deleted.", "success")
-            })
-        }), o("#swal-demo5").on("click", function(e) {
-            e.preventDefault(), swal({
-                title: "Are you sure?",
-                text: "You will not be able to recover this imaginary file!",
-                type: "warning",
-                showCancelButton: !0,
-                confirmButtonColor: "#DD6B55",
-                confirmButtonText: "Yes, delete it!",
-                cancelButtonText: "No, cancel plx!",
-                closeOnConfirm: !1,
-                closeOnCancel: !1
-            }, function(e) {
-                e ? swal("Deleted!", "Your imaginary file has been deleted.", "success") : swal("Cancelled", "Your imaginary file is safe :)", "error")
-            })
-        })
-    })
-}(window, document, window.jQuery),
-function(e, t, o, n) {
-    o(function() {
         o("[data-check-all]").on("change", function() {
             var e = o(this),
                 t = e.index() + 1,
