@@ -1,59 +1,68 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Choose Patient and Doctor</div>
-                <div class="panel-body">
-                <div class="row">
-                    <div class="col-md-4">
-                        @foreach ($patients as $patient)
-                            <p>{!! $patient->patient_number !!} {!! $patient->user()->first()->name !!} {!! $patient->user()->first()->surname !!}</p>
-                        @endforeach
-                    </div>
-                    <div class="col-md-4">
-                        @foreach ($doctors as $doctor)
-                            <p>{!! $doctor->doctor_number !!} {!! $doctor->user()->first()->name !!} {!! $doctor->user()->first()->surname !!}</p>
-                        @endforeach
-                    </div>
-                    <div class="col-md-4">
-                        {!! Form::open(['url' => 'appointment/staff/create/selected', 'class' => 'form-horizontal']) !!}
-                            {!! Form::token() !!}
-                            <div class="form-group{{ $errors->has('patient_number') ? ' has-error' : '' }}">
-                                {!! Form::label('patient_number', 'Patient Number', ['class' => 'col-md-4 control-label']) !!}
+<div class="content-wrapper container">
+	<h3> สร้างรายการนัดหมายใหม่ </h3>
+	<div class="row">
+		<div class="col-md-6 col-md-offset-3">
+			<div class="panel panel-info">
 
-                                <div class="col-md-6">
-                                    {!! Form::text('patient_number', old('patient_number'), ['class' => 'form-control', 'required', 'autofocus']) !!}
+				<div class="panel-heading white-text">ขั้นตอนที่ 1: เลือกแพทย์และผู้ป่วย</div>
+				<div class="panel-body">
+					{!! Form::open(['url' => 'appointment/staff/create/selected', 'class' => 'form-horizontal']) !!}
+					{!! Form::token() !!}
 
-                                    @if ($errors->has('patient_number'))
-                                        <span class="help-block">
-                                            <strong>{{ $errors->first('patient_number') }}</strong>
-                                        </span>
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="form-group{{ $errors->has('doctor_number') ? ' has-error' : '' }}">
-                                {!! Form::label('doctor_number', 'Doctor Number', ['class' => 'col-md-4 control-label']) !!}
+					<div class="form-group{{ $errors->has('doctor_number') ? ' has-error' : '' }}">
+						{!! Form::label('doctor_number', 'แพทย์ผู้ทำการตรวจ', ['class' => 'col-md-4 control-label']) !!}
+						<div class="col-md-8">
+							<select name="doctor_number" required class="chosen-select input-md form-control">
+								<option value=""> -- พิมพ์ ชื่อหรือรหัส แพทย์ หรือ แผนก เพื่อค้นหา --</option>
+								@foreach($doctors as $doctor)
+								<option value="{!! $doctor->doctor_number !!}">[{!! $doctor->department !!}] {!! $doctor->doctor_number !!} - {!! $doctor->user()->first()->title !!} {!! $doctor->user()->first()->name !!} {!! $doctor->user()->first()->surname !!} </option>
+								@endforeach
+							</select>
+							@if ($errors->has('doctor_number'))<span class="help-block"><strong>{{ $errors->first('doctor_number') }}</strong></span>@endif
+						</div>
+					</div>
 
-                                <div class="col-md-6">
-                                    {!! Form::text('doctor_number', old('doctor_number'), ['class' => 'form-control', 'required', 'autofocus']) !!}
+					<div class="form-group{{ $errors->has('patient_number') ? ' has-error' : '' }}">
+						{!! Form::label('patient_number', 'ผู้ป่วยที่เข้ารับการรักษา', ['class' => 'col-md-4 control-label']) !!}
+						<div class="col-md-8">
+							<select name="patient_number" required class="chosen-select input-md form-control">
+								<option value=""> -- พิมพ์ ชื่อหรือรหัส ผู้ป่วย เพื่อค้นหา --</option>
+								@foreach($patients as $patient)
+								<option value="{!! $patient->patient_number !!}">{!! $patient->patient_number !!} - {!! $patient->user()->first()->title !!} {!! $patient->user()->first()->name !!} {!! $patient->user()->first()->surname !!}</option>
+								@endforeach
+							</select>
+							@if ($errors->has('patient_number'))<span class="help-block"><strong>{{ $errors->first('patient_number') }}</strong></span>@endif
+						</div>
+					</div>
 
-                                    @if ($errors->has('doctor_number'))
-                                        <span class="help-block">
-                                            <strong>{{ $errors->first('doctor_number') }}</strong>
-                                        </span>
-                                    @endif
-                                </div>
-                            </div>
-                            {!! Form::submit('Make Appointment >>', ['class' => 'btn btn-success']) !!}
-                        {!! Form::close() !!}
-                    </div>
-                </div>
-                </div>
-            </div>
-        </div>
-    </div>
+					<div class="form-group">
+						<div class="col-md-4 col-md-offset-4">
+							{!! Form::submit('ไปยังขั้นตอนต่อไป', ['class' => 'btn btn-success btn-block']) !!}
+						</div>
+					</div>
+
+					{!! Form::close() !!}
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 @endsection
+
+
+@section('footer_script')
+   <!-- CHOSEN-->
+   <link rel="stylesheet" href="{{ url('/vendor/chosen_v1.2.0/chosen.min.css') }}">
+ <!-- CHOSEN-->
+   <script src="{{ url('/vendor/chosen_v1.2.0/chosen.jquery.min.js') }}"></script>
+<script>
+
+	$('.chosen-select').chosen();
+</script>
+@endsection
+
+
+
