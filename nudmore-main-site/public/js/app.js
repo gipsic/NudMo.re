@@ -147,75 +147,7 @@ function(e, t, o, n) {
     })
 }(window, document, window.jQuery),
     
-function(e, t, o, n) {
-    e.defaultColors = {
-        markerColor: "#23b7e5",
-        bgColor: "transparent",
-        scaleColors: ["#878c9a"],
-        regionFill: "#bbbec6"
-    }, e.VectorMap = function(e, t, o) {
-        function n(e, t, o, n) {
-            e.vectorMap({
-                map: t.mapName,
-                backgroundColor: t.bgColor,
-                zoomMin: 1,
-                zoomMax: 8,
-                zoomOnScroll: !1,
-                regionStyle: {
-                    initial: {
-                        fill: t.regionFill,
-                        "fill-opacity": 1,
-                        stroke: "none",
-                        "stroke-width": 1.5,
-                        "stroke-opacity": 1
-                    },
-                    hover: {
-                        "fill-opacity": .8
-                    },
-                    selected: {
-                        fill: "blue"
-                    },
-                    selectedHover: {}
-                },
-                focusOn: {
-                    x: .4,
-                    y: .6,
-                    scale: t.scale
-                },
-                markerStyle: {
-                    initial: {
-                        fill: t.markerColor,
-                        stroke: t.markerColor
-                    }
-                },
-                onRegionLabelShow: function(e, t, n) {
-                    o && o[n] && t.html(t.html() + ": " + o[n] + " visitors")
-                },
-                markers: n,
-                series: {
-                    regions: [{
-                        values: o,
-                        scale: t.scaleColors,
-                        normalizeFunction: "polynomial"
-                    }]
-                }
-            })
-        }
-        if (e && e.length) {
-            var a = e.data(),
-                r = a.height || "300",
-                i = {
-                    markerColor: a.markerColor || defaultColors.markerColor,
-                    bgColor: a.bgColor || defaultColors.bgColor,
-                    scale: a.scale || 1,
-                    scaleColors: a.scaleColors || defaultColors.scaleColors,
-                    regionFill: a.regionFill || defaultColors.regionFill,
-                    mapName: a.mapName || "world_mill_en"
-                };
-            e.css("height", r), n(e, i, t, o)
-        }
-    }
-}(window, document, window.jQuery),
+
 function(e, t, o, n) {
     o(function() {
         if ("undefined" != typeof Morris) {
