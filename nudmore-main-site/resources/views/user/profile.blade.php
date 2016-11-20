@@ -33,7 +33,7 @@
 					</div>
 				</div>
 			</div>
-					<div class="panel panel-info mt-xl">
+			<div class="panel panel-info mt-xl">
 				<div class="panel-heading">ข้อมูลทางการแพทย์</div>
 				<div class="panel-body form-horizontal">
 
@@ -82,7 +82,7 @@
 			</div>
 		</div>
 		<div class="col-lg-4 col-lg-offset-0">
-	
+
 			<div class="panel panel-info mt-xl">
 				<div class="panel-heading">ข้อมูลส่วนบุคคล</div>
 				<div class="panel-body form-horizontal">
@@ -148,13 +148,13 @@
 	@if ($user->isAdministrator())
 		jQuery("#user_type").val("ผู้ดูแลระบบ");
 	@elseif ($user->isStaff())
-		jQuery("#user_type").val("เจ้าหน้าที่");
+	jQuery("#user_type").val("เจ้าหน้าที่");
 	@elseif ($user->isDoctor())
-		jQuery("#user_type").val("แพทย์");
+	jQuery("#user_type").val("แพทย์");
 	@elseif ($user->isNurse())
-		jQuery("#user_type").val("พยาบาล");
+	jQuery("#user_type").val("พยาบาล");
 	@elseif ($user->isPharmacist())
-		jQuery("#user_type").val("เภสัชกร");
+	jQuery("#user_type").val("เภสัชกร");
 	@else
 		jQuery("#user_type").val("ผู้ป่วย");
 	@endif
