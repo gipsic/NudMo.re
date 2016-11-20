@@ -487,47 +487,6 @@ function(e, t, o, n) {
 }(window, document, window.jQuery),
 function(e, t, o, n) {
     o(function() {
-        var t = o("body");
-        toggle = new StateToggler, o("[data-toggle-state]").on("click", function(a) {
-            a.stopPropagation();
-            var r = o(this),
-                i = r.data("toggleState"),
-                l = r.data("target"),
-                s = r.attr("data-no-persist") !== n,
-                c = l ? o(l) : t;
-            i && (c.hasClass(i) ? (c.removeClass(i), s || toggle.removeState(i)) : (c.addClass(i), s || toggle.addState(i))), o(e).resize()
-        })
-    }), e.StateToggler = function() {
-        var e = "jq-toggleState",
-            t = {
-                hasWord: function(e, t) {
-                    return new RegExp("(^|\\s)" + t + "(\\s|$)").test(e)
-                },
-                addWord: function(e, t) {
-                    if (!this.hasWord(e, t)) return e + (e ? " " : "") + t
-                },
-                removeWord: function(e, t) {
-                    if (this.hasWord(e, t)) return e.replace(new RegExp("(^|\\s)*" + t + "(\\s|$)*", "g"), "")
-                }
-            };
-        return {
-            addState: function(n) {
-                var a = o.localStorage.get(e);
-                a = a ? t.addWord(a, n) : n, o.localStorage.set(e, a)
-            },
-            removeState: function(n) {
-                var a = o.localStorage.get(e);
-                a && (a = t.removeWord(a, n), o.localStorage.set(e, a))
-            },
-            restoreState: function(t) {
-                var n = o.localStorage.get(e);
-                n && t.addClass(n)
-            }
-        }
-    }
-}(window, document, window.jQuery),
-function(e, t, o, n) {
-    o(function() {
         var n = o("[data-trigger-resize]"),
             a = n.data("triggerResize");
         n.on("click", function() {
