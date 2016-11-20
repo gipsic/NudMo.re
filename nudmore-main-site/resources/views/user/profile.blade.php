@@ -51,7 +51,7 @@
 					<hr />
 					@endif
 
-					<div class="form-group row {{ $errors->has('username') ? 'has-error' : '' }}">
+					<div class="form-group row">
 						{!! Form::label('username', 'รหัสผู้ป่วย', ['class' => 'col-md-5 control-label']) !!}
 						<div class="col-md-7">{!! Form::text('username', $user->patient()->first()->patient_number, ['class' => 'form-control', 'readonly', 'autofocus']) !!}</div>
 					</div>
