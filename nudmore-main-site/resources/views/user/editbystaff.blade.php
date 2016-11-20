@@ -112,7 +112,7 @@
 
 						<div class="mb col-md-6 {{ $errors->has('blood_type') ? ' has-error' : '' }}">
 							{!! Form::label('user_type', 'ประเภทผู้ใช้งาน', ['class' => 'control-label']) !!}
-							{!! Form::select('user_type', ['patient'=>'ผู้ป่วย', 'administrator'=>'ผู้ดูแลระบบ', 'staff'=>'เจ้าหน้าที่', 'doctor'=>'แพทย์', 'nurse'=>'พยาบาล', 'pharmacist'=>'เภสัชกร'], $user->blood_type, ['class' => 'form-control', 'required', 'id'=>'user_type']) !!}
+							{!! Form::select('user_type', ['patient'=>'ผู้ป่วย', 'administrator'=>'ผู้ดูแลระบบ', 'staff'=>'เจ้าหน้าที่', 'doctor'=>'แพทย์', 'nurse'=>'พยาบาล', 'pharmacist'=>'เภสัชกร'], 'patient', ['class' => 'form-control', 'required', 'id'=>'user_type']) !!}
 							<input type="hidden" id="user_tt" name="patient" value="patient" />
 						</div>
 					</div>
@@ -120,13 +120,13 @@
 
 						<div class="mb col-md-6 {{ $errors->has('doctor_number') ? ' has-error' : '' }}">
 							{!! Form::label('doctor_number', 'รหัสประจำตัวแพทย์', ['class' => 'control-label']) !!}
-							{!! Form::text('doctor_number', $user->doctor_number, ['class' => 'form-control', 'required']) !!}
+							{!! Form::text('doctor_number', $user->doctor()->first()->doctor_number, ['class' => 'form-control', 'required']) !!}
 							@if ($errors->has('doctor_number'))<span class="help-block"><strong>{{ $errors->first('doctor_number') }}</strong></span>@endif
 						</div>
 
 						<div class="mb col-md-6 {{ $errors->has('department') ? ' has-error' : '' }}">
 							{!! Form::label('department', 'แผนก', ['class' => 'control-label']) !!}
-							{!! Form::text('department', $user->phone_number, ['class' => 'form-control', 'required']) !!}
+							{!! Form::text('department', $user->doctor()->first()->department, ['class' => 'form-control', 'required']) !!}
 							@if ($errors->has('department'))<span class="help-block"><strong>{{ $errors->first('department') }}</strong></span>@endif
 						</div>
 					</div>
@@ -151,7 +151,21 @@
 @section('footer_script')
 
 <script>
-	jQuery("#user_type").change(function(){
+	var type = jQuery("#user_type");
+	
+	@if ($user->isAdministrator())
+		type.val("administrator");
+	@elseif ($user->isStaff())
+		type.val("staff");
+	@elseif ($user->isDoctor())
+		type.val("doctor");
+	@elseif ($user->isNurse())
+		type.val("nurse");
+	@elseif ($user->isPharmacist())
+		type.val("pharmacist");
+	@else
+	@endif
+	type.change(function(){
 		var t = jQuery(this).val();
 		jQuery("#user_tt").attr("name",t).val(t);
 		if(t == 'doctor') {
@@ -161,6 +175,6 @@
 			$("#doctor_info").hide();
 			$("#doctor_info input").removeAttr("required");			
 		}
-	});
+	}).trigger("change");
 </script>
 @endsection
