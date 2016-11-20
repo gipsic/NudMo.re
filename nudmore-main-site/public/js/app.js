@@ -463,19 +463,6 @@ function(e, t, o, n) {
 }(window, document, window.jQuery),
 function(e, t, o, n) {
     o(function() {
-        function t() {
-            var t = o(this),
-                n = t.data(),
-                a = n.values && n.values.split(",");
-            n.type = n.type || "bar", n.disableHiddenCheck = !0, t.sparkline(a, n), n.resize && o(e).resize(function() {
-                t.sparkline(a, n)
-            })
-        }
-        o("[data-sparkline]").each(t)
-    })
-}(window, document, window.jQuery),
-function(e, t, o, n) {
-    o(function() {
         o("[data-check-all]").on("change", function() {
             var e = o(this),
                 t = e.index() + 1,
@@ -587,5 +574,8 @@ function(e, t, o) {
     }), n.addClass(e.support.touch ? "touch" : "no-touch")
 }(jQuery, window, document),
 function(e, t, o, n) {
-    o(function() {})
+    o(function() {
+		
+		
+	})
 }(window, document, window.jQuery);
