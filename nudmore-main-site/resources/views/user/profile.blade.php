@@ -61,23 +61,6 @@
 						<div class="col-md-7">{!! Form::textarea('username', $user->patient()->first()->drug_allergy, ['class' => 'form-control', 'readonly', 'autofocus']) !!}</div>
 					</div>
 
-
-
-					<div class="row" style="display:none;">
-						@if ($current_user->id === $user->id)
-						<div class="col-md-4 col-md-offset-4 mt-xl">
-							<a href="{{ url('/profile/edit') }}" class="btn btn-success btn-block">แก้ไข้ข้อมูลส่วนตัว</a>
-						</div>
-						@elseif ($current_user->isAdministrator())
-						<div class="col-md-4 col-md-offset-2 mt-xl"><a href="{{ url('/profile/'.$user->id.'/edit') }}" class="btn btn-success btn-block">แก้ไข้ข้อมูลผู้ใช้</a></div>
-						<div class="col-md-4 mt-xl">
-							{!! Form::open(['url' => '/profile/'.$user->id.'/delete', 'method' => 'delete']) !!}
-							{!! Form::token() !!}
-							{!! Form::button('ลบผู้ใช้รายนี้', ['id' => 'deleteU','class' => 'btn btn-danger btn-block']) !!}
-							{!! Form::close() !!}
-						</div>
-						@endif
-					</div>
 				</div>
 			</div>
 		</div>
