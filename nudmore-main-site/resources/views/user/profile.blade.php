@@ -103,22 +103,27 @@
 						{!! Form::label('address', 'ที่อยู่', ['class' => 'col-md-4 control-label']) !!}
 						<div class="col-md-8">{!! Form::textarea('address', $user->patient()->first()->address, ['class' => 'form-control', 'readonly']) !!}</div>
 					</div>
+				</div>
+			</div>
+		</div>
+		<div class="panel panel-info mt-xl">
+			<div class="panel-heading">ข้อมูลส่วนบุคคล</div>
+			<div class="panel-body form-horizontal">
+				<div class="form-group row">
 
-					<div class="row" style="display:none;">
-						@if ($current_user->id === $user->id)
-						<div class="col-md-4 col-md-offset-4 mt-xl">
-							<a href="{{ url('/profile/edit') }}" class="btn btn-success btn-block">แก้ไข้ข้อมูลส่วนตัว</a>
-						</div>
-						@elseif ($current_user->isAdministrator())
-						<div class="col-md-4 col-md-offset-2 mt-xl"><a href="{{ url('/profile/'.$user->id.'/edit') }}" class="btn btn-success btn-block">แก้ไข้ข้อมูลผู้ใช้</a></div>
-						<div class="col-md-4 mt-xl">
-							{!! Form::open(['url' => '/profile/'.$user->id.'/delete', 'method' => 'delete']) !!}
-							{!! Form::token() !!}
-							{!! Form::button('ลบผู้ใช้รายนี้', ['id' => 'deleteU','class' => 'btn btn-danger btn-block']) !!}
-							{!! Form::close() !!}
-						</div>
-						@endif
+					@if ($current_user->id === $user->id)
+					<div class="col-md-4 col-md-offset-4 mt-xl">
+						<a href="{{ url('/profile/edit') }}" class="btn btn-success btn-block">แก้ไข้ข้อมูลส่วนตัว</a>
 					</div>
+					@elseif ($current_user->isAdministrator())
+					<div class="col-md-4 col-md-offset-2 mt-xl"><a href="{{ url('/profile/'.$user->id.'/edit') }}" class="btn btn-success btn-block">แก้ไข้ข้อมูลผู้ใช้</a></div>
+					<div class="col-md-4 mt-xl">
+						{!! Form::open(['url' => '/profile/'.$user->id.'/delete', 'method' => 'delete']) !!}
+						{!! Form::token() !!}
+						{!! Form::button('ลบผู้ใช้รายนี้', ['id' => 'deleteU','class' => 'btn btn-danger btn-block']) !!}
+						{!! Form::close() !!}
+					</div>
+					@endif
 				</div>
 			</div>
 		</div>
