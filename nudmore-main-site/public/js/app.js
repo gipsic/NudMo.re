@@ -179,28 +179,6 @@ function(e, t, o, n) {
     }
 }(window, document, window.jQuery),
 function(e, t, o) {
-    "use strict";
-
-    function n(t) {
-        var o = t.data("message"),
-            n = t.data("options");
-        o || e.error("Notify: No message specified"), e.notify(o, n || {})
-    }
-    var a = "[data-notify]";
-    e(o);
-    e(function() {
-        e(a).each(function() {
-            var t = e(this),
-                o = t.data("onload");
-            void 0 !== o && setTimeout(function() {
-                n(t)
-            }, 800), t.on("click", function(e) {
-                e.preventDefault(), n(t)
-            })
-        })
-    })
-}(jQuery, window, document),
-function(e, t, o) {
     var n = {},
         a = {},
         r = function(t) {
