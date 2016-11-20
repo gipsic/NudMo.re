@@ -17,7 +17,8 @@
 		</div>
 		<a href="{{ url('/profile/'.$user->id.'/edit') }}" class="btn btn-success mh pull-right">แก้ไข้ข้อมูลผู้ใช้</a>
 		@endif
-		@endif </h3>
+		@endif 
+	</h3>
 	<div class="row">
 		<div class="col-lg-4 col-lg-offset-2">
 			<div class="panel panel-info mt-xl">
@@ -106,25 +107,23 @@
 				</div>
 			</div>
 		</div>
-		<div class="panel panel-info mt-xl">
-			<div class="panel-heading">ข้อมูลส่วนบุคคล</div>
-			<div class="panel-body form-horizontal">
-				<div class="form-group row">
-
-					@if ($current_user->id === $user->id)
-					<div class="col-md-4 col-md-offset-4 mt-xl">
-						<a href="{{ url('/profile/edit') }}" class="btn btn-success btn-block">แก้ไข้ข้อมูลส่วนตัว</a>
-					</div>
-					@elseif ($current_user->isAdministrator())
-					<div class="col-md-4 col-md-offset-2 mt-xl"><a href="{{ url('/profile/'.$user->id.'/edit') }}" class="btn btn-success btn-block">แก้ไข้ข้อมูลผู้ใช้</a></div>
-					<div class="col-md-4 mt-xl">
-						{!! Form::open(['url' => '/profile/'.$user->id.'/delete', 'method' => 'delete']) !!}
-						{!! Form::token() !!}
-						{!! Form::button('ลบผู้ใช้รายนี้', ['id' => 'deleteU','class' => 'btn btn-danger btn-block']) !!}
-						{!! Form::close() !!}
-					</div>
-					@endif
+	</div>
+	<div class="row">
+		<div class="col-lg-8 col-lg-offset-2">
+			<div class="form-group row">
+				@if ($current_user->id === $user->id)
+				<div class="col-md-4 col-md-offset-4">
+					<a href="{{ url('/profile/edit') }}" class="btn btn-success btn-block">แก้ไข้ข้อมูลส่วนตัว</a>
 				</div>
+				@elseif ($current_user->isAdministrator())
+				<div class="col-md-4 col-md-offset-2"><a href="{{ url('/profile/'.$user->id.'/edit') }}" class="btn btn-success btn-block">แก้ไข้ข้อมูลผู้ใช้</a></div>
+				<div class="col-md-4">
+					{!! Form::open(['url' => '/profile/'.$user->id.'/delete', 'method' => 'delete']) !!}
+					{!! Form::token() !!}
+					{!! Form::button('ลบผู้ใช้รายนี้', ['id' => 'deleteU','class' => 'btn btn-danger btn-block']) !!}
+					{!! Form::close() !!}
+				</div>
+				@endif
 			</div>
 		</div>
 	</div>
