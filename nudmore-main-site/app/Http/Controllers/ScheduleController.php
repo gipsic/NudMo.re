@@ -34,6 +34,7 @@ class ScheduleController extends Controller
 
     public function listStaff()
     {   
+        $date_time = Carbon::now()->toDateTimeString();
         $schedules = Schedule::where('date_time', '>', $date_time)->get();
 
         return view('schedule/staff/list', ['schedules' => $schedules]);
