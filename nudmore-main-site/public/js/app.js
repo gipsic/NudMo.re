@@ -28,43 +28,6 @@ function(e, t, o, n) {
 }(window, document, window.jQuery),
 function(e, t, o, n) {
     o(function() {
-        if (o.fn.knob) {
-            var e = {
-                width: "50%",
-                displayInput: !0,
-                fgColor: APP_COLORS.info
-            };
-            o("#knob-chart1").knob(e);
-            var t = {
-                width: "50%",
-                displayInput: !0,
-                fgColor: APP_COLORS.purple,
-                readOnly: !0
-            };
-            o("#knob-chart2").knob(t);
-            var n = {
-                width: "50%",
-                displayInput: !0,
-                fgColor: APP_COLORS.info,
-                bgColor: APP_COLORS.gray,
-                angleOffset: -125,
-                angleArc: 250
-            };
-            o("#knob-chart3").knob(n);
-            var a = {
-                width: "50%",
-                displayInput: !0,
-                fgColor: APP_COLORS.pink,
-                displayPrevious: !0,
-                thickness: .1,
-                lineCap: "round"
-            };
-            o("#knob-chart4").knob(a)
-        }
-    })
-}(window, document, window.jQuery),
-function(e, t, o, n) {
-    o(function() {
         if ("undefined" != typeof Chart) {
             var e = function() {
                     return Math.round(100 * Math.random())
