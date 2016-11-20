@@ -44,7 +44,7 @@
 						<div class="col-md-7">{!! Form::text('username', $user->doctor()->first()->doctor_number, ['class' => 'form-control', 'readonly', 'autofocus']) !!}</div>
 					</div>
 
-					<div class="form-group row {{ $errors->has('username') ? 'has-error' : '' }}">
+					<div class="form-group row">
 						{!! Form::label('username', 'แผนก', ['class' => 'col-md-5 control-label']) !!}
 						<div class="col-md-7">{!! Form::text('username', $user->doctor()->first()->department, ['class' => 'form-control', 'readonly', 'autofocus']) !!}</div>
 					</div>
