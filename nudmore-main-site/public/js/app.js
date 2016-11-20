@@ -528,33 +528,6 @@ function(e, t, o, n) {
 }(window, document, window.jQuery),
 function(e, t, o, n) {
     o(function() {
-        var e = [];
-        if (o(".tour-step").each(function() {
-                var t = o(this).data();
-                t.element = "#" + this.id, e.push(t)
-            }), e.length) {
-            var t = new Tour({
-                backdrop: !0,
-                onShown: function(e) {
-                    o(".wrapper > section").css({
-                        position: "static"
-                    })
-                },
-                onHide: function(e) {
-                    o(".wrapper > section").css({
-                        position: ""
-                    })
-                },
-                steps: e
-            });
-            t.init(), o("#start-tour").on("click", function() {
-                t.restart()
-            })
-        }
-    })
-}(window, document, window.jQuery),
-function(e, t, o, n) {
-    o(function() {
         var n = o("[data-trigger-resize]"),
             a = n.data("triggerResize");
         n.on("click", function() {
