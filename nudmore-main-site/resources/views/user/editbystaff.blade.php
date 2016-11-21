@@ -120,13 +120,13 @@
 
 						<div class="mb col-md-6 {{ $errors->has('doctor_number') ? ' has-error' : '' }}">
 							{!! Form::label('doctor_number', 'รหัสประจำตัวแพทย์', ['class' => 'control-label']) !!}
-							{!! Form::text('doctor_number', $user->doctor()->first()->doctor_number, ['class' => 'form-control', 'required']) !!}
+							{!! Form::text('doctor_number', $user->isDoctor() ? $user->doctor()->first()->doctor_number:'', ['class' => 'form-control', 'required']) !!}
 							@if ($errors->has('doctor_number'))<span class="help-block"><strong>{{ $errors->first('doctor_number') }}</strong></span>@endif
 						</div>
 
 						<div class="mb col-md-6 {{ $errors->has('department') ? ' has-error' : '' }}">
 							{!! Form::label('department', 'แผนก', ['class' => 'control-label']) !!}
-							{!! Form::text('department', $user->doctor()->first()->department, ['class' => 'form-control', 'required']) !!}
+							{!! Form::text('department', $user->isDoctor() ? $user->doctor()->first()->department:'', ['class' => 'form-control', 'required']) !!}
 							@if ($errors->has('department'))<span class="help-block"><strong>{{ $errors->first('department') }}</strong></span>@endif
 						</div>
 					</div>
