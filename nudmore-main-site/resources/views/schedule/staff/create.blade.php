@@ -9,7 +9,7 @@
 
 				<div class="panel-heading white-text">กำหนดเวลาออกตรวจ</div>
 				<div class="panel-body">
-					{!! Form::open(['url' => 'schedule/doctor/create', 'class' => 'form-horizontal']) !!}
+					{!! Form::open(['url' => 'schedule/staff/create', 'class' => 'form-horizontal']) !!}
 					{!! Form::token() !!}
 
 					<div class="form-group{{ $errors->has('doctor_number') ? ' has-error' : '' }}">
