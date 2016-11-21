@@ -8,7 +8,7 @@
 	@if($isSuccess)
 		<div role="alert" class="alert alert-success"><strong>สำรเร็จแล้ว! </strong> ท่านได้ยืนยันการเปิดใช้งานบัญชีแล้ว สามารถเข้าสู่ระบบได้ทันที</div>
 	@else
-		<div role="alert" class="alert alert-warning"><strong>ขออภัย </strong> รหัสยืนยืนการเปิดใช้งานบัญชีและรหัสผ่านของท่านไม่ถูกต้อง</div>
+		<div role="alert" class="alert alert-warning"><strong>ขออภัย </strong> รหัสยืนยืนการเปิดใช้งานบัญชีและรหัสผ่านของท่านไม่ถูกต้องหรือถูกใช้ยืนยันไปแล้ว</div>
 	@endif
 	<div class="panel panel-flat">
 		<div class="panel-heading text-center color-light-sky-blue">
