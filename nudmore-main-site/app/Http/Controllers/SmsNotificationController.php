@@ -34,7 +34,7 @@ class SmsNotificationController extends Controller
 		
 		$out = json_decode($server_output);
 
-		if ($out['message'] == "OK") {
+		if ($out->message == "OK") {
 			echo 'ok';
 		} else {
 			print_r($out);
