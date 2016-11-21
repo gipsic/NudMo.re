@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="content-wrapper container">
-	<h3>ดูประวัติการรับยาของผู้ป่วย </h3>
+	<h3>ดูประวัติการรักษาของผู้ป่วย </h3>
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2 mt">
 			<div class="panel panel-default mt">
