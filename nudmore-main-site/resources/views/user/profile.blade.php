@@ -99,6 +99,10 @@
 						{!! Form::label('phone_number', 'หมายเลขโทรศัพท์', ['class' => 'col-md-4 control-label']) !!}
 						<div class="col-md-8">{!! Form::text('phone_number', $user->patient()->first()->phone_number, ['class' => 'form-control', 'readonly']) !!}</div>
 					</div>
+					<div class="form-group row">
+						{!! Form::label('email', 'อีเมล', ['class' => 'col-md-4 control-label']) !!}
+						<div class="col-md-8">{!! Form::text('email', $user->email, ['class' => 'form-control', 'readonly']) !!}</div>
+					</div>
 
 					<div class="form-group row">
 						{!! Form::label('address', 'ที่อยู่', ['class' => 'col-md-4 control-label']) !!}
