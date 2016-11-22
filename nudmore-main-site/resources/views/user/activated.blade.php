@@ -19,7 +19,7 @@
 		<div class="panel-body">
 			
 			<p class="text-center pv">เข้าสู่ระบบเพื่อดำเนินการต่อ</p>
-			{!! Form::open(['url' => 'login', 'class' => ' mb-lg']) !!}
+			{!! Form::open(['url' => '/login', 'class' => ' mb-lg']) !!}
                 {!! Form::token() !!}
 				<div class="form-group has-feedback {{ $errors->has('username') ? ' has-error' : '' }}">
 					{!! Form::text('username', old('username'), ['class' => 'form-control', 'placeholder' => 'ชื่อผู้ใช้', 'required', 'autofocus']) !!}
