@@ -109,7 +109,6 @@ class AppointmentController extends Controller
 
         $topic = 'แจ้งเตือนการนัดหมาย - Nudmo.re';
         $message = $patient->user()->first()->title.' '.$patient->user()->first()->name.' '.$patient->user()->first()->surname.' มีการนัดหมายแพทย์ '.$doctor->user()->first()->name.' '.$doctor->user()->first()->surname.' แผนก '.$doctor->department.' เพื่อเข้ารับการตรวจในวันที่ '.$request->date_time;
-
         $detail = 'รหัสผู้ป่วย: '.$patient->patient_number.'<br>ชื่อ-นามสกุล ผู้ป่วย: '.$patient->user()->first()->title.' '.$patient->user()->first()->name.' '.$patient->user()->first()->surname.'<br>วันเวลานัด: '.$request->date_time.'<br>แพทย์ที่นัด: '.$doctor->user()->first()->name.' '.$doctor->user()->first()->surname.'<br>แผนก: '.$doctor->department.'<br>';
 
         $notification->email()->create(['notification_id' => $notification->id,
@@ -152,7 +151,6 @@ class AppointmentController extends Controller
 
         $topic = 'แจ้งเตือนการนัดหมาย - Nudmo.re';
         $message = $patient->user()->first()->title.' '.$patient->user()->first()->name.' '.$patient->user()->first()->surname.' มีการนัดหมายแพทย์ '.$doctor->user()->first()->name.' '.$doctor->user()->first()->surname.' แผนก '.$doctor->department.' เพื่อเข้ารับการตรวจในวันที่ '.$request->date_time;
-
         $detail = 'รหัสผู้ป่วย: '.$patient->patient_number.'<br>ชื่อ-นามสกุล ผู้ป่วย: '.$patient->user()->first()->title.' '.$patient->user()->first()->name.' '.$patient->user()->first()->surname.'<br>วันเวลานัด: '.$request->date_time.'<br>แพทย์ที่นัด: '.$doctor->user()->first()->name.' '.$doctor->user()->first()->surname.'<br>แผนก: '.$doctor->department.'<br>';
 
         $notification->email()->create(['notification_id' => $notification->id,
@@ -195,7 +193,6 @@ class AppointmentController extends Controller
 
         $topic = 'แจ้งเตือนการนัดหมาย - Nudmo.re';
         $message = $patient->user()->first()->title.' '.$patient->user()->first()->name.' '.$patient->user()->first()->surname.' มีการนัดหมายแพทย์ '.$doctor->user()->first()->name.' '.$doctor->user()->first()->surname.' แผนก '.$doctor->department.' เพื่อเข้ารับการตรวจในวันที่ '.$request->date_time;
-
         $detail = 'รหัสผู้ป่วย: '.$patient->patient_number.'<br>ชื่อ-นามสกุล ผู้ป่วย: '.$patient->user()->first()->title.' '.$patient->user()->first()->name.' '.$patient->user()->first()->surname.'<br>วันเวลานัด: '.$request->date_time.'<br>แพทย์ที่นัด: '.$doctor->user()->first()->name.' '.$doctor->user()->first()->surname.'<br>แผนก: '.$doctor->department.'<br>';
 
         $notification->email()->create(['notification_id' => $notification->id,
@@ -221,6 +218,16 @@ class AppointmentController extends Controller
     {
     	$appointment = Appointment::where('id', $id)->first();
 
+        $patient = Patient::where('patient_number', 'LIKE', $appointment->patient_number)->first();
+        $doctor = Doctor::where('doctor_number', 'LIKE', $appointment->doctor_number)->first();
+
+        $topic = 'แจ้งยกเลิกการนัดหมาย - Nudmo.re';
+        $message = $patient->user()->first()->title.' '.$patient->user()->first()->name.' '.$patient->user()->first()->surname.' ได้ยกเลิกนัดหมายแพทย์ '.$doctor->user()->first()->name.' '.$doctor->user()->first()->surname.' แผนก '.$doctor->department.' เพื่อเข้ารับการตรวจในวันที่ '.$appointment->date_time;
+        $detail = 'รหัสผู้ป่วย: '.$patient->patient_number.'<br>ชื่อ-นามสกุล ผู้ป่วย: '.$patient->user()->first()->title.' '.$patient->user()->first()->name.' '.$patient->user()->first()->surname.'<br>วันเวลานัด: '.$appointment->date_time.'<br>แพทย์ที่นัด: '.$doctor->user()->first()->name.' '.$doctor->user()->first()->surname.'<br>แผนก: '.$doctor->department.'<br>';
+
+        app('App\Http\Controllers\SmsNotificationController')->sendSms($patient->phone_number, $message);
+        app('App\Http\Controllers\EmailNotificationController')->sendEmail($patient->user()->first()->email, $topic, $detail, true);
+
         $notification = Notification::where('id', $appointment->notification_id);
 
         $notification->delete();
@@ -234,6 +241,16 @@ class AppointmentController extends Controller
     {
     	$appointment = Appointment::where('id', $id)->first();
 
+        $patient = Patient::where('patient_number', 'LIKE', $appointment->patient_number)->first();
+        $doctor = Doctor::where('doctor_number', 'LIKE', $appointment->doctor_number)->first();
+
+        $topic = 'แจ้งยกเลิกการนัดหมาย - Nudmo.re';
+        $message = $patient->user()->first()->title.' '.$patient->user()->first()->name.' '.$patient->user()->first()->surname.' ได้ถูกยกเลิกนัดหมายแพทย์ '.$doctor->user()->first()->name.' '.$doctor->user()->first()->surname.' แผนก '.$doctor->department.' ในการเข้ารับการตรวจในวันที่ '.$appointment->date_time;
+        $detail = 'รหัสผู้ป่วย: '.$patient->patient_number.'<br>ชื่อ-นามสกุล ผู้ป่วย: '.$patient->user()->first()->title.' '.$patient->user()->first()->name.' '.$patient->user()->first()->surname.'<br>วันเวลานัด: '.$appointment->date_time.'<br>แพทย์ที่นัด: '.$doctor->user()->first()->name.' '.$doctor->user()->first()->surname.'<br>แผนก: '.$doctor->department.'<br>';
+
+        app('App\Http\Controllers\SmsNotificationController')->sendSms($patient->phone_number, $message);
+        app('App\Http\Controllers\EmailNotificationController')->sendEmail($patient->user()->first()->email, $topic, $detail, true);
+
         $notification = Notification::where('id', $appointment->notification_id);
 
         $notification->delete();
@@ -246,6 +263,16 @@ class AppointmentController extends Controller
     public function deleteAppointmentStaff($id)
     {
     	$appointment = Appointment::where('id', $id)->first();
+
+        $patient = Patient::where('patient_number', 'LIKE', $appointment->patient_number)->first();
+        $doctor = Doctor::where('doctor_number', 'LIKE', $appointment->doctor_number)->first();
+
+        $topic = 'แจ้งยกเลิกการนัดหมาย - Nudmo.re';
+        $message = $patient->user()->first()->title.' '.$patient->user()->first()->name.' '.$patient->user()->first()->surname.' ได้ถูกยกเลิกนัดหมายแพทย์ '.$doctor->user()->first()->name.' '.$doctor->user()->first()->surname.' แผนก '.$doctor->department.' ในการเข้ารับการตรวจในวันที่ '.$appointment->date_time;
+        $detail = 'รหัสผู้ป่วย: '.$patient->patient_number.'<br>ชื่อ-นามสกุล ผู้ป่วย: '.$patient->user()->first()->title.' '.$patient->user()->first()->name.' '.$patient->user()->first()->surname.'<br>วันเวลานัด: '.$appointment->date_time.'<br>แพทย์ที่นัด: '.$doctor->user()->first()->name.' '.$doctor->user()->first()->surname.'<br>แผนก: '.$doctor->department.'<br>';
+
+        app('App\Http\Controllers\SmsNotificationController')->sendSms($patient->phone_number, $message);
+        app('App\Http\Controllers\EmailNotificationController')->sendEmail($patient->user()->first()->email, $topic, $detail, true);
 
         $notification = Notification::where('id', $appointment->notification_id);
 
