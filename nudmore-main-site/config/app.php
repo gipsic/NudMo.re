@@ -51,7 +51,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://nudmore.google.com/'),
+    'url' => env('APP_URL', 'http://nudmo.re/'),
 
     /*
     |--------------------------------------------------------------------------
